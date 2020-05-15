@@ -17,6 +17,8 @@ import { RegisterComponent } from './utils/register/register.component';
 import { ProductTypeListComponent } from './shopping-view/common/product-type-list/product-type-list.component';
 import { ProductGridItemComponent } from './shopping-view/common/product-grid-item/product-grid-item.component';
 import { ProductTypePreviewComponent } from './shopping-view/common/product-type-preview/product-type-preview.component';
+import { FooterComponent } from './shopping-view/common/footer/footer.component';
+import { AdCarouselComponent } from './shopping-view/common/ad-carousel/ad-carousel.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ProductTypePreviewComponent } from './shopping-view/common/product-type
     RegisterComponent,
     ProductTypeListComponent,
     ProductGridItemComponent,
-    ProductTypePreviewComponent
+    ProductTypePreviewComponent,
+    FooterComponent,
+    AdCarouselComponent
   ],
   imports: [
     BrowserModule,
