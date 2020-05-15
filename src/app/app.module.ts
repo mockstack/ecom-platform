@@ -11,6 +11,7 @@ import { CartComponent } from './shopping-view/cart/cart.component';
 import { CheckoutComponent } from './shopping-view/checkout/checkout.component';
 import { ProductComponent } from './shopping-view/product/product.component';
 import { NotFoundComponent } from './utils/not-found/not-found.component';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,11 @@ import { NotFoundComponent } from './utils/not-found/not-found.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
+  ],
+  schemas:[
+
   ],
   providers: [],
   bootstrap: [AppComponent]

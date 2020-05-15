@@ -12,4 +12,11 @@ export class TopNavBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showLoginPopup() {
+    console.log('show the login form');
+  }
+
+  showUserRegistrationForm() {
+    console.log('show user registration form');
+  }
 }
