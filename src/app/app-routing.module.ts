@@ -6,6 +6,8 @@ import { ProductDetailComponent } from './shopping-view/product-detail/product-d
 import { CheckoutComponent } from './shopping-view/checkout/checkout.component';
 import { CartComponent } from './shopping-view/cart/cart.component';
 import { NotFoundComponent } from './utils/not-found/not-found.component';
+import { LoginComponent } from './utils/login/login.component';
+import { RegisterComponent } from './utils/register/register.component';
 
 
 const routes: Routes = [
@@ -15,6 +17,8 @@ const routes: Routes = [
   {path: 'product-detail', component: ProductDetailComponent},
   {path: 'check-out', component: CheckoutComponent},
   {path: 'cart', component: CartComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: '**', component: NotFoundComponent}
 ];
 
