@@ -14,6 +14,9 @@ import { NotFoundComponent } from './utils/not-found/not-found.component';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { LoginComponent } from './utils/login/login.component';
 import { RegisterComponent } from './utils/register/register.component';
+import { ProductTypeListComponent } from './shopping-view/common/product-type-list/product-type-list.component';
+import { ProductGridItemComponent } from './shopping-view/common/product-grid-item/product-grid-item.component';
+import { ProductTypePreviewComponent } from './shopping-view/common/product-type-preview/product-type-preview.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { RegisterComponent } from './utils/register/register.component';
     ProductComponent,
     NotFoundComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductTypeListComponent,
+    ProductGridItemComponent,
+    ProductTypePreviewComponent
   ],
   imports: [
     BrowserModule,
