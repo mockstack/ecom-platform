@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-nav-bar',
@@ -7,16 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopNavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  showLoginPopup() {
-    console.log('show the login form');
+  showCart() {
+    this.router.navigateByUrl('cart');
   }
 
-  showUserRegistrationForm() {
-    console.log('show user registration form');
+  showLogin() {
+    this.router.navigateByUrl('login');
+  }
+
+  showRegister() {
+    this.router.navigateByUrl('register');
+  }
+
+  showHome() {
+    this.router.navigateByUrl('')
   }
 }
