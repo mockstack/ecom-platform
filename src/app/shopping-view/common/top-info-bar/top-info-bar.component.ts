@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-info-bar',
@@ -14,7 +15,7 @@ export class TopInfoBarComponent implements OnInit {
   public instagramIcon = faInstagram;
   public emailIcon = faEnvelopeOpen;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
