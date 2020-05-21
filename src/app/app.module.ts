@@ -19,6 +19,10 @@ import { ProductGridItemComponent } from './shopping-view/common/product-grid-it
 import { ProductTypePreviewComponent } from './shopping-view/common/product-type-preview/product-type-preview.component';
 import { FooterComponent } from './shopping-view/common/footer/footer.component';
 import { AdCarouselComponent } from './shopping-view/common/ad-carousel/ad-carousel.component';
+import { HttpClientModule } from "@angular/common/http";
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -42,7 +46,11 @@ import { AdCarouselComponent } from './shopping-view/common/ad-carousel/ad-carou
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule,
+    FormsModule,
+    TypeaheadModule.forRoot(),
+    BrowserAnimationsModule
   ],
   schemas:[
 

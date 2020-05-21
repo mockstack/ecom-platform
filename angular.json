@@ -74,7 +74,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ecom-platform:build"
+            "browserTarget": "ecom-platform:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
