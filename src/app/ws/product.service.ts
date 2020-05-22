@@ -13,6 +13,6 @@ export class ProductService {
    * Get product names.
    */
   public getProductNames(): any {
-    return this.httpClient.get(environment.apiUrl + 'names');
+    return this.httpClient.get(environment.apiUrl + 'product/names');
   }
 }
