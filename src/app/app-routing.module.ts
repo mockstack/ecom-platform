@@ -13,7 +13,8 @@ import { RegisterComponent } from './utils/register/register.component';
 const routes: Routes = [
   //{path: '', redirectTo: 'product-view', pathMatch: 'full'},
   {path: '', component: HomeComponent},
-  {path: 'products', component: ProductComponent},
+  {path: 'product', pathMatch: 'full', redirectTo: ''},
+  {path: 'product/:catid', component: ProductComponent},
   {path: 'detail', component: ProductDetailComponent},
   {path: 'checkout', component: CheckoutComponent},
   {path: 'cart', component: CartComponent},

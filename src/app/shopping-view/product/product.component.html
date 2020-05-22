@@ -1,19 +1,9 @@
-<div class="container">
-    <!--Content-->
-    <div class="row w-100">
-        <div class="col-3">
-            <app-product-type-list></app-product-type-list>
-        </div>
-        <div class="col-9">
-            <!--Product Type Preview-->
-            <div class="row float-right">
-                <app-product-grid-item class="w-25"></app-product-grid-item>
-                <app-product-grid-item class="w-25"></app-product-grid-item>
-                <app-product-grid-item class="w-25"></app-product-grid-item>
-                <app-product-grid-item class="w-25"></app-product-grid-item>
-                <app-product-grid-item class="w-25"></app-product-grid-item>
-            </div>
-        </div>
+<div class="container w-100">
+    <div class="row float-right">
+        <app-product-grid-item class="w-25" *ngFor="let item of productList; let i = index"></app-product-grid-item>
+        <!--<app-product-grid-item class="w-25"></app-product-grid-item>
+        <app-product-grid-item class="w-25"></app-product-grid-item>
+        <app-product-grid-item class="w-25"></app-product-grid-item>
+        <app-product-grid-item class="w-25"></app-product-grid-item>-->
     </div>
 </div>
-<app-footer></app-footer>

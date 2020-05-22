@@ -3,7 +3,9 @@
     <div class="card bg-light mb-3">
         <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> We Deliver</div>
         <ul class="list-group category_block">
-            <li class="list-group-item" *ngFor='let item of categoryList; let i = index'><a href="category.html">{{item.name}}</a></li>
+            <li class="list-group-item" *ngFor='let item of categoryList; let i = index'>
+                <a [routerLink]="['/product', item._id]">{{item.name}}</a>
+            </li>
             <!--<li class="list-group-item"><a href="category.html">Nuts</a></li>
             <li class="list-group-item"><a href="category.html">Grocery Items</a></li>
             <li class="list-group-item"><a href="category.html">Electronics</a></li>

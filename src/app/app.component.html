@@ -2,5 +2,17 @@
 <app-top-info-bar></app-top-info-bar>
 <!--main top view which contains app name, login buttons, cart button etc-->
 <app-top-nav-bar></app-top-nav-bar>
-<!--content area-->
-<router-outlet></router-outlet>
+
+<div class="container">
+    <!--Content-->
+    <div class="row w-100">
+        <div class="col-3">
+            <app-product-type-list></app-product-type-list>
+        </div>
+        <div class="col-9">
+            <router-outlet></router-outlet>  
+        </div>
+    </div>
+</div>
+<!--footer-->
+<app-footer></app-footer>
