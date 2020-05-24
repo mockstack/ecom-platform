@@ -23,6 +23,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LoadingComponent, RepeatDirective } from './shopping-view/common/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     ProductGridItemComponent,
     ProductTypePreviewComponent,
     FooterComponent,
-    AdCarouselComponent
+    AdCarouselComponent,
+    LoadingComponent,
+    RepeatDirective
   ],
   imports: [
     BrowserModule,

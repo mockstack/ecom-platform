@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params, RoutesRecognized } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/ws/product.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { ProductService } from 'src/app/ws/product.service';
 	styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+
+	@ViewChild('loading') loadingView: ElementRef;
 
 	public productList;
 	private paramSubscription;
@@ -22,6 +24,8 @@ export class ProductComponent implements OnInit {
 			if (catId != undefined) {
 				this.productService.getProductsByCategoryId(catId).subscribe((data: Object[]) => {
 					this.productList = data;
+					//Hide the loading view
+					this.loadingView.nativeElement.remove();
 				});
 			}
 		});
