@@ -1,15 +1,11 @@
 <!--This view will be visibled on left side for all screens with product type names-->
-<div>
+<!--<div>
     <div class="card bg-light mb-3">
         <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> We Deliver</div>
         <ul class="list-group category_block">
             <li class="list-group-item" *ngFor='let item of categoryList; let i = index'>
                 <a [routerLink]="['/product', item._id]">{{item.name}}</a>
             </li>
-            <!--<li class="list-group-item"><a href="category.html">Nuts</a></li>
-            <li class="list-group-item"><a href="category.html">Grocery Items</a></li>
-            <li class="list-group-item"><a href="category.html">Electronics</a></li>
-            <li class="list-group-item"><a href="category.html">Fruit & Vegitables</a></li>-->
         </ul>
     </div>
     <div class="card bg-light mb-3">
@@ -21,4 +17,29 @@
             <p class="bloc_left_price">99.00 $</p>
         </div>
     </div>
-</div>
+</div>-->
+<nav class="bg-brown">
+    <ul class="nav flex-column bg-brown">
+        <li class="nav-item navbar-light bg-brown navbar-expand-lg">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2"
+                aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse w-100" id="navbarSupportedContent2">
+                <a type="button" [routerLink]="['/product', item._id]" class="btn bg-transparent btn-sm ml-2"
+                    *ngFor='let item of categoryList; let i = index'>
+                    {{item.name}}
+                </a>
+
+                <a type="button" class="btn bg-transparent btn-sm pr-1">Small button</a>
+                <a type="button" class="btn bg-transparent btn-sm">Small button</a>
+                <a type="button" class="btn bg-transparent btn-sm">Small button</a>
+                <a type="button" class="btn bg-transparent btn-sm">Small button</a>
+                <!--<span class="pe-is-ec-cart-1" style="font-size: 64px;"></span>
+                <span class="pe-is-ec-cart-2" style="font-size: 64px;"></span>
+                <span class="pe-is-ec-cart-3" style="font-size: 64px;"></span>-->
+            </div>
+        </li>
+    </ul>
+</nav>
