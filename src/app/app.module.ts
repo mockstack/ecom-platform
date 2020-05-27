@@ -24,6 +24,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoadingComponent, RepeatDirective } from './shopping-view/common/loading/loading.component';
+import { AdStatCustomerComponent } from './shopping-view/common/ad-stat-customer/ad-stat-customer.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { LoadingComponent, RepeatDirective } from './shopping-view/common/loadin
     FooterComponent,
     AdCarouselComponent,
     LoadingComponent,
-    RepeatDirective
+    RepeatDirective,
+    AdStatCustomerComponent
   ],
   imports: [
     BrowserModule,

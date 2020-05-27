@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/model/product';
 
 @Component({
   selector: 'app-product-grid-item',
@@ -7,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-grid-item.component.scss']
 })
 export class ProductGridItemComponent implements OnInit {
+
+  @Input() product: Product;
 
   constructor(private router: Router) { }
 

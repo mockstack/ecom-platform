@@ -14,7 +14,7 @@ const routes: Routes = [
   //{path: '', redirectTo: 'product-view', pathMatch: 'full'},
   {path: '', component: HomeComponent},
   {path: 'product', pathMatch: 'full', redirectTo: ''},
-  {path: 'product/:catid', component: ProductComponent},
+  {path: 'product/:cat/:catid', component: ProductComponent},
   {path: 'detail', component: ProductDetailComponent},
   {path: 'checkout', component: CheckoutComponent},
   {path: 'cart', component: CartComponent},

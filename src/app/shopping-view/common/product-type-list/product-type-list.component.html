@@ -27,7 +27,7 @@
             </button>
 
             <div class="collapse navbar-collapse w-100" id="navbarSupportedContent2">
-                <a type="button" [routerLink]="['/product', item._id]" class="btn bg-transparent btn-sm ml-2"
+                <a type="button" [routerLink]="['/product', item.name, item._id]" class="btn bg-transparent btn-sm ml-2"
                     *ngFor='let item of categoryList; let i = index'>
                     {{item.name}}
                 </a>

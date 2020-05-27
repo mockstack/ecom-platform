@@ -1,11 +1,18 @@
-<div class="container w-100">
-    <div class="row float-right w-100">
+<div class="w-100">
+    <div class="row bg-dark">
+        <span>
+            <h4 class="text-white p-2">{{selectedCategoryName}}</h4>
+        </span>
+    </div>
+
+    <div class="row float-right w-100 pb-5">
         <!--Loading Shrimmer-->
-        <div #loading class="w-100">
+        <div #loading class="w-100 h-50">
             <app-loading *biRepeat="3" ></app-loading>
         </div>
         
         <!--Product List-->
-        <app-product-grid-item class="w-25" *ngFor="let item of productList; let i = index"></app-product-grid-item>
+        <app-product-grid-item *ngFor="let item of productList; let i = index" [product]="item">
+        </app-product-grid-item>
     </div>
 </div>
