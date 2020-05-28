@@ -1,22 +1,46 @@
-<div class="container mt-5">
-    <form class="form-signin">
-        <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-            <label for="inputEmail"></label>
+<div class="container card p-5 mt-5 mb-5">
+    <div class="row align-items-center">
+        <!--Username/Password login-->
+        <div class="col-6">
+            <div class="container mt-5">
+                <form class="form-signin">
+                    <div class="form-label-group">
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required
+                            autofocus>
+                        <label for="inputEmail"></label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <label for="inputPassword"></label>
+                    </div>
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-block btn-orange" type="submit">Sign in</button>
+                    <!--<p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>-->
+                </form>
+            </div>
         </div>
 
-        <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <label for="inputPassword"></label>
+        <!--Social login-->
+        <div class="col-6">
+            <div class="text-center social-btn">
+                <a class="btn btn-primary btn-block text-white" (click)="signInWithFB()">
+                    <i class="fab fa-facebook-f"></i>
+                    Sign in with<b>Facebook</b>
+                </a>
+                <!--<a href="#" class="btn btn-info btn-block"><i class="fab fa-twitter"></i> Sign in with
+                    <b>Twitter</b></a>-->
+                <a class="btn btn-danger btn-block text-white" (click)="signInWithGoogle()">
+                    <i class="fab fa-google"></i>
+                    Sign in with
+                    <b>Google</b>
+                </a>
+            </div>
         </div>
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
-    </form>
-
+    </div>
 </div>
