@@ -12,14 +12,14 @@ import { RegisterComponent } from './utils/register/register.component';
 
 const routes: Routes = [
   //{path: '', redirectTo: 'product-view', pathMatch: 'full'},
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, data: {bcNav: 'Home'}},
   {path: 'product', pathMatch: 'full', redirectTo: ''},
-  {path: 'product/:cat/:catid', component: ProductComponent},
-  {path: 'detail', component: ProductDetailComponent},
-  {path: 'checkout', component: CheckoutComponent},
-  {path: 'cart', component: CartComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'product/:cat/:catid', component: ProductComponent, data: {bcNav: 'Product'} },
+  {path: 'detail', component: ProductDetailComponent, data: {bcNav: 'Detail'}},
+  {path: 'checkout', component: CheckoutComponent, data: {bcNav: 'Checkout'}},
+  {path: 'cart', component: CartComponent, data: {bcNav: 'Cart'}},
+  {path: 'login', component: LoginComponent, data: {bcNav: 'Login'}},
+  {path: 'register', component: RegisterComponent, data: {bcNav: 'Register'}},
   {path: '**', component: NotFoundComponent}
 ];
 

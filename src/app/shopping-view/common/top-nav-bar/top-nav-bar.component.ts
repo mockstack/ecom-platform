@@ -1,45 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/ws/product.service';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/public_api';
+import { BcNavigation } from 'src/app/model/bc-navigation';
 
 @Component({
-  selector: 'app-top-nav-bar',
-  templateUrl: './top-nav-bar.component.html',
-  styleUrls: ['./top-nav-bar.component.scss']
+	selector: 'app-top-nav-bar',
+	templateUrl: './top-nav-bar.component.html',
+	styleUrls: ['./top-nav-bar.component.scss']
 })
 export class TopNavBarComponent implements OnInit {
 
-  selectedProduct:String;
-  selectedOption: String;
-  productList = [];
+	selectedProduct: String;
+	selectedOption: String;
+	productList = [];
+	bcUrls: BcNavigation[] = [];
 
-  constructor(private router: Router, private productService: ProductService) { }
+	constructor(private router: Router, private productService: ProductService,
+		private activatedRoute: ActivatedRoute) {
+		router.events.subscribe(evt => {
+			// console.log(evt);
 
-  ngOnInit(): void {
-    this.productService.getProductNames().subscribe((data: any[]) => {
-      this.productList = data;
-    });
-  }
+			if (evt instanceof NavigationEnd) {
+				if (evt.url === '/') {
+					//has moved to the home, clean the array
+					this.bcUrls = [];
+				}
+				//TODO this logic must be implemented
+				//let item = new BcNavigation('a', evt.url);
+			}
+		});
+	}
 
-  onSelectProduct(event: TypeaheadMatch): void {
-    this.selectedOption = event.item._id;
-    console.log(this.selectedOption)
-  }
+	ngOnInit(): void {
+		this.productService.getProductNames().subscribe((data: any[]) => {
+			this.productList = data;
+		});
 
-  showCart() {
-    this.router.navigateByUrl('cart');
-  }
+		this.activatedRoute.params.subscribe(values => {
+			console.log(values['catid']);
+		})
+	}
 
-  showLogin() {
-    this.router.navigateByUrl('login');
-  }
+	onSelectProduct(event: TypeaheadMatch): void {
+		this.selectedOption = event.item._id;
+		console.log(this.selectedOption)
+	}
 
-  showRegister() {
-    this.router.navigateByUrl('register');
-  }
+	showCart() {
+		this.router.navigateByUrl('cart');
+	}
 
-  showHome() {
-    this.router.navigateByUrl('')
-  }
+	showLogin() {
+		this.router.navigateByUrl('login');
+	}
+
+	showRegister() {
+		this.router.navigateByUrl('register');
+	}
+
+	showHome() {
+		this.router.navigateByUrl('')
+	}
 }

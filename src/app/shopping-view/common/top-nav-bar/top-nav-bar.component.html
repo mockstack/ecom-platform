@@ -43,8 +43,8 @@
 
           <!--Login-->
           <div class="dropdown">
-            <a class="nav-link mr-3" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link mr-3" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
               <!--<span class="mr-2 mb-2">Sign In</span>-->
               <!--<i class="fas fa-user fa-2x text-white" style="size: 30px;"></i>-->
               <span class="pe-is-ec-profile" style="font-size: 30px; color: white"></span>
@@ -62,8 +62,13 @@
   </li>
 
   <!--Menu items-->
-  <li class="nav-item pb-1">
+  <li class="nav-item">
     <app-product-type-list></app-product-type-list>
+  </li>
+  
+  <!--Breadcrumb navigation-->
+  <li class="nav-item pb-1">
+    <app-breadcrumb [urls]="bcUrls"></app-breadcrumb>
   </li>
 
 </ul>

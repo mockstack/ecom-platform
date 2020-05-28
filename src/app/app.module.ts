@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoadingComponent, RepeatDirective } from './shopping-view/common/loading/loading.component';
 import { AdStatCustomerComponent } from './shopping-view/common/ad-stat-customer/ad-stat-customer.component';
+import { BreadcrumbComponent } from './shopping-view/common/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AdStatCustomerComponent } from './shopping-view/common/ad-stat-customer
     AdCarouselComponent,
     LoadingComponent,
     RepeatDirective,
-    AdStatCustomerComponent
+    AdStatCustomerComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
