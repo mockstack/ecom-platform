@@ -21,13 +21,14 @@ import { FooterComponent } from './shopping-view/common/footer/footer.component'
 import { AdCarouselComponent } from './shopping-view/common/ad-carousel/ad-carousel.component';
 import { HttpClientModule } from "@angular/common/http";
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoadingComponent, RepeatDirective } from './shopping-view/common/loading/loading.component';
 import { AdStatCustomerComponent } from './shopping-view/common/ad-stat-customer/ad-stat-customer.component';
 import { BreadcrumbComponent } from './shopping-view/common/breadcrumb/breadcrumb.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { CryptoService } from './service/crypto.service';
 
 
 let config = new AuthServiceConfig([
@@ -74,6 +75,7 @@ export function provideConfig() {
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     TypeaheadModule.forRoot(),
     BrowserAnimationsModule,
     SocialLoginModule
@@ -84,8 +86,9 @@ export function provideConfig() {
   providers: [
     {
       provide: AuthServiceConfig,
-      useFactory: provideConfig
-    }
+      useFactory: provideConfig,
+    },
+    CryptoService
   ],
   bootstrap: [AppComponent]
 })

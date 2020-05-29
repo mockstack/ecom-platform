@@ -1,27 +1,44 @@
-<div class="container h-100 mt-5">
-    <form class="form-signin">
+<div class="container card mt-5 mb-5">
+    <form class="w-50 align-self-center" [formGroup]="registerForm" (ngSubmit)="submitForm()">
         <div class="text-center mb-4">
             <!--<img class="mb-4" src="../assets/logo.png" alt="" width="72" height="72">-->
             <h1 class="h3 mb-3 font-weight-normal"> Registration with your email account</h1>
-          </div>
+        </div>
 
-        <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <div class="form-group">
+            <input formControlName="email" type="email"  autocomplete="new-password"
+                class="form-control" placeholder="Email address" [ngClass]="{ 'is-invalid': submitted && formField.email.errors }"
+                required autofocus>
             <label for="inputEmail"></label>
+            <div *ngIf="submitted && formField.email.errors" class="invalid-feedback">
+                <div *ngIf="formField.email.errors.required">Email is required</div>
+                <div *ngIf="formField.email.errors.email">Email must be a valid email address</div>
+            </div>
         </div>
 
-        <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="form-group">
+            <input formControlName="password" name="password" type="password" autocomplete="new-password" id="inputPassword"
+            [ngClass]="{ 'is-invalid': submitted && formField.password.errors }"
+                class="form-control" placeholder="Password" required>
             <label for="inputPassword"></label>
+            <div *ngIf="submitted && formField.password.errors" class="invalid-feedback">
+                <div *ngIf="formField.password.errors.required">Password is required</div>
+                <div *ngIf="formField.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
         </div>
 
-        <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Confirm Password" required>
+        <div class="form-group">
+            <input type="password" formControlName="confirmPassword" id="inputPassword" autocomplete="new-password"
+            [ngClass]="{ 'is-invalid': submitted && formField.confirmPassword.errors }"
+                class="form-control" placeholder="Confirm Password" required>
             <label for="inputPassword"></label>
+            <div *ngIf="submitted && formField.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="formField.confirmPassword.errors.required">Confirm password is required</div>
+                <div *ngIf="formField.confirmPassword.errors.mustMatch">Passwords must match</div>
+            </div>
         </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-        <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
+        <button class="btn btn-lg btn-orange btn-block" type="submit">Register</button>
     </form>
 
 </div>
