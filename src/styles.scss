@@ -2,6 +2,11 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 //@import "assets/sass/now-ui-kit.scss";
 @import "assets/css/icons.css";
+//for toast
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~ngx-toastr/toastr-bs4-alert';
 
 .btn-orange {
     background-color: orange;

@@ -3,6 +3,7 @@ import { CryptoService } from 'src/app/service/crypto.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/ws/user.service';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
 	registerForm: FormGroup;
 	submitted = false;
 
-	constructor(private cryptoService: CryptoService, private formBuilder: FormBuilder, private userService: UserService) { }
+	constructor(private cryptoService: CryptoService, private formBuilder: FormBuilder,
+		private userService: UserService, private toastr: ToastrService) { }
 
 	ngOnInit(): void {
 		this.registerForm = this.formBuilder.group({
@@ -35,40 +37,41 @@ export class RegisterComponent implements OnInit {
 		this.submitted = true;
 
 		if (this.registerForm.invalid) {
-            return;
+			return;
 		}
 
 		this.registerForm.value.password = this.cryptoService.set(environment.key, this.registerForm.value.password);
 		let payload = JSON.stringify(this.registerForm.value, null, 4);
-		this.userService.registerUser(JSON.parse(payload)).subscribe(data => {
-			console.log(data)
-		}, error => {
-			console.log(error)
+		this.userService.registerUser(JSON.parse(payload)).subscribe((data) => {
+			this.toastr.success('User added successfully', 'Success');
+		}, (error) => {
+			console.log(error);
+			this.toastr.error(error.message, 'Error');
 		});
 
 	}
 
 	onReset() {
-        this.submitted = false;
-        this.registerForm.reset();
-    }
+		this.submitted = false;
+		this.registerForm.reset();
+	}
 }
 
 export function MustMatch(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-        const control = formGroup.controls[controlName];
-        const matchingControl = formGroup.controls[matchingControlName];
+	return (formGroup: FormGroup) => {
+		const control = formGroup.controls[controlName];
+		const matchingControl = formGroup.controls[matchingControlName];
 
-        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-            // return if another validator has already found an error on the matchingControl
-            return;
-        }
+		if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+			// return if another validator has already found an error on the matchingControl
+			return;
+		}
 
-        // set error on matchingControl if validation fails
-        if (control.value !== matchingControl.value) {
-            matchingControl.setErrors({ mustMatch: true });
-        } else {
-            matchingControl.setErrors(null);
-        }
-    }
+		// set error on matchingControl if validation fails
+		if (control.value !== matchingControl.value) {
+			matchingControl.setErrors({ mustMatch: true });
+		} else {
+			matchingControl.setErrors(null);
+		}
+	}
 }

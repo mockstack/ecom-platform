@@ -29,7 +29,7 @@ import { BreadcrumbComponent } from './shopping-view/common/breadcrumb/breadcrum
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { CryptoService } from './service/crypto.service';
-
+import { ToastrModule } from 'ngx-toastr';
 
 let config = new AuthServiceConfig([
   {
@@ -78,7 +78,12 @@ export function provideConfig() {
     ReactiveFormsModule,
     TypeaheadModule.forRoot(),
     BrowserAnimationsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    })
   ],
   schemas: [
 
