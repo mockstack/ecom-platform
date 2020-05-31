@@ -8,6 +8,7 @@ import { CartComponent } from './shopping-view/cart/cart.component';
 import { NotFoundComponent } from './utils/not-found/not-found.component';
 import { LoginComponent } from './utils/login/login.component';
 import { RegisterComponent } from './utils/register/register.component';
+import { PackComponent } from './shopping-view/pack/pack.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent, data: {bcNav: 'Cart'}},
   {path: 'login', component: LoginComponent, data: {bcNav: 'Login'}},
   {path: 'register', component: RegisterComponent, data: {bcNav: 'Register'}},
+  {path: 'pack', component: PackComponent, data: {bcNav: 'Packs'}},
   {path: '**', component: NotFoundComponent}
 ];
 

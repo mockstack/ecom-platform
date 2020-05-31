@@ -47,6 +47,10 @@ export class TopNavBarComponent implements OnInit {
 		console.log(this.selectedOption)
 	}
 
+	showPacks() {
+		this.router.navigateByUrl('pack')
+	}
+
 	showCart() {
 		this.router.navigateByUrl('cart');
 	}
