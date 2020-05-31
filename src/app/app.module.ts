@@ -31,6 +31,8 @@ import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-logi
 import { CryptoService } from './service/crypto.service';
 import { ToastrModule } from 'ngx-toastr';
 import { PackComponent } from './shopping-view/pack/pack.component';
+import { PackGridComponent } from './shopping-view/common/pack-grid/pack-grid.component';
+import { PackContentComponent } from './shopping-view/common/pack-content/pack-content.component';
 
 let config = new AuthServiceConfig([
   {
@@ -69,7 +71,9 @@ export function provideConfig() {
     RepeatDirective,
     AdStatCustomerComponent,
     BreadcrumbComponent,
-    PackComponent
+    PackComponent,
+    PackGridComponent,
+    PackContentComponent
   ],
   imports: [
     BrowserModule,

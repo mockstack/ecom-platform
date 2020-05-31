@@ -1,0 +1,38 @@
+<div class="container card mt-3 mb-3 p-2 shadow-sm">
+    <div class="col">
+        <div class="row">
+            <h4>Pack for a small family</h4>
+        </div>
+        <div class="row">
+            <p>This pack contains required grocerries and milk products for a small family of 4 members</p>
+        </div>
+        <div class="row float-right">
+            <button type="button" class="btn btn-success" (click)="showCheckout()">Buy Now</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">View
+                Content</button>
+            <button type="button" class="btn btn-warning" (click)="showPackEdit()">Customize</button>
+        </div>
+    </div>
+</div>
+
+<!-- Quick View of the Pack Content -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
