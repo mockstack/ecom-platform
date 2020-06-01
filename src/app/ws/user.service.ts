@@ -17,4 +17,9 @@ export class UserService {
   public registerUser(data: String): Observable<Object> {
     return this.httpClient.post(environment.apiUrl + 'user/add', data);
   }
+
+  /**Add a social login */
+  public addSocialLogin(data: any): Observable<Object> {
+    return this.httpClient.post(environment.apiUrl + 'social', data);
+  }
 }

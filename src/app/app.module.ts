@@ -38,11 +38,13 @@ import { ModalModule } from "ngx-bootstrap/modal";
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("Google-OAuth-Client-Id")
+    provider: new GoogleLoginProvider("921352824143-8im63g97h3h75a5s913j87ivq8b15k2k.apps.googleusercontent.com")
+    //SECRET - VBuEgJpwfwaV_BfHvv_RR3qa
+    //CLIENT-ID - 921352824143-8im63g97h3h75a5s913j87ivq8b15k2k.apps.googleusercontent.com
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("Facebook-App-Id")
+    provider: new FacebookLoginProvider("278742869945500")
   }
 ]);
 
