@@ -18,8 +18,20 @@ export class UserService {
     return this.httpClient.post(environment.apiUrl + 'user/add', data);
   }
 
+  /**Login a user */
+  public login(userName: string, password: string): Observable<object> {
+    let login = {email: userName, password: password};
+    return this.httpClient.post(environment.apiUrl + 'user/login', login);
+  }
+
   /**Add a social login */
   public addSocialLogin(data: any): Observable<Object> {
     return this.httpClient.post(environment.apiUrl + 'social', data);
+  }
+
+  /**Initialize a session */
+  public initiateSession(userId: string): Observable<object> {
+    let data = {userId: userId};
+    return this.httpClient.post(environment.apiUrl + 'session', data);
   }
 }

@@ -3,15 +3,16 @@
         <!--Username/Password login-->
         <div class="col-6">
             <div class="container mt-5">
-                <form class="form-signin" (submit)="signInWithAccount()">
+                <form class="form-signin" (submit)="signInWithAccount()" [formGroup]="loginForm">
                     <div class="form-label-group">
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required
-                            autofocus>
+                        <input type="email" id="inputEmail" formControlName="email" class="form-control"
+                            placeholder="Email address" required autofocus>
                         <label for="inputEmail"></label>
                     </div>
 
                     <div class="form-label-group">
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <input type="password" id="inputPassword" formControlName="password" class="form-control"
+                            placeholder="Password" required>
                         <label for="inputPassword"></label>
                     </div>
 
