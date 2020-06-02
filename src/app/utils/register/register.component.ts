@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
 
 		this.registerForm.value.password = this.cryptoService.set(environment.key, this.registerForm.value.password);
 		let payload = JSON.stringify(this.registerForm.value, null, 4);
-		this.userService.registerUser(JSON.parse(payload)).subscribe((data) => {
+		this.userService.addUser(JSON.parse(payload)).subscribe((data) => {
 			this.toastr.success('User added successfully', 'Success');
 		}, (error) => {
 			console.log(error);

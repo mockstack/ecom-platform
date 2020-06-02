@@ -49,7 +49,9 @@ export class LoginComponent implements OnInit {
 			this.cryptoService.set(environment.key, this.loginForm.value.password)).subscribe(data => {
 				let appUser = new AppUser().deserialize(data);
 				this.userService.initiateSession(appUser._id).subscribe(data => {
+					// store required data in a cookie
 					this.cookieService.set('userId', appUser._id);
+					this.cookieService.set('loggedUser', JSON.stringify(appUser));
 					this.router.navigateByUrl('/');
 				}, error => {
 					console.log(error);
@@ -61,10 +63,12 @@ export class LoginComponent implements OnInit {
 
 	signInWithGoogle(): void {
 		this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
-			this.userService.addSocialLogin(data).subscribe(data => {
+			this.userService.addUser(data).subscribe(data => {
 				let socialUser = new AppSocialUser().deserialize(data);
 				this.userService.initiateSession(socialUser.id).subscribe(data => {
+					// store required data in a cookie
 					this.cookieService.set('userId', socialUser.id);
+					this.cookieService.set('loggedUser', JSON.stringify(socialUser));
 					this.router.navigateByUrl('/');
 				}, error => {
 					console.log(error);
@@ -79,10 +83,12 @@ export class LoginComponent implements OnInit {
 
 	signInWithFB(): void {
 		this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data => {
-			this.userService.addSocialLogin(data).subscribe(data => {
+			this.userService.addUser(data).subscribe(data => {
 				let socialUser = new AppSocialUser().deserialize(data);
 				this.userService.initiateSession(socialUser.id).subscribe(data => {
+					// store required data in a cookie
 					this.cookieService.set('userId', socialUser.id);
+					this.cookieService.set('loggedUser', JSON.stringify(socialUser));
 					this.router.navigateByUrl('/');
 				}, error => {
 					console.log(error);

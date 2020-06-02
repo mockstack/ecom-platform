@@ -10,28 +10,43 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  /**
-   * Add a new user.
-   * @param data user register data as a string
-   */
-  public registerUser(data: String): Observable<Object> {
-    return this.httpClient.post(environment.apiUrl + 'user/add', data);
+  /*public registerUser(data: String): Observable<Object> {
+    return this.httpClient.post(environment.apiUrl + 'user', data);
+  }
+  public addSocialLogin(data: any): Observable<Object> {
+    return this.httpClient.post(environment.apiUrl + 'social', data);
+  }*/
+
+  /**Add new user */
+  public addUser(data: any): Observable<object> {
+    return this.httpClient.post(environment.apiUrl + 'user', data);
   }
 
   /**Login a user */
   public login(userName: string, password: string): Observable<object> {
-    let login = {email: userName, password: password};
+    let login = { email: userName, password: password, provider: 'APP' };
     return this.httpClient.post(environment.apiUrl + 'user/login', login);
   }
 
-  /**Add a social login */
-  public addSocialLogin(data: any): Observable<Object> {
-    return this.httpClient.post(environment.apiUrl + 'social', data);
+  /**Update user */
+  public updateUser(data: any): Observable<object> {
+    return this.httpClient.put(environment.apiUrl + 'user', data);
+  }
+
+  /**Get user by user id */
+  public getUserByUserId(userId: string): Observable<object> {
+    return this.httpClient.get(environment.apiUrl + 'user/' + userId);
   }
 
   /**Initialize a session */
   public initiateSession(userId: string): Observable<object> {
-    let data = {userId: userId};
+    let data = { userId: userId };
     return this.httpClient.post(environment.apiUrl + 'session', data);
   }
+
+  /**Validate the user current session */
+  public validateSession(userId: string): Observable<object> {
+    return this.httpClient.get(environment.apiUrl + 'session/' + userId);
+  }
+
 }
