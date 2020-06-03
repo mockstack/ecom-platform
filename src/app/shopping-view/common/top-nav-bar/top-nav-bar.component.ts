@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/ws/product.service';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/public_api';
@@ -7,6 +7,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/ws/user.service';
 import { UserSession } from 'src/app/model/user-session';
 import { AppUser } from 'src/app/model/app-user';
+import { AuthService } from 'angularx-social-login';
+import { AppAuthService } from 'src/app/service/app-auth.service';
 
 @Component({
 	selector: 'app-top-nav-bar',
@@ -15,15 +17,16 @@ import { AppUser } from 'src/app/model/app-user';
 })
 export class TopNavBarComponent implements OnInit {
 
-	selectedProduct: String;
-	selectedOption: String;
-	productList = [];
-	bcUrls: BcNavigation[] = [];
-	loggedUser: AppUser;
+	public selectedProduct: String;
+	public selectedOption: String;
+	public productList = [];
+	public bcUrls: BcNavigation[] = [];
+	public loggedUser: AppUser;
 
 	constructor(private router: Router, private productService: ProductService,
 		private activatedRoute: ActivatedRoute, private cookieService: CookieService,
-		private userService: UserService) {
+		private userService: UserService, private authService: AuthService,
+		private ref: ChangeDetectorRef, public appAuthService: AppAuthService) {
 		router.events.subscribe(evt => {
 			// console.log(evt);
 
@@ -46,12 +49,19 @@ export class TopNavBarComponent implements OnInit {
 				const userSession = new UserSession().deserialize(data);
 				this.cookieService.set('userSession', JSON.stringify(userSession));
 				this.loggedUser = new AppUser().deserialize(JSON.parse(this.cookieService.get('loggedUser')));
+				//console.log(this.loggedUser);
+
+				//setting service attributes
+				this.appAuthService.initiateSession(this.loggedUser, userSession, true);
 			}, error => {
 				this.cookieService.deleteAll();
+				this.appAuthService.reset();
 				console.log('there is no valid session for the user');
-			})
+			});
 		} else {
-			console.log('There is no userId')
+			this.cookieService.deleteAll();
+			this.appAuthService.reset();
+			console.log('There is no userId ' + this.loggedUser)
 		}
 
 		//if (this.cookieService.get('userId'))
@@ -60,7 +70,7 @@ export class TopNavBarComponent implements OnInit {
 		});
 
 		this.activatedRoute.params.subscribe(values => {
-			console.log(values['catid']);
+			//console.log(values['catid']);
 		})
 	}
 
@@ -95,5 +105,15 @@ export class TopNavBarComponent implements OnInit {
 
 	showProfile() {
 		// to be implemented
+	}
+
+	signOut(): void {
+		if (this.loggedUser.provider !== 'APP') {
+			this.authService.signOut();
+		}
+		this.appAuthService.reset();
+		this.cookieService.deleteAll();
+		this.loggedUser = undefined;
+		this.ref.detectChanges();
 	}
 }

@@ -30,7 +30,7 @@ export class PackService {
 
 	/**Get private packs by user id */
 	public getPrivatePacksByUserId(userID: string): Observable<object> {
-		return this.httpClient.get(this.pack + this.myPack + '/' + userID);
+		return this.httpClient.get(this.pack + this.myPack + userID);
 	}
 
 	/**Get default pack by pack id */

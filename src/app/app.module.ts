@@ -35,6 +35,7 @@ import { PackGridComponent } from './shopping-view/common/pack-grid/pack-grid.co
 import { PackContentComponent } from './shopping-view/common/pack-content/pack-content.component';
 import { ModalModule } from "ngx-bootstrap/modal";
 import { CookieService } from "ngx-cookie-service";
+import { AppAuthService } from './service/app-auth.service';
 
 let config = new AuthServiceConfig([
   {
@@ -105,7 +106,8 @@ export function provideConfig() {
       useFactory: provideConfig,
     },
     CryptoService,
-    CookieService
+    CookieService,
+    AppAuthService
   ],
   bootstrap: [AppComponent]
 })

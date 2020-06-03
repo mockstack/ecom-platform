@@ -8,13 +8,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CryptoService } from 'src/app/service/crypto.service';
 import { environment } from 'src/environments/environment';
 import { AppUser } from 'src/app/model/app-user';
-import { AppSocialUser } from "src/app/model/app-social-user";
+//import { AppSocialUser } from "src/app/model/app-social-user";
+import { AppAuthService } from 'src/app/service/app-auth.service';
+import { UserSession } from 'src/app/model/user-session';
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss']
 })
+/**
+ * Login component functionality.
+ * Cookie will be used to keep data after closing the browser.
+ * AppAuthService will be used to access session data throughout the application.
+ */
 export class LoginComponent implements OnInit {
 
 	loginForm: FormGroup;
@@ -24,12 +31,12 @@ export class LoginComponent implements OnInit {
 
 	constructor(private authService: AuthService, private userService: UserService,
 		private cookieService: CookieService, private router: Router, private formBuilder: FormBuilder,
-		private cryptoService: CryptoService) { }
+		private cryptoService: CryptoService, private appAuthService: AppAuthService) { }
 
 	ngOnInit(): void {
 		// initializing the login form
 		this.loginForm = this.formBuilder.group({
-			email: ['', Validators.required, Validators.email],
+			email: ['', [Validators.required, Validators.email]],
 			password: ['', Validators.required]
 		});
 
@@ -53,6 +60,8 @@ export class LoginComponent implements OnInit {
 					this.cookieService.set('userId', appUser._id);
 					this.cookieService.set('loggedUser', JSON.stringify(appUser));
 					this.router.navigateByUrl('/');
+					//setting service attributes
+					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
 				}, error => {
 					console.log(error);
 				});
@@ -64,12 +73,15 @@ export class LoginComponent implements OnInit {
 	signInWithGoogle(): void {
 		this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
 			this.userService.addUser(data).subscribe(data => {
-				let socialUser = new AppSocialUser().deserialize(data);
-				this.userService.initiateSession(socialUser.id).subscribe(data => {
+				let appUser = new AppUser().deserialize(data);
+				this.userService.initiateSession(appUser._id).subscribe(data => {
 					// store required data in a cookie
-					this.cookieService.set('userId', socialUser.id);
-					this.cookieService.set('loggedUser', JSON.stringify(socialUser));
+					this.cookieService.set('userId', appUser._id);
+					this.cookieService.set('loggedUser', JSON.stringify(appUser));
 					this.router.navigateByUrl('/');
+
+					//setting service attributes
+					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
 				}, error => {
 					console.log(error);
 				});
@@ -84,12 +96,15 @@ export class LoginComponent implements OnInit {
 	signInWithFB(): void {
 		this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data => {
 			this.userService.addUser(data).subscribe(data => {
-				let socialUser = new AppSocialUser().deserialize(data);
-				this.userService.initiateSession(socialUser.id).subscribe(data => {
+				let appUser = new AppUser().deserialize(data);
+				this.userService.initiateSession(appUser._id).subscribe(data => {
 					// store required data in a cookie
-					this.cookieService.set('userId', socialUser.id);
-					this.cookieService.set('loggedUser', JSON.stringify(socialUser));
+					this.cookieService.set('userId', appUser._id);
+					this.cookieService.set('loggedUser', JSON.stringify(appUser));
 					this.router.navigateByUrl('/');
+
+					//setting service attributes
+					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
 				}, error => {
 					console.log(error);
 				});
@@ -104,5 +119,6 @@ export class LoginComponent implements OnInit {
 	signOut(): void {
 		this.cookieService.deleteAll();
 		this.authService.signOut();
+		this.appAuthService.reset();
 	}
 }

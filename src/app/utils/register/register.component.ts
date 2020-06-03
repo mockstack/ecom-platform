@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
 		this.registerForm = this.formBuilder.group({
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(1)]],
-			confirmPassword: ['', Validators.required]
+			confirmPassword: ['', Validators.required],
 		}, {
 			validator: MustMatch('password', 'confirmPassword')
 		});
@@ -41,6 +41,7 @@ export class RegisterComponent implements OnInit {
 		}
 
 		this.registerForm.value.password = this.cryptoService.set(environment.key, this.registerForm.value.password);
+		this.registerForm.value.provider = 'APP';
 		let payload = JSON.stringify(this.registerForm.value, null, 4);
 		this.userService.addUser(JSON.parse(payload)).subscribe((data) => {
 			this.toastr.success('User added successfully', 'Success');
