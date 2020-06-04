@@ -72,8 +72,10 @@ export class LoginComponent implements OnInit {
 
 	signInWithGoogle(): void {
 		this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
-			this.userService.addUser(data).subscribe(data => {
-				let appUser = new AppUser().deserialize(data);
+			let appUser = new AppUser().deserialize(data);
+			//console.log(data)
+			this.userService.addUser(data).subscribe(userId => {
+				appUser._id = userId + '';
 				this.userService.initiateSession(appUser._id).subscribe(data => {
 					// store required data in a cookie
 					this.cookieService.set('userId', appUser._id);
@@ -95,8 +97,9 @@ export class LoginComponent implements OnInit {
 
 	signInWithFB(): void {
 		this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data => {
-			this.userService.addUser(data).subscribe(data => {
-				let appUser = new AppUser().deserialize(data);
+			let appUser = new AppUser().deserialize(data);
+			this.userService.addUser(data).subscribe(userId => {
+				appUser._id = userId + '';
 				this.userService.initiateSession(appUser._id).subscribe(data => {
 					// store required data in a cookie
 					this.cookieService.set('userId', appUser._id);
