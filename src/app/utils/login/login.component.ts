@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 				this.userService.initiateSession(appUser._id).subscribe(data => {
 					// store required data in a cookie
 					this.cookieService.set('userId', appUser._id);
-					this.cookieService.set('loggedUser', JSON.stringify(appUser));
+					//this.cookieService.set('loggedUser', JSON.stringify(appUser));
 					this.router.navigateByUrl('/');
 					//setting service attributes
 					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
 				this.userService.initiateSession(appUser._id).subscribe(data => {
 					// store required data in a cookie
 					this.cookieService.set('userId', appUser._id);
-					this.cookieService.set('loggedUser', JSON.stringify(appUser));
+					//this.cookieService.set('loggedUser', JSON.stringify(appUser));
 					this.router.navigateByUrl('/');
 
 					//setting service attributes
@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
 				this.userService.initiateSession(appUser._id).subscribe(data => {
 					// store required data in a cookie
 					this.cookieService.set('userId', appUser._id);
-					this.cookieService.set('loggedUser', JSON.stringify(appUser));
+					//this.cookieService.set('loggedUser', JSON.stringify(appUser));
 					this.router.navigateByUrl('/');
 
 					//setting service attributes

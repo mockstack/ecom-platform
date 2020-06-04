@@ -39,16 +39,23 @@ export class TopNavBarComponent implements OnInit {
 				//let item = new BcNavigation('a', evt.url);
 			}
 		});
+
+		console.log('1' + this.appAuthService.validSessionAvailable)
 	}
 
 	ngOnInit(): void {
 		if (this.cookieService.get('userId') !== '') {
+			console.log('validate ' + this.cookieService.get('userId'))
 			//check session validity
 			this.userService.validateSession(this.cookieService.get('userId')).subscribe(data => {
 				//session is valid.
 				const userSession = new UserSession().deserialize(data);
 				this.cookieService.set('userSession', JSON.stringify(userSession));
-				this.loggedUser = new AppUser().deserialize(JSON.parse(this.cookieService.get('loggedUser')));
+
+				//remvoe user from cookie
+				//get it from session validation which is supposed to populate over userid
+				//this.loggedUser = new AppUser().deserialize(JSON.parse(this.cookieService.get('loggedUser')));
+				this.loggedUser = userSession.userId;
 				//console.log(this.loggedUser);
 
 				//setting service attributes
@@ -59,6 +66,7 @@ export class TopNavBarComponent implements OnInit {
 				console.log('there is no valid session for the user');
 			});
 		} else {
+			console.log('cant validate')
 			this.cookieService.deleteAll();
 			this.appAuthService.reset();
 			console.log('There is no userId ' + this.loggedUser)
@@ -108,12 +116,8 @@ export class TopNavBarComponent implements OnInit {
 	}
 
 	signOut(): void {
-		if (this.loggedUser.provider !== 'APP') {
-			this.authService.signOut();
-		}
 		this.appAuthService.reset();
-		this.cookieService.deleteAll();
-		this.loggedUser = undefined;
+		this.cookieService.delete('userId');
 		this.ref.detectChanges();
 	}
 }
