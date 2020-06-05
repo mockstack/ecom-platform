@@ -23,8 +23,8 @@ export class UserService {
   }
 
   /**Login a user */
-  public login(userName: string, password: string): Observable<object> {
-    let login = { email: userName, password: password, provider: 'APP' };
+  public login(userName: string, password: string, provider: string): Observable<object> {
+    let login = { email: userName, password: password, provider: provider };
     return this.httpClient.post(environment.apiUrl + 'user/login', login);
   }
 
@@ -37,6 +37,11 @@ export class UserService {
   public getUserByUserId(userId: string): Observable<object> {
     return this.httpClient.get(environment.apiUrl + 'user/' + userId);
   }
+
+    /**Get user by user id */
+    public getUserBySocialId(socialId: String): Observable<object> {
+      return this.httpClient.get(environment.apiUrl + 'user/social/' + socialId);
+    }
 
   /**Initialize a session */
   public initiateSession(userId: string): Observable<object> {

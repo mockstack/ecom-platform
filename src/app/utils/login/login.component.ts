@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
 
 	signInWithAccount() {
 		this.userService.login(this.loginForm.value.email,
-			this.cryptoService.set(environment.key, this.loginForm.value.password)).subscribe(data => {
+			this.cryptoService.set(environment.key, this.loginForm.value.password), 'APP').subscribe(data => {
 				let appUser = new AppUser().deserialize(data);
 				this.userService.initiateSession(appUser._id).subscribe(data => {
 					// store required data in a cookie
@@ -72,23 +72,49 @@ export class LoginComponent implements OnInit {
 
 	signInWithGoogle(): void {
 		this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data => {
+			//app user without user id (_id)
 			let appUser = new AppUser().deserialize(data);
-			//console.log(data)
-			this.userService.addUser(data).subscribe(userId => {
-				appUser._id = userId + '';
-				this.userService.initiateSession(appUser._id).subscribe(data => {
-					// store required data in a cookie
-					this.cookieService.set('userId', appUser._id);
-					//this.cookieService.set('loggedUser', JSON.stringify(appUser));
-					this.router.navigateByUrl('/');
-
-					//setting service attributes
-					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-				}, error => {
-					console.log(error);
-				});
+			this.userService.getUserBySocialId(appUser.id).subscribe((data: object[]) => {
+				// app user with user id
+				if (data.length > 0) {
+					// there is already registered user
+					appUser = new AppUser().deserialize(data[0]);
+					this.userService.updateUser(appUser).subscribe(data => {
+						// user update success
+						this.userService.initiateSession(appUser._id).subscribe(data => {
+							// store required data in a cookie
+							this.cookieService.set('userId', appUser._id);
+							//this.cookieService.set('loggedUser', JSON.stringify(appUser));
+							this.router.navigateByUrl('/');
+							//setting service attributes
+							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
+						}, error => {
+							console.log(error);
+						});
+					}, error => {
+						console.log(error);
+					})
+				} else {
+					// there is no user so we sould inser it.
+					//console.log(data)
+					this.userService.addUser(appUser).subscribe(userId => {
+						appUser._id = userId + '';
+						this.userService.initiateSession(appUser._id).subscribe(data => {
+							// store required data in a cookie
+							this.cookieService.set('userId', appUser._id);
+							//this.cookieService.set('loggedUser', JSON.stringify(appUser));
+							this.router.navigateByUrl('/');
+							//setting service attributes
+							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
+						}, error => {
+							console.log(error);
+						});
+					}, error => {
+						console.log(error)
+					});
+				}
 			}, error => {
-				console.log(error)
+				console.log(error);
 			});
 		}).catch(error => {
 			console.log(error);
@@ -97,20 +123,47 @@ export class LoginComponent implements OnInit {
 
 	signInWithFB(): void {
 		this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data => {
+			//app user without user id (_id)
 			let appUser = new AppUser().deserialize(data);
-			this.userService.addUser(data).subscribe(userId => {
-				appUser._id = userId + '';
-				this.userService.initiateSession(appUser._id).subscribe(data => {
-					// store required data in a cookie
-					this.cookieService.set('userId', appUser._id);
-					//this.cookieService.set('loggedUser', JSON.stringify(appUser));
-					this.router.navigateByUrl('/');
-
-					//setting service attributes
-					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-				}, error => {
-					console.log(error);
-				});
+			this.userService.getUserBySocialId(appUser.id).subscribe((data: object[]) => {
+				// app user with user id
+				if (data.length > 0) {
+					// there is already registered user
+					appUser = new AppUser().deserialize(data[0]);
+					this.userService.updateUser(appUser).subscribe(data => {
+						// user update success
+						this.userService.initiateSession(appUser._id).subscribe(data => {
+							// store required data in a cookie
+							this.cookieService.set('userId', appUser._id);
+							//this.cookieService.set('loggedUser', JSON.stringify(appUser));
+							this.router.navigateByUrl('/');
+							//setting service attributes
+							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
+						}, error => {
+							console.log(error);
+						});
+					}, error => {
+						console.log(error);
+					})
+				} else {
+					// there is no user so we sould inser it.
+					//console.log(data)
+					this.userService.addUser(appUser).subscribe(userId => {
+						appUser._id = userId + '';
+						this.userService.initiateSession(appUser._id).subscribe(data => {
+							// store required data in a cookie
+							this.cookieService.set('userId', appUser._id);
+							//this.cookieService.set('loggedUser', JSON.stringify(appUser));
+							this.router.navigateByUrl('/');
+							//setting service attributes
+							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
+						}, error => {
+							console.log(error);
+						});
+					}, error => {
+						console.log(error)
+					});
+				}
 			}, error => {
 				console.log(error);
 			});

@@ -116,6 +116,7 @@ export class TopNavBarComponent implements OnInit {
 	}
 
 	signOut(): void {
+		this.authService.signOut();
 		this.appAuthService.reset();
 		this.cookieService.delete('userId');
 		this.ref.detectChanges();
