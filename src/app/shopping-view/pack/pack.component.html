@@ -6,14 +6,14 @@
         </div>
         <div class="col-6">
             <h1>My Packs</h1>
-            <div *ngIf="loggedUser === undefined" class="text-center w-100 mt-5">
+            <div *ngIf="!appAuthService.validSessionAvailable" class="text-center w-100 mt-5">
                 <p>Please <button type="button" class="btn btn-link">login</button> to see your packs</p>
             </div>
-            <div *ngIf="loggedUser !== undefined" class="text-center w-100">
+            <div *ngIf="appAuthService.validSessionAvailable" class="text-center w-100">
                 <app-pack-grid *ngFor="let item2 of myPackList" [pack]="item2"></app-pack-grid>
             </div>
             <div class="text-center w-100" *ngIf="!userPackAvailable">
-                <p>You don't have any pack, let's <button type="button" class="btn btn-link">create</button> one</p>
+                <p>You don't have any pack, let's <button type="button" (click)="showCreatePack()" class="btn btn-link">create</button> one</p>
             </div>
         </div>
     </div>

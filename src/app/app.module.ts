@@ -36,6 +36,10 @@ import { PackContentComponent } from './shopping-view/common/pack-content/pack-c
 import { ModalModule } from "ngx-bootstrap/modal";
 import { CookieService } from "ngx-cookie-service";
 import { AppAuthService } from './service/app-auth.service';
+import { CreatePackComponent } from './shopping-view/create-pack/create-pack.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { ProductNameService } from './service/product-name.service';
+import { ProductCategoryFilterPipe } from './pipe/product-category-filter.pipe';
 
 let config = new AuthServiceConfig([
   {
@@ -43,11 +47,12 @@ let config = new AuthServiceConfig([
     provider: new GoogleLoginProvider("921352824143-8im63g97h3h75a5s913j87ivq8b15k2k.apps.googleusercontent.com")
     //SECRET - VBuEgJpwfwaV_BfHvv_RR3qa
     //CLIENT-ID - 921352824143-8im63g97h3h75a5s913j87ivq8b15k2k.apps.googleusercontent.com
-  },
+  }
+  /*,
   {
     id: FacebookLoginProvider.PROVIDER_ID,
     provider: new FacebookLoginProvider("278742869945500")
-  }
+  }*/
 ]);
 
 export function provideConfig() {
@@ -78,7 +83,9 @@ export function provideConfig() {
     BreadcrumbComponent,
     PackComponent,
     PackGridComponent,
-    PackContentComponent
+    PackContentComponent,
+    CreatePackComponent,
+    ProductCategoryFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -95,7 +102,8 @@ export function provideConfig() {
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    AccordionModule.forRoot()
   ],
   schemas: [
 
@@ -107,7 +115,8 @@ export function provideConfig() {
     },
     CryptoService,
     CookieService,
-    AppAuthService
+    AppAuthService,
+    ProductNameService
   ],
   bootstrap: [AppComponent]
 })

@@ -9,6 +9,7 @@ import { UserSession } from 'src/app/model/user-session';
 import { AppUser } from 'src/app/model/app-user';
 import { AuthService } from 'angularx-social-login';
 import { AppAuthService } from 'src/app/service/app-auth.service';
+import { ProductNameService } from 'src/app/service/product-name.service';
 
 @Component({
 	selector: 'app-top-nav-bar',
@@ -26,7 +27,8 @@ export class TopNavBarComponent implements OnInit {
 	constructor(private router: Router, private productService: ProductService,
 		private activatedRoute: ActivatedRoute, private cookieService: CookieService,
 		private userService: UserService, private authService: AuthService,
-		private ref: ChangeDetectorRef, public appAuthService: AppAuthService) {
+		private ref: ChangeDetectorRef, public appAuthService: AppAuthService,
+		private productNameService: ProductNameService) {
 		router.events.subscribe(evt => {
 			// console.log(evt);
 
@@ -75,6 +77,7 @@ export class TopNavBarComponent implements OnInit {
 		//if (this.cookieService.get('userId'))
 		this.productService.getProductNames().subscribe((data: any[]) => {
 			this.productList = data;
+			this.productNameService.productList = data;
 		});
 
 		this.activatedRoute.params.subscribe(values => {

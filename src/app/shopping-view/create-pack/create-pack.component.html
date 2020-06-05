@@ -1,0 +1,30 @@
+<div class="container">
+    <!--Item accordian-->
+    <div class="row">
+        <div class="col-6">
+            <accordion [isAnimated]="true">
+                <accordion-group *ngFor="let item of categoryList; let i = index" heading="{{item.name}}">
+                    <div class="row" *ngFor="let prod of productList | productCategoryFilter: item; let a = index">
+                        <div class="col-8">
+                            {{prod.name}}
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary" (click)="addProductToMyPack(prod)">+</button>
+                        </div>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+        <!--Selected item list-->
+        <div class="col-6">
+            <div class="row" *ngFor="let packItm of myPack; let i = index">
+                <div class="col-8">
+                    {{packItm.name}}
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" (click)="removeProductFromMyPack(packItm)">-</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ import { error } from 'protractor';
 import { AppUser } from 'src/app/model/app-user';
 import { CookieService } from 'ngx-cookie-service';
 import { AppAuthService } from 'src/app/service/app-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-pack',
@@ -17,7 +18,7 @@ export class PackComponent implements OnInit {
 	public loggedUser: AppUser;
 	public userPackAvailable: boolean = false;
 
-	constructor(private packService: PackService, private cookieService: CookieService, private appAuthService: AppAuthService) { }
+	constructor(private packService: PackService, public appAuthService: AppAuthService, private router: Router) { }
 
 	ngOnInit(): void {
 		// get default packs
@@ -28,8 +29,9 @@ export class PackComponent implements OnInit {
 		});
 
 		// get private packs
-		if (this.cookieService.get('loggedUser') !== '') {
-			this.loggedUser = new AppUser().deserialize(JSON.parse(this.cookieService.get('loggedUser')));
+		if (this.appAuthService.validSessionAvailable) {
+			this.loggedUser = this.appAuthService.loggedUser;
+			console.log(this.loggedUser);
 
 			this.packService.getPrivatePacksByUserId(this.loggedUser._id).subscribe((data: Object[]) => {
 				this.myPackList = data;
@@ -40,6 +42,10 @@ export class PackComponent implements OnInit {
 				console.log(error);
 			})
 		}
+	}
+
+	showCreatePack() {
+		this.router.navigateByUrl('pack/create');
 	}
 
 }
