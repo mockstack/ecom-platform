@@ -11,6 +11,7 @@ import { RegisterComponent } from './utils/register/register.component';
 import { PackComponent } from './shopping-view/pack/pack.component';
 import { PackContentComponent } from './shopping-view/common/pack-content/pack-content.component';
 import { CreatePackComponent } from './shopping-view/create-pack/create-pack.component';
+import { AppUserGuard } from './guard/app-user.guard';
 
 
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent, data: {bcNav: 'Register'}},
   {path: 'pack', component: PackComponent, data: {bcNav: 'Packs'}},
   {path: 'pack/detail', component: PackContentComponent, data: {bcNav: 'Edit Pack'}},
-  {path: 'pack/create', component: CreatePackComponent, data: {bcNav: 'Create Pack'}},
+  {path: 'pack/create', component: CreatePackComponent, canActivate: [AppUserGuard], data: {bcNav: 'Create Pack'}},
   {path: '**', component: NotFoundComponent}
 ];
 
