@@ -19,7 +19,7 @@ import { ProductGridItemComponent } from './shopping-view/common/product-grid-it
 import { ProductTypePreviewComponent } from './shopping-view/common/product-type-preview/product-type-preview.component';
 import { FooterComponent } from './shopping-view/common/footer/footer.component';
 import { AdCarouselComponent } from './shopping-view/common/ad-carousel/ad-carousel.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -40,6 +40,7 @@ import { CreatePackComponent } from './shopping-view/create-pack/create-pack.com
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ProductNameService } from './service/product-name.service';
 import { ProductCategoryFilterPipe } from './pipe/product-category-filter.pipe';
+import { HttpInterceptorInterceptor } from './ws/http-interceptor.interceptor';
 
 let config = new AuthServiceConfig([
   {
@@ -116,7 +117,8 @@ export function provideConfig() {
     CryptoService,
     CookieService,
     AppAuthService,
-    ProductNameService
+    ProductNameService,
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -12,7 +12,7 @@
             <div *ngIf="appAuthService.validSessionAvailable" class="text-center w-100">
                 <app-pack-grid *ngFor="let item2 of myPackList" [pack]="item2"></app-pack-grid>
             </div>
-            <div class="text-center w-100" *ngIf="!userPackAvailable">
+            <div class="text-center w-100" *ngIf="appAuthService.validSessionAvailable && myPackList.length === 0">
                 <p>You don't have any pack, let's <button type="button" (click)="showCreatePack()" class="btn btn-link">create</button> one</p>
             </div>
         </div>

@@ -11,6 +11,7 @@ import { AppUser } from 'src/app/model/app-user';
 //import { AppSocialUser } from "src/app/model/app-social-user";
 import { AppAuthService } from 'src/app/service/app-auth.service';
 import { UserSession } from 'src/app/model/user-session';
+import Key from '../key';
 
 @Component({
 	selector: 'app-login',
@@ -62,6 +63,8 @@ export class LoginComponent implements OnInit {
 					this.router.navigateByUrl('/');
 					//setting service attributes
 					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
+					// save items in the session
+					//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
 				}, error => {
 					console.log(error);
 				});
@@ -88,6 +91,8 @@ export class LoginComponent implements OnInit {
 							this.router.navigateByUrl('/');
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
+							// save items in the session
+							//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
 						}, error => {
 							console.log(error);
 						});
@@ -106,6 +111,8 @@ export class LoginComponent implements OnInit {
 							this.router.navigateByUrl('/');
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
+							// save items in the session
+							//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
 						}, error => {
 							console.log(error);
 						});
@@ -139,6 +146,8 @@ export class LoginComponent implements OnInit {
 							this.router.navigateByUrl('/');
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
+							// save items in the session
+							//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
 						}, error => {
 							console.log(error);
 						});
@@ -157,6 +166,8 @@ export class LoginComponent implements OnInit {
 							this.router.navigateByUrl('/');
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
+							// save items in the session
+							//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
 						}, error => {
 							console.log(error);
 						});
@@ -172,9 +183,22 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
+	/**Save user login information in the session storage */
+	saveSessionData(appUser, session, status) {
+		sessionStorage.setItem(Key.SS_LOGGED_USER, JSON.stringify(appUser));
+		sessionStorage.setItem(Key.SS_LOGGED_USER_SESSION, JSON.stringify(session));
+		sessionStorage.setItem(Key.SS_IS_USER_LOGGEDIN, JSON.stringify(status));
+	}
+
 	signOut(): void {
 		this.cookieService.deleteAll();
 		this.authService.signOut();
 		this.appAuthService.reset();
+
+		// remove all from the session storage
+		for (let index = 0; index < sessionStorage.length; index++) {
+			const element = sessionStorage[index];
+			sessionStorage.removeItem(sessionStorage.key(index));
+		}
 	}
 }

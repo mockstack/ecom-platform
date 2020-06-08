@@ -1,4 +1,5 @@
 import { Deserializable } from './deserializable';
+import { MeasurementType } from "../model/measurement-type.enum";
 
 export class Product implements Deserializable {
     _id: String;
@@ -12,6 +13,7 @@ export class Product implements Deserializable {
     promotions: String;
     stockAvailable: Boolean;
     showToCustomer: Boolean;
+    measurementUnit: MeasurementType;
     created_date: Date;
     modified_date: Date;
 

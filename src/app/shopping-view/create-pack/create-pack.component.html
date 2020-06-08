@@ -17,13 +17,22 @@
         </div>
         <!--Selected item list-->
         <div class="col-6">
-            <div class="row" *ngFor="let packItm of myPack; let i = index">
-                <div class="col-8">
-                    {{packItm.name}}
+            <div class="row" *ngFor="let packItem of myPackItems; let i = index">
+                <div class="col-6">
+                    {{packItem.productName}}
                 </div>
-                <div>
+                <div class="col-4">
+                    <input type="number" value="1" class="form-control" placeholder="Quantity" min="0" max="100" [(ngModel)]="packItem.quantity">
+                </div>
+                <div class="col-2">
                     <button type="button" class="btn btn-primary" (click)="removeProductFromMyPack(packItm)">-</button>
                 </div>
+            </div>
+            <!--Pack Info-->
+            <div class="col" [hidden]="myPackItems.length === 0">
+                <input type="text" class="form-control" id="packName" placeholder="Put a name for the pack" [(ngModel)]="packTitle">
+                <textarea class="form-control" id="packDescription" rows="3" placeholder="Describe the pack" [(ngModel)]="packDescription"></textarea>
+                <button type="button" class="btn btn-primary" (click)="saveMyPack()">Save</button>
             </div>
         </div>
     </div>

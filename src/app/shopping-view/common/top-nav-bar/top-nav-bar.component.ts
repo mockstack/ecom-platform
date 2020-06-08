@@ -10,6 +10,8 @@ import { AppUser } from 'src/app/model/app-user';
 import { AuthService } from 'angularx-social-login';
 import { AppAuthService } from 'src/app/service/app-auth.service';
 import { ProductNameService } from 'src/app/service/product-name.service';
+import Key from 'src/app/utils/key';
+import { error } from 'protractor';
 
 @Component({
 	selector: 'app-top-nav-bar',
@@ -51,17 +53,26 @@ export class TopNavBarComponent implements OnInit {
 			//check session validity
 			this.userService.validateSession(this.cookieService.get('userId')).subscribe(data => {
 				//session is valid.
+				console.log('session validation -> ' + data);
 				const userSession = new UserSession().deserialize(data);
 				this.cookieService.set('userSession', JSON.stringify(userSession));
 
-				//remvoe user from cookie
-				//get it from session validation which is supposed to populate over userid
-				//this.loggedUser = new AppUser().deserialize(JSON.parse(this.cookieService.get('loggedUser')));
-				this.loggedUser = userSession.userId;
-				//console.log(this.loggedUser);
+				this.userService.getUserByUserId(this.cookieService.get('userId')).subscribe(user => {
+					//remvoe user from cookie
+					//get it from session validation which is supposed to populate over userid
+					//this.loggedUser = new AppUser().deserialize(JSON.parse(this.cookieService.get('loggedUser')));
+					this.loggedUser = new AppUser().deserialize(user);
+					//console.log(this.loggedUser);
 
-				//setting service attributes
-				this.appAuthService.initiateSession(this.loggedUser, userSession, true);
+					//setting service attributes
+					this.appAuthService.initiateSession(this.loggedUser, userSession, true);
+					// save data in session storage
+					//sessionStorage.setItem(Key.SS_LOGGED_USER, JSON.stringify(this.loggedUser));
+					//sessionStorage.setItem(Key.SS_LOGGED_USER_SESSION, JSON.stringify(userSession));
+					//sessionStorage.setItem(Key.SS_IS_USER_LOGGEDIN, JSON.stringify(true));
+				}, error => {
+					console.log('cannot get the user by user id - ' + error);
+				});
 			}, error => {
 				this.cookieService.deleteAll();
 				this.appAuthService.reset();
@@ -78,6 +89,8 @@ export class TopNavBarComponent implements OnInit {
 		this.productService.getProductNames().subscribe((data: any[]) => {
 			this.productList = data;
 			this.productNameService.productList = data;
+			// storing the product list in the session storage.
+			sessionStorage.setItem(Key.SS_PRODUCT_LIST, JSON.stringify(data));
 		});
 
 		this.activatedRoute.params.subscribe(values => {
