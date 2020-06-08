@@ -13,7 +13,7 @@ import Key from 'src/app/utils/key';
 export class PackComponent implements OnInit {
 
 	public defaultPackList = [];
-	public myPackList = [];
+	public myPackList: object[];
 	public loggedUser: AppUser;
 	public userPackAvailable: boolean = false;
 
@@ -30,29 +30,26 @@ export class PackComponent implements OnInit {
 			console.log(error);
 		});
 
-		// get private packs
-		if (this.appAuthService.validSessionAvailable) {
-			this.loggedUser = this.appAuthService.loggedUser;
-			console.log(this.loggedUser);
+		// listen to session status changes
+		this.appAuthService.sessionStatus.subscribe(value => {
+			if (value) {
+				this.loggedUser = this.appAuthService.loggedUser;
+				console.log(this.loggedUser);
 
-			this.packService.getPrivatePacksByUserId(this.loggedUser._id).subscribe((data: Object[]) => {
-				this.myPackList = data;
-				//save my packs in the session storage
-				sessionStorage.setItem(Key.SS_PACK_PRIVATE, JSON.stringify(this.myPackList));
-				if (this.myPackList.length > 0) {
-					this.userPackAvailable = true;
-				}
-			}, error => {
-				console.log(error);
-			})
-		}
-	}
-
-	ngOnChanges(changes: SimpleChanges) {
-		if (changes[''].currentValue) {
-
-		}
-
+				this.packService.getPrivatePacksByUserId(this.loggedUser._id).subscribe((data: Object[]) => {
+					this.myPackList = data;
+					//save my packs in the session storage
+					sessionStorage.setItem(Key.SS_PACK_PRIVATE, JSON.stringify(this.myPackList));
+					if (this.myPackList.length > 0) {
+						this.userPackAvailable = true;
+					}
+				}, error => {
+					console.log(error);
+				});
+			}
+		}, error => {
+			console.error(error);
+		});
 	}
 
 	showCreatePack() {

@@ -24,7 +24,7 @@ export class TopNavBarComponent implements OnInit {
 	public selectedOption: String;
 	public productList = [];
 	public bcUrls: BcNavigation[] = [];
-	public loggedUser: AppUser;
+	//public loggedUser: AppUser;
 
 	constructor(private router: Router, private productService: ProductService,
 		private activatedRoute: ActivatedRoute, private cookieService: CookieService,
@@ -43,21 +43,34 @@ export class TopNavBarComponent implements OnInit {
 				//let item = new BcNavigation('a', evt.url);
 			}
 		});
-
-		console.log('1' + this.appAuthService.validSessionAvailable)
 	}
 
 	ngOnInit(): void {
-		if (this.cookieService.get('userId') !== '') {
-			console.log('validate ' + this.cookieService.get('userId'))
+		//get the session from the cookie
+		if (this.cookieService.get(Key.COOKIE_USER) !== '') {
+			const appUser: AppUser = new AppUser().deserialize(JSON.parse(this.cookieService.get(Key.COOKIE_USER)));
+			const prevSession: UserSession = new UserSession().deserialize(JSON.parse(this.cookieService.get(Key.COOKIE_USER_SESSION)));
+
+			this.userService.validateSession(appUser._id).subscribe(session => {
+				const validatedSession = new UserSession().deserialize(session);
+				this.appAuthService.initiateSession(appUser, validatedSession, true);
+			}, error => {
+				this.cookieService.deleteAll();
+				this.appAuthService.reset();
+			});
+		}
+
+		//REMOVED SINCE SESSION VALIDATION IS DONE THROUGH THE COOKIE
+		/*if (this.cookieService.get(Key.COOKIE_USER_ID) !== '') {
+			console.log('validate ' + this.cookieService.get(Key.COOKIE_USER_ID))
 			//check session validity
-			this.userService.validateSession(this.cookieService.get('userId')).subscribe(data => {
+			this.userService.validateSession(this.cookieService.get(Key.COOKIE_USER_ID)).subscribe(data => {
 				//session is valid.
 				console.log('session validation -> ' + data);
 				const userSession = new UserSession().deserialize(data);
-				this.cookieService.set('userSession', JSON.stringify(userSession));
+				//this.cookieService.set('userSession', JSON.stringify(userSession));
 
-				this.userService.getUserByUserId(this.cookieService.get('userId')).subscribe(user => {
+				this.userService.getUserByUserId(this.cookieService.get(Key.COOKIE_USER_ID)).subscribe(user => {
 					//remvoe user from cookie
 					//get it from session validation which is supposed to populate over userid
 					//this.loggedUser = new AppUser().deserialize(JSON.parse(this.cookieService.get('loggedUser')));
@@ -83,7 +96,7 @@ export class TopNavBarComponent implements OnInit {
 			this.cookieService.deleteAll();
 			this.appAuthService.reset();
 			console.log('There is no userId ' + this.loggedUser)
-		}
+		}*/
 
 		//if (this.cookieService.get('userId'))
 		this.productService.getProductNames().subscribe((data: any[]) => {
@@ -134,7 +147,7 @@ export class TopNavBarComponent implements OnInit {
 	signOut(): void {
 		this.authService.signOut();
 		this.appAuthService.reset();
-		this.cookieService.delete('userId');
+		this.cookieService.delete(Key.COOKIE_USER_ID);
 		this.ref.detectChanges();
 	}
 }

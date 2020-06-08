@@ -1,5 +1,8 @@
 export default class Key {
     // keys for cookies
+    public static COOKIE_USER_ID = 'uId';
+    public static COOKIE_USER = 'cU';
+    public static COOKIE_USER_SESSION = 'uS';
 
     // key for session storage
     public static SS_CATEGORY_LIST: string = 'ss-category-list';

@@ -58,13 +58,10 @@ export class LoginComponent implements OnInit {
 				let appUser = new AppUser().deserialize(data);
 				this.userService.initiateSession(appUser._id).subscribe(data => {
 					// store required data in a cookie
-					this.cookieService.set('userId', appUser._id);
-					//this.cookieService.set('loggedUser', JSON.stringify(appUser));
-					this.router.navigateByUrl('/');
+					this.setCookies(appUser, new UserSession().deserialize(data));
 					//setting service attributes
 					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-					// save items in the session
-					//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
+					this.router.navigateByUrl('/');
 				}, error => {
 					console.log(error);
 				});
@@ -86,13 +83,10 @@ export class LoginComponent implements OnInit {
 						// user update success
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							// store required data in a cookie
-							this.cookieService.set('userId', appUser._id);
-							//this.cookieService.set('loggedUser', JSON.stringify(appUser));
-							this.router.navigateByUrl('/');
+							this.setCookies(appUser, new UserSession().deserialize(data));
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							// save items in the session
-							//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
+							this.router.navigateByUrl('/');
 						}, error => {
 							console.log(error);
 						});
@@ -106,13 +100,10 @@ export class LoginComponent implements OnInit {
 						appUser._id = userId + '';
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							// store required data in a cookie
-							this.cookieService.set('userId', appUser._id);
-							//this.cookieService.set('loggedUser', JSON.stringify(appUser));
-							this.router.navigateByUrl('/');
+							this.setCookies(appUser, new UserSession().deserialize(data));
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							// save items in the session
-							//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
+							this.router.navigateByUrl('/');
 						}, error => {
 							console.log(error);
 						});
@@ -141,13 +132,10 @@ export class LoginComponent implements OnInit {
 						// user update success
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							// store required data in a cookie
-							this.cookieService.set('userId', appUser._id);
-							//this.cookieService.set('loggedUser', JSON.stringify(appUser));
-							this.router.navigateByUrl('/');
+							this.setCookies(appUser, new UserSession().deserialize(data));
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							// save items in the session
-							//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
+							this.router.navigateByUrl('/');
 						}, error => {
 							console.log(error);
 						});
@@ -161,13 +149,10 @@ export class LoginComponent implements OnInit {
 						appUser._id = userId + '';
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							// store required data in a cookie
-							this.cookieService.set('userId', appUser._id);
-							//this.cookieService.set('loggedUser', JSON.stringify(appUser));
-							this.router.navigateByUrl('/');
+							this.setCookies(appUser, new UserSession().deserialize(data));
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							// save items in the session
-							//this.saveSessionData(appUser, new UserSession().deserialize(data), true);
+							this.router.navigateByUrl('/');
 						}, error => {
 							console.log(error);
 						});
@@ -188,6 +173,13 @@ export class LoginComponent implements OnInit {
 		sessionStorage.setItem(Key.SS_LOGGED_USER, JSON.stringify(appUser));
 		sessionStorage.setItem(Key.SS_LOGGED_USER_SESSION, JSON.stringify(session));
 		sessionStorage.setItem(Key.SS_IS_USER_LOGGEDIN, JSON.stringify(status));
+	}
+
+	/**Store required data in cookies */
+	setCookies(appUser: AppUser, session: UserSession) {
+		this.cookieService.set(Key.COOKIE_USER_ID, appUser._id);
+		this.cookieService.set(Key.COOKIE_USER, JSON.stringify(appUser));
+		this.cookieService.set(Key.COOKIE_USER_SESSION, JSON.stringify(session));
 	}
 
 	signOut(): void {
