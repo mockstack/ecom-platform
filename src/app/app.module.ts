@@ -41,6 +41,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ProductNameService } from './service/product-name.service';
 import { ProductCategoryFilterPipe } from './pipe/product-category-filter.pipe';
 import { HttpInterceptorInterceptor } from './ws/http-interceptor.interceptor';
+import { CookiePolicyService } from './service/cookie-policy.service';
 
 let config = new AuthServiceConfig([
   {
@@ -118,7 +119,8 @@ export function provideConfig() {
     CookieService,
     AppAuthService,
     ProductNameService,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true},
+    CookiePolicyService
   ],
   bootstrap: [AppComponent]
 })
