@@ -1,0 +1,36 @@
+<div class="container bg-light pt-5">
+    <div class="row">
+        <h3>New Arraivals</h3>
+    </div>
+    <div class="row">
+
+        <!-- Card Narrower -->
+        <div class="col-sm card card-cascade narrower m-1 p-1" *ngFor="let item of newItemList">
+
+            <!-- Card image -->
+            <div class="view view-cascade overlay">
+                <img class="card-img-top" src="../../../../assets/img/products/cherry.jpg" alt="Card image cap">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <!-- Card content -->
+            <div class="card-body card-body-cascade">
+
+                <!-- Label -->
+                <h5 class="pink-text pb-2 pt-1"><i class="fas fa-utensils"></i> Culinary</h5>
+                <!-- Title -->
+                <h4 class="font-weight-bold card-title">Cheat day inspirations</h4>
+
+            </div>
+
+            <!-- Card footer -->
+            <div class="card-footer text-muted text-center">
+                2 days ago
+            </div>
+
+        </div>
+
+    </div>
+</div>
