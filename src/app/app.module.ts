@@ -42,6 +42,7 @@ import { ProductNameService } from './service/product-name.service';
 import { ProductCategoryFilterPipe } from './pipe/product-category-filter.pipe';
 import { HttpInterceptorInterceptor } from './ws/http-interceptor.interceptor';
 import { CookiePolicyService } from './service/cookie-policy.service';
+import { HomeGridItemComponent } from './shopping-view/common/home-grid-item/home-grid-item.component';
 
 let config = new AuthServiceConfig([
   {
@@ -87,7 +88,8 @@ export function provideConfig() {
     PackGridComponent,
     PackContentComponent,
     CreatePackComponent,
-    ProductCategoryFilterPipe
+    ProductCategoryFilterPipe,
+    HomeGridItemComponent
   ],
   imports: [
     BrowserModule,

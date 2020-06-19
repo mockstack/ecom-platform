@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router'
 
 @Component({
-  selector: 'app-product-type-preview',
-  templateUrl: './product-type-preview.component.html',
-  styleUrls: ['./product-type-preview.component.scss']
+	selector: 'app-product-type-preview',
+	templateUrl: './product-type-preview.component.html',
+	styleUrls: ['./product-type-preview.component.scss']
 })
 export class ProductTypePreviewComponent implements OnInit {
+	@Input() productType: string;
 
-  constructor(private router: Router) { }
+	constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+		console.log(this.productType);
+	}
 
-  showAllProductsByType() {
-    this.router.navigateByUrl('products');
-  }
+	showAllProductsByType() {
+		this.router.navigateByUrl('products');
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		console.log(changes);
+	}
 }

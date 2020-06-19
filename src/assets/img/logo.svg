@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="41.486668"
+   inkscape:export-xdpi="41.486668"
+   inkscape:export-filename="C:\Users\Indika\Workspace\AngularProjects\ecom-platform\src\assets\img\logo.png"
+   width="250mm"
+   height="60mm"
+   viewBox="0 0 250 60"
+   version="1.1"
+   id="svg53"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="logo.svg">
+  <defs
+     id="defs47">
+    <linearGradient
+       id="linearGradient882"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop880" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="555.91444"
+     inkscape:cy="102.41214"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1000"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     showguides="true" />
+  <metadata
+     id="metadata50">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       inkscape:export-ydpi="20.824814"
+       inkscape:export-xdpi="20.824814"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:49.3889px;line-height:1.25;font-family:'Fjalla One';-inkscape-font-specification:'Fjalla One';fill:#e38a17;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="51.476124"
+       y="58.224628"
+       id="text948"><tspan
+         sodipodi:role="line"
+         id="tspan946"
+         x="51.476124"
+         y="58.224628"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:49.3889px;font-family:'Fjalla One';-inkscape-font-specification:'Fjalla One';fill:#e38a17;fill-opacity:1;stroke-width:0.264583">DEVI</tspan></text>
+    <text
+       inkscape:export-ydpi="20.824814"
+       inkscape:export-xdpi="20.824814"
+       id="text948-7"
+       y="58.480045"
+       x="134.54196"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:47.625px;line-height:1.25;font-family:'Fjalla One';-inkscape-font-specification:'Fjalla One';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:47.625px;font-family:'Fjalla One';-inkscape-font-specification:'Fjalla One';fill:#ffffff;stroke-width:0.264583"
+         y="58.480045"
+         x="134.54196"
+         id="tspan946-6"
+         sodipodi:role="line">online</tspan></text>
+    <path
+       inkscape:export-ydpi="20.824814"
+       inkscape:export-xdpi="20.824814"
+       id="rect944"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:6.00001;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.764706"
+       d="M 3.851123,20.427008 H 43.916606 L 41.176279,56.240255 6.402462,55.673285 Z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       inkscape:export-ydpi="20.824814"
+       inkscape:export-xdpi="20.824814"
+       transform="scale(-1)"
+       d="m -12.082594,-18.112675 a 12.334476,13.277729 0 0 1 -6.28132,11.5688841 12.334476,13.277729 0 0 1 -12.446448,-0.2140022 12.334476,13.277729 0 0 1 -5.934893,-11.7789269"
+       sodipodi:arc-type="arc"
+       sodipodi:open="true"
+       sodipodi:end="3.1735347"
+       sodipodi:start="0"
+       sodipodi:ry="13.277729"
+       sodipodi:rx="12.334476"
+       sodipodi:cy="-18.112675"
+       sodipodi:cx="-24.41707"
+       sodipodi:type="arc"
+       id="path854"
+       style="fill:none;fill-rule:evenodd;stroke:#e38a17;stroke-width:2.43678;stroke-miterlimit:4;stroke-dasharray:none" />
+  </g>
+</svg>
