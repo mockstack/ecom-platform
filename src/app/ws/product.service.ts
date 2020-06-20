@@ -8,19 +8,27 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
+  private products: string = 'products/';
+  private product: string = 'product/';
+
   constructor(private httpClient: HttpClient) { }
 
   /**
    * Get product names.
    */
   public getProductNames(): any {
-    return this.httpClient.get(environment.apiUrl + 'product/names');
+    return this.httpClient.get(environment.apiUrl + this.products + '/names');
   }
 
   /**
    * Get products by category id.
    */
   public getProductsByCategoryId(id): Observable<Object> {
-    return this.httpClient.get(environment.apiUrl + 'product/byCategory/' + id);
+    return this.httpClient.get(environment.apiUrl + this.products + 'byCategory/' + id);
+  }
+
+  /**Get product by product id */
+  public getProduct(id): Observable<Object> {
+    return this.httpClient.get(environment.apiUrl + this.product + id);
   }
 }

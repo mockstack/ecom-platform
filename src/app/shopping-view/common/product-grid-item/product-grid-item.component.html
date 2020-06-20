@@ -14,6 +14,6 @@
     <div class="text-center">
         <button type="button" class="btn btn-sm"><i class="fas fa-cart-plus"></i></button>
         <button type="button" class="btn btn-sm"><i class="far fa-heart text-danger"></i></button>
-        <button type="button" class="btn btn-link btn-sm" (click)="showProductInfo(product)">more</button>
+        <button type="button" class="btn btn-link btn-sm" [routerLink]="['/product', product._id]">more</button>
     </div>
 </div>

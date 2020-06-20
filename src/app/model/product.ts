@@ -4,7 +4,8 @@ import { MeasurementType } from "../model/measurement-type.enum";
 export class Product implements Deserializable {
     _id: String;
     name: String;
-    unit_price: Number;
+    unit_price_lkr: Number;
+    unit_price_usd: Number;
     long_desc: String;
     short_desc: String;
     category: String;

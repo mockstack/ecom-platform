@@ -11,14 +11,10 @@ import { environment } from 'src/environments/environment';
 export class ProductGridItemComponent implements OnInit {
 
   @Input() product: Product;
-  serverUrl: string = environment.apiUrl;
+  serverUrl = environment.apiUrl;
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-  }
-
-  showProductInfo() {
-    this.router.navigateByUrl('detail');
   }
 }

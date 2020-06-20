@@ -1,41 +1,51 @@
-<div class="container">
-    <div class="row">
+<div class="container m-5">
+    <div class="row" *ngIf="product !== undefined">
         <!--Product Image-->
         <div class="col-4">
-            <img src="/assets/dummy-data/products/brown_sugar.jpg" class="img-fluid" alt="Responsive image">
+            <img src="{{serverUrl}}{{product.fullImage}}" class="img-fluid" alt="Responsive image">
         </div>
         <!--Details-->
         <div class="col-7">
             <div class="row">
-                <p class="font-weight-normal product-name">Brown Sugar</p>
-            </div>    
+                <p class="font-weight-normal product-name">{{product.name}}</p>
+            </div>
             <div class="row">
                 <p class="font-weight-light product-description">
-                    Brown sugar is a sucrose sugar product with a distinctive brown color due to the presence of
-                    molasses. It is either an unrefined or partially refined soft sugar consisting of sugar crystals
-                    with some residual molasses content, or it is produced by the addition of molasses to refined white
-                    sugar.
+                    {{product.long_desc}}
                 </p>
             </div>
             <div class="row">
-                <p>Unit Price:</p> 230LKR
+                <p>Unit Price:</p> {{product.unit_price_lkr}}
             </div>
             <div class="row">
-                <p>Size:</p> 1Kg Packs
+                <p>Size:</p> {{product.measurementUnit}}
             </div>
+
+            <!--Quantity-->
             <div class="row">
-                <div class="section" style="padding-bottom:20px;">
-                    <p>Quantity</p>                  
-                    <div class="row">
-                        <div class="btn-minus"><i class="fas fa-plus"></i></div>
-                        <input value="1" />
-                        <div class="btn-plus"><i class="fas fa-minus"></i></div>
+                <div class="col">
+                    <p>Quantity</p>
+                    <div class="input-group mb-3 w-50">
+                        <div class="input-group-prepend" (click)="increaseQuantity()">
+                            <span class="input-group-text">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </div>
+                        <input type="text" disabled value="{{quantity}}" class="form-control" aria-label="Quantity">
+                        <div class="input-group-append" (click)="decreaseQuantity()">
+                            <span class="input-group-text">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <button type="button" class="btn btn-success">Add to cart</button>
-                <button type="button" class="btn btn-danger">Out of Stock</button>
+
+            <div class="row mt-5">
+                <button *ngIf="product.stockAvailable" type="button" class="btn btn-success">
+                    <i class="fas fa-cart-plus"></i> | Add to cart</button>
+                <button *ngIf="!product.stockAvailable" type="button" disabled class="btn btn-danger">
+                    <i class="fas fa-ban"></i> | Out of Stock</button>
             </div>
         </div>
     </div>
