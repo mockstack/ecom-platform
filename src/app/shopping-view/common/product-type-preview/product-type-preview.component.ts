@@ -8,7 +8,7 @@ import { Router } from '@angular/router'
 })
 export class ProductTypePreviewComponent implements OnInit {
 	@Input() productType: string;
-
+	newItemList: number[] = [23, 4, 3, 6];
 	constructor(private router: Router) { }
 
 	ngOnInit(): void {

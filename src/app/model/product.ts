@@ -14,6 +14,8 @@ export class Product implements Deserializable {
     stockAvailable: Boolean;
     showToCustomer: Boolean;
     measurementUnit: MeasurementType;
+    thumbImage: string;
+    fullImage: string;
     created_date: Date;
     modified_date: Date;
 

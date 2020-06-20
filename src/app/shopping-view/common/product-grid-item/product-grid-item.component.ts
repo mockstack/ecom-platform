@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-grid-item',
@@ -10,6 +11,7 @@ import { Product } from 'src/app/model/product';
 export class ProductGridItemComponent implements OnInit {
 
   @Input() product: Product;
+  serverUrl: string = environment.apiUrl;
 
   constructor(private router: Router) { }
 

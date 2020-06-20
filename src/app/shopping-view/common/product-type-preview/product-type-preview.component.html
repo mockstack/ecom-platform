@@ -1,27 +1,14 @@
-<!--Will show 3 item of a product type in the home page-->
-<div class="card mt-1 mb-1">
-    <div class="card-header">
-        Cakes
+<div class="container bg-light pt-5">
+    <div class="row">
+        <h3>New Arraivals</h3>
     </div>
-    <div class="card-body">
-        <!--<h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+    <div class="row">
 
-        <div class="row">
-            <div class="col-sm">
-                <app-home-grid-item></app-home-grid-item>
-            </div>
-            <div class="col-sm">
-                <app-home-grid-item></app-home-grid-item>
-            </div>
-            <div class="col-sm">
-                <app-home-grid-item></app-home-grid-item>
-            </div>
-            <div class="col-sm">
-                <app-home-grid-item></app-home-grid-item>
-            </div>
+        <!-- Card Narrower -->
+        <div class="col-sm narrower m-1 p-1" *ngFor="let item of newItemList">
+            <app-home-grid-item></app-home-grid-item>
         </div>
 
-        <button type="button" class="btn btn-link float-right" (click)="showAllProductsByType();">More</button>
     </div>
+    <button type="button" class="btn btn-link float-right" (click)="showAllProductsByType();">More</button>
 </div>

@@ -1,12 +1,19 @@
 <div class="card m-2" style="width: 12rem;">
-    
-    <div #loading class="card-img-top" style="height: 10rem;">
-        <app-loading *biRepeat="1"></app-loading>
+
+    <div #loading class="card-img-top text-center">
+        <!--<app-loading *biRepeat="1"></app-loading>-->
+        <img src="{{serverUrl}}{{product.thumbImage}}" style="height: 10rem; width: 10rem;" class="rounded"
+            alt="{{product.name}}">
     </div>
-    
-    <div class="card-body">
-        <h6 class="card-title text-truncate"><b>{{product.name}}</b></h6>
-        <p class="card-text text-truncate">{{product.short_desc}}</p>
-        <a class="nav-link float-right" (click)="showProductInfo()">More</a>
+
+    <div class="card-body p-1" style="height: 6rem;">
+        <p class="card-title text-center"><b>{{product.name}}</b></p>
+        <p class="card-text text-center">{{product.short_desc}}</p>
+    </div>
+    <hr>
+    <div class="text-center">
+        <button type="button" class="btn btn-sm"><i class="fas fa-cart-plus"></i></button>
+        <button type="button" class="btn btn-sm"><i class="far fa-heart text-danger"></i></button>
+        <button type="button" class="btn btn-link btn-sm" (click)="showProductInfo(product)">more</button>
     </div>
 </div>
