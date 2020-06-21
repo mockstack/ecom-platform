@@ -21,6 +21,6 @@ export class ProductGridItemComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.cart.addItem(new CartItem( undefined, product._id, 1));
+    this.cart.addItem(new CartItem(product, 1));
   }
 }

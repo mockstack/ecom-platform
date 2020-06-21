@@ -1,11 +1,12 @@
+import { ProductService } from '../ws/product.service';
+import { Product } from './product';
+
 export class CartItem {
-    _id: String;
-    productId: String;
+    product: Product;
     quantity: Number;
 
-    constructor(id?: String, productId?: String, quantity?: Number) {
-        this._id = id;
-        this.productId = productId;
+    constructor(product?: Product, quantity?: Number) {
+        this.product = product;
         this.quantity = quantity;
     }
 

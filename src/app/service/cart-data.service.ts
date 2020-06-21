@@ -41,12 +41,12 @@ export class CartDataService {
 	public addItem(cartItem: CartItem) {
 		if (this._cart === undefined) throw Error('Cart is not initialized');
 
-		if (this._cartItems.findIndex(item => (item.productId === cartItem.productId)) === -1) {
+		if (this._cartItems.findIndex(item => (item.product._id === cartItem.product._id)) === -1) {
 			//item is not available then push it
 			this._cartItems.push(cartItem);
 		} else {
 			//item is available then remove it and add it with new values
-			this._cartItems = this._cartItems.filter(item => item.productId !== cartItem.productId);
+			this._cartItems = this._cartItems.filter(item => item.product._id !== cartItem.product._id);
 			this._cartItems.push(cartItem);
 			// since filter returns a new array we have to assign it again.
 			this._cart.items = this._cartItems;
@@ -54,11 +54,11 @@ export class CartDataService {
 
 		// add item to database
 		if (this._cart._id === undefined) {
-			this.cartService.addCart(this._cart).subscribe((id: string) => {
+			this.cartService.addCart(this.convertToSaveModel(this._cart)).subscribe((id: string) => {
 				this._cart._id = id;
 			});
 		} else {
-			this.cartService.updateCart(this._cart).subscribe(data => {
+			this.cartService.updateCart(this.convertToSaveModel(this._cart)).subscribe(data => {
 				this.toasts.success('Added Item', 'Success');
 			}, error => {
 				this.toasts.error(error, 'Error');
@@ -74,10 +74,16 @@ export class CartDataService {
 	public removeItem(cartItem: CartItem) {
 		if (this._cart === undefined) throw Error('Cart is not initialized');
 
-		this._cartItems = this._cartItems.filter(item => item._id !== cartItem._id);
+		this._cartItems = this._cartItems.filter(item => item.product._id !== cartItem.product._id);
+		this._cart.items = this._cartItems;
+		this.notifier.next(this._cartItems);
 
 		// update the cart with modified data
-		this.cartService.updateCart(this._cart);
+		this.cartService.updateCart(this.convertToSaveModel(this._cart)).subscribe(data => {
+			this.toasts.success('Item removed successfully', 'Success');
+		}, error => {
+			this.toasts.error(error.message, 'Error');
+		});
 	}
 
 	/**
@@ -107,9 +113,55 @@ export class CartDataService {
 			this._cart.userId = this.userService.loggedUser._id;
 		}
 		this._cart.checkedOut = true;
-		this.cartService.updateCart(this._cart);
+		this.cartService.updateCart(this.convertToSaveModel(this._cart));
 		// reset all data
 		this._cart = undefined;
 		this._cartItems = undefined;
+	}
+
+	/**
+	 * Save request does not need every items so this method convert it into a suitable data model.
+	 * @param cart cat instance
+	 */
+	private convertToSaveModel(cart: Cart): CartSave {
+		let itemList: CartSaveItem[] = [];
+		cart.items.forEach(item => {
+			itemList.push(new CartSaveItem(item.product._id, item.quantity));
+		});
+
+		let out: CartSave = new CartSave(cart._id, cart.userId, itemList, cart.checkedOut, cart.created_date, cart.modified_date);
+
+		return out;
+	}
+}
+
+/**
+ * Cart model for saving in the backend.
+ */
+export class CartSave {
+	_id: String;
+	userId: String;
+	items: CartSaveItem[];
+	checkedOut: Boolean;
+	created_date: Date;
+	modified_date: Date;
+	constructor(id?: String, userId?: String, items?: CartSaveItem[], checkOut?: Boolean, createdDate?: Date,
+		modifiedDate?: Date) {
+		this._id = id;
+		this.userId = userId;
+		this.items = items;
+		this.checkedOut = checkOut;
+		this.created_date = createdDate;
+		this.modified_date = modifiedDate;
+	}
+}
+
+export class CartSaveItem {
+	productId: String;
+	quantity: Number;
+
+	constructor(productId: String, quantity: Number) {
+		this.productId = productId;
+		this.quantity = quantity;
 	}
 }

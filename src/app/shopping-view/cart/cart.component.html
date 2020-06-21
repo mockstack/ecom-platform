@@ -1,4 +1,43 @@
-<form class="form-inline">
+<!--<form class="form-inline">
     <button type="submit" class="btn btn-primary mb-2" (click)="router.navigate(['/checkout']);">Confirm
         Checkout</button>
-</form>
+</form>-->
+<div class="container text-center p-3" *ngIf="cartItemList.length > 0">
+    <!--header-->
+    <div class="row text-uppercase font-weight-bold p-3">
+        <div class="col-1">#</div>
+        <div class="col">Item</div>
+        <div class="col-2">Quantity</div>
+        <div class="col-2">Unit Price</div>
+        <div class="col-2">Price</div>
+        <div class="col-1">Delete</div>
+    </div>
+    <div class="row p-3" *ngFor="let item of cartItemList; let i = index">
+        <div class="col-1">{{i}}</div>
+        <div class="col itemName">{{item.product.name}}</div>
+        <div class="col-2 quantity">
+            <input type="number" min="1" class="form-control rounded-right" value="{{item.quantity}}" (change)="changeItemQuantity(item, $event.target.value)">
+        </div>
+        <div class="col-2 price">{{item.product.unit_price_lkr}}</div>
+        <div class="col-2 price">{{item.quantity * item.product.unit_price_lkr}}</div>
+        <div class="col-1"><i class="far fa-trash-alt" style="color: red;" (click)="deleteCartItem(item)"></i></div>
+    </div>
+    <!--Total Value-->
+    <li class="row totals float-right">
+        <span class="itemName">Total:</span>
+        <span class="price">{{total}}</span>
+        <span class="order"> <a class="text-center">ORDER</a></span>
+    </li>
+</div>
+
+<div class="h-50 m-5 p-5" *ngIf="cartItemList.length === 0">
+    <div class="col-sm-12 h-100 ">
+        <div class="card  align-middle">
+            <div class=" text-center p-5">
+                <h1 class="card-title">Not Items in the Cart</h1>
+                <h4 class="card-text">You have not added any item to the cart yet.</h4>
+                <!--<a href="#" class="btn btn-link" [routerLink]="">Go Home</a>-->
+            </div>
+        </div>
+    </div>
+</div>
