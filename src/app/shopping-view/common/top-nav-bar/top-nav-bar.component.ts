@@ -27,6 +27,7 @@ export class TopNavBarComponent implements OnInit {
 	public productList = [];
 	public bcUrls: BcNavigation[] = [];
 	public cartItemCount: number = 0;
+	public cartItems: CartItem[];
 	//public loggedUser: AppUser;
 
 	constructor(private router: Router, private productService: ProductService,
@@ -115,6 +116,7 @@ export class TopNavBarComponent implements OnInit {
 
 		this.cartDataService.selectionStatus.subscribe( (data: CartItem[]) => {
 			this.cartItemCount = data.length;
+			this.cartItems = data;
 		}, error => {
 
 		});
