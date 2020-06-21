@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { AuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { UserService } from 'src/app/ws/user.service';
@@ -26,13 +26,17 @@ import Key from '../key';
 export class LoginComponent implements OnInit {
 
 	loginForm: FormGroup;
-
+	@Input() showGuestButton: Boolean;
 	private user: SocialUser;
 	private loggedIn: boolean;
 
 	constructor(private authService: AuthService, private userService: UserService,
 		private cookieService: CookieService, private router: Router, private formBuilder: FormBuilder,
 		private cryptoService: CryptoService, private appAuthService: AppAuthService) { }
+
+	ngOnChanges(changes: SimpleChanges) {
+		this.showGuestButton = changes.showGuestButton.currentValue;
+	}
 
 	ngOnInit(): void {
 		// initializing the login form
@@ -166,6 +170,10 @@ export class LoginComponent implements OnInit {
 		}).catch(error => {
 			console.log(error);
 		});
+	}
+
+	continueAsGuest() {
+		this.router.navigateByUrl('checkout');
 	}
 
 	/**Save user login information in the session storage */

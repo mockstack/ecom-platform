@@ -1,8 +1,8 @@
-<div class="container card p-5 mt-5 mb-5">
-    <div class="row align-items-center">
+<div class="container card p-3">
+    <div class="row align-items-center p-3">
         <!--Username/Password login-->
-        <div class="col-6">
-            <div class="container mt-5">
+        <div class="col-sm-6">
+            <div class="container">
                 <form class="form-signin" (submit)="signInWithAccount()" [formGroup]="loginForm">
                     <div class="form-label-group">
                         <input type="email" id="inputEmail" formControlName="email" class="form-control"
@@ -28,7 +28,7 @@
         </div>
 
         <!--Social login-->
-        <div class="col-6">
+        <div class="col-sm-6">
             <div class="text-center social-btn">
                 <a class="btn btn-primary btn-block text-white" (click)="signInWithFB()">
                     <i class="fab fa-facebook-f"></i>
@@ -41,6 +41,15 @@
                     Sign in with
                     <b>Google</b>
                 </a>
+
+                <div *ngIf="showGuestButton">
+                    <hr>
+                    <p>Login as a registered user will allow your to save your billing address.</p>
+                    <a class="btn btn-success btn-block text-white" (click)="continueAsGuest()">
+                        <i class="fas fa-user-tie"></i>
+                        Continue as <b>guest</b>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
