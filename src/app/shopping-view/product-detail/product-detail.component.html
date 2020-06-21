@@ -42,7 +42,7 @@
             </div>
 
             <div class="row mt-5">
-                <button *ngIf="product.stockAvailable" type="button" class="btn btn-success">
+                <button *ngIf="product.stockAvailable" type="button" class="btn btn-success" (click)="addItemToCart(product)">
                     <i class="fas fa-cart-plus"></i> | Add to cart</button>
                 <button *ngIf="!product.stockAvailable" type="button" disabled class="btn btn-danger">
                     <i class="fas fa-ban"></i> | Out of Stock</button>

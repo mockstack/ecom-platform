@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/model/product';
 import { ProductService } from 'src/app/ws/product.service';
 import { environment } from 'src/environments/environment';
+import { CartDataService } from 'src/app/service/cart-data.service';
+import { CartItem } from 'src/app/model/cart-item';
 
 @Component({
 	selector: 'app-product-detail',
@@ -17,7 +19,8 @@ export class ProductDetailComponent implements OnInit {
 	quantity: number = 1;
 	serverUrl = environment.apiUrl;
 
-	constructor(private router: Router, private activatedRoute: ActivatedRoute, private productService: ProductService) { }
+	constructor(private router: Router, private activatedRoute: ActivatedRoute,
+		private productService: ProductService, private cartDataService: CartDataService) { }
 
 	ngOnInit(): void {
 		this.activatedRoute.params.subscribe(params => {
@@ -41,5 +44,9 @@ export class ProductDetailComponent implements OnInit {
 		if (this.quantity <= 1) {
 			this.quantity = 1;
 		}
+	}
+
+	addItemToCart(product: Product) {
+		this.cartDataService.addItem(new CartItem( undefined, product._id, this.quantity));
 	}
 }

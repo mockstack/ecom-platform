@@ -12,6 +12,8 @@ import { AppAuthService } from 'src/app/service/app-auth.service';
 import { ProductNameService } from 'src/app/service/product-name.service';
 import Key from 'src/app/utils/key';
 import { error } from 'protractor';
+import { CartDataService } from 'src/app/service/cart-data.service';
+import { CartItem } from 'src/app/model/cart-item';
 
 @Component({
 	selector: 'app-top-nav-bar',
@@ -24,13 +26,14 @@ export class TopNavBarComponent implements OnInit {
 	public selectedOption: String;
 	public productList = [];
 	public bcUrls: BcNavigation[] = [];
+	public cartItemCount: number = 0;
 	//public loggedUser: AppUser;
 
 	constructor(private router: Router, private productService: ProductService,
 		private activatedRoute: ActivatedRoute, private cookieService: CookieService,
 		private userService: UserService, private authService: AuthService,
 		private ref: ChangeDetectorRef, public appAuthService: AppAuthService,
-		private productNameService: ProductNameService) {
+		private productNameService: ProductNameService, private cartDataService: CartDataService) {
 		router.events.subscribe(evt => {
 			// console.log(evt);
 
@@ -109,6 +112,12 @@ export class TopNavBarComponent implements OnInit {
 		this.activatedRoute.params.subscribe(values => {
 			//console.log(values['catid']);
 		})
+
+		this.cartDataService.selectionStatus.subscribe( (data: CartItem[]) => {
+			this.cartItemCount = data.length;
+		}, error => {
+
+		});
 	}
 
 	onSelectProduct(event: TypeaheadMatch): void {
