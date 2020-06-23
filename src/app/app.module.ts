@@ -28,7 +28,7 @@ import { AdStatCustomerComponent } from './shopping-view/common/ad-stat-customer
 import { BreadcrumbComponent } from './shopping-view/common/breadcrumb/breadcrumb.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
-import { CryptoService } from './service/crypto.service';
+//import { CryptoService } from './service/crypto.service';
 import { ToastrModule } from 'ngx-toastr';
 import { PackComponent } from './shopping-view/pack/pack.component';
 import { PackGridComponent } from './shopping-view/common/pack-grid/pack-grid.component';
@@ -119,7 +119,6 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig,
     },
-    CryptoService,
     CookieService,
     AppAuthService,
     ProductNameService,

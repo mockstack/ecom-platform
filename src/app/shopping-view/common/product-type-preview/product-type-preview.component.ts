@@ -12,7 +12,6 @@ export class ProductTypePreviewComponent implements OnInit {
 	constructor(private router: Router) { }
 
 	ngOnInit(): void {
-		console.log(this.productType);
 	}
 
 	showAllProductsByType() {
@@ -20,6 +19,5 @@ export class ProductTypePreviewComponent implements OnInit {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log(changes);
 	}
 }
