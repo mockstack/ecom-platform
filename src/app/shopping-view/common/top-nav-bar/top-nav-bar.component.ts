@@ -144,7 +144,7 @@ export class TopNavBarComponent implements OnInit {
 	}
 
 	showHome() {
-		this.router.navigateByUrl('')
+		this.router.navigateByUrl('/')
 	}
 
 	showMyPacks() {

@@ -59,6 +59,8 @@ export class CartComponent implements OnInit {
 	}
 
 	ngOnDestroy() {
-		this.modalRef.hide();
+		if (this.modalRef !== undefined) {
+			this.modalRef.hide();
+		}
 	}
 }
