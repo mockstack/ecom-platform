@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 	@Input() showGuestButton: Boolean;
 	private user: SocialUser;
 	private loggedIn: boolean;
+	public loginError: string;
 
 	constructor(private authService: AuthService, private userService: UserService,
 		private cookieService: CookieService, private router: Router, private formBuilder: FormBuilder,
@@ -68,9 +69,11 @@ export class LoginComponent implements OnInit {
 					this.router.navigateByUrl('/');
 				}, error => {
 					console.log(error);
+					this.loginError = error.error;
 				});
 			}, error => {
 				console.log(error);
+				this.loginError = error.error;
 			});
 	}
 

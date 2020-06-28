@@ -6,13 +6,13 @@
                 <form class="form-signin" (submit)="signInWithAccount()" [formGroup]="loginForm">
                     <div class="form-label-group">
                         <input type="email" id="inputEmail" formControlName="email" class="form-control"
-                            placeholder="Email address" required autofocus>
+                            placeholder="Email address" (ngModelChange)="loginError = undefined" required autofocus>
                         <label for="inputEmail"></label>
                     </div>
 
                     <div class="form-label-group">
                         <input type="password" id="inputPassword" formControlName="password" class="form-control"
-                            placeholder="Password" required>
+                            placeholder="Password" (ngModelChange)="loginError = undefined" required>
                         <label for="inputPassword"></label>
                     </div>
 
@@ -22,6 +22,7 @@
                         </label>
                     </div>
                     <button class="btn btn-lg btn-block btn-orange" type="submit">Sign in</button>
+                    <p *ngIf="loginError !== undefined" class="text-danger text-center">{{loginError}}</p>
                     <!--<p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>-->
                 </form>
             </div>
