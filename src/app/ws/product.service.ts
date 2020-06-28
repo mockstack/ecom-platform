@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  private products: string = 'products/';
+  //private products: string = 'products/';
   private product: string = 'product/';
 
   constructor(private httpClient: HttpClient) { }
@@ -17,14 +17,14 @@ export class ProductService {
    * Get product names.
    */
   public getProductNames(): any {
-    return this.httpClient.get(environment.apiUrl + this.products + '/names');
+    return this.httpClient.get(environment.apiUrl + this.product + '/names');
   }
 
   /**
    * Get products by category id.
    */
   public getProductsByCategoryId(id): Observable<Object> {
-    return this.httpClient.get(environment.apiUrl + this.products + 'byCategory/' + id);
+    return this.httpClient.get(environment.apiUrl + this.product + 'byCategory/' + id);
   }
 
   /**Get product by product id */
