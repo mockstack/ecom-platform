@@ -21,14 +21,9 @@
     <div class="row mt-3">
         <div class="row">
             <h4>My Packs</h4>
-            <i *ngIf="appAuthService.validSessionAvailable" class="far fa-plus-square fa-2x btn text-danger p-0 pl-3"
-                (click)="showCreatePack()"></i>
         </div>
 
         <!--not a logged in user-->
-        <!--<div *ngIf="!appAuthService.validSessionAvailable" class="text-center w-100">
-            <p>Please <span class="btn btn-link p-0 m-0">login</span> to see your packs</p>
-        </div>-->
         <div class="row p-5 w-100" *ngIf="!appAuthService.validSessionAvailable">
             <div class="col-sm-12 h-100 d-table bg-danger">
                 <div class=" card-block d-table-cell align-middle bg-danger">
@@ -42,12 +37,7 @@
         <!--my pack list-->
         <div *ngIf="appAuthService.validSessionAvailable" class="text-center w-100">
             <app-pack-grid #privatepacks *ngFor="let item2 of myPackList" [pack]="item2"></app-pack-grid>
-        </div>
-
-        <!--logged in user and empty packs-->
-        <div class="text-center w-100" *ngIf="myPackList !== undefined && myPackList.length === 0">
-            <p>You don't have any pack, let's <button type="button" (click)="showCreatePack()"
-                    class="btn btn-link">create</button> one</p>
+            <app-add-item-view [message]="'Create your own pack'" (click)="showCreatePack()"></app-add-item-view>
         </div>
     </div>
 
