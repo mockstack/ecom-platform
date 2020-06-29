@@ -1,6 +1,11 @@
 import { Component, OnInit, Output, Input, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { PackItem } from 'src/app/model/pack-item';
+import { Pack } from 'src/app/model/pack';
+import { CartService } from 'src/app/ws/cart.service';
+import { CartDataService } from 'src/app/service/cart-data.service';
+import { CartItem } from 'src/app/model/cart-item';
 
 @Component({
 	selector: 'app-pack-grid',
@@ -13,13 +18,17 @@ export class PackGridComponent implements OnInit {
 	selectedItems = [];
 	modalRef: BsModalRef;
 
-	constructor(private router: Router, private modalService: BsModalService) { }
+	constructor(private router: Router, private modalService: BsModalService, private cartDataService: CartDataService) { }
 
 	ngOnInit(): void {
 	}
 
-	showCheckout() {
-		this.router.navigateByUrl("checkout");
+	showCheckout(pack: Pack) {
+		for(let item of pack.packItems) {
+			console.log(item)
+			this.cartDataService.addItem(new CartItem(item.product, item.quantity));
+		}
+		
 	}
 
 	showPackEdit() {

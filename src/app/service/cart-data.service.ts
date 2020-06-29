@@ -5,12 +5,13 @@ import { CartService } from '../ws/cart.service';
 import { BehaviorSubject } from 'rxjs';
 import { AppAuthService } from './app-auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { IBuyItem } from '../model/ibuy-item';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class CartDataService {
-	private _cartItems: CartItem[] = [];
+	private _cartItems: IBuyItem[] = [];
 	private _cart: Cart;
 	private notifier = new BehaviorSubject(this._cartItems);
 	public selectionStatus = this.notifier.asObservable();

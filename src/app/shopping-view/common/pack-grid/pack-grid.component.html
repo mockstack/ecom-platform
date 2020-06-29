@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="col-sm-2 float-right bg-white">
-            <button type="button" class="btn" (click)="showCheckout()">
+            <button type="button" class="btn" (click)="showCheckout(pack)">
                 <i class="fas fa-cart-plus"></i>
             </button>
             <button type="button" class="btn" (click)="showModal(packDetailViewTemplate, pack)">
@@ -27,16 +27,20 @@
 
 <!-- Quick View of the Pack Content -->
 <ng-template #packDetailViewTemplate>
-    <div class="modal-header">
+    <div class="modal-header bg-light">
         <h4 class="modal-title pull-left">Pack Content</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <div *ngFor="let item of selectedItems">
-            <p>{{item.productId.name}}</p>
-            <p>{{item.quantity}}</p>
+        <div class="row pl-3 pr-3" *ngFor="let item of selectedItems">
+            <div class="col-sm-10">
+                <p>{{item.product.name}}</p>
+            </div>
+            <div class="col-sm-2">
+                <p class="float-right">{{item.quantity}}</p>
+            </div>
         </div>
     </div>
 </ng-template>

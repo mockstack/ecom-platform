@@ -1,7 +1,8 @@
 import { ProductService } from '../ws/product.service';
 import { Product } from './product';
+import { IBuyItem } from './ibuy-item';
 
-export class CartItem {
+export class CartItem implements IBuyItem {
     product: Product;
     quantity: Number;
 
