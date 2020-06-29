@@ -23,7 +23,7 @@ export class PackGridComponent implements OnInit {
 	}
 
 	showPackEdit() {
-		this.router.navigateByUrl("pack/detail");
+		this.router.navigateByUrl("detail");
 	}
 
 	showModal(template: TemplateRef<any>, pack: any) {

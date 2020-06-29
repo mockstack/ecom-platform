@@ -17,7 +17,7 @@ export class ProductService {
    * Get product names.
    */
   public getProductNames(): any {
-    return this.httpClient.get(environment.apiUrl + this.product + '/names');
+    return this.httpClient.get(environment.apiUrl + this.product + 'names');
   }
 
   /**
@@ -31,4 +31,9 @@ export class ProductService {
   public getProduct(id): Observable<Object> {
     return this.httpClient.get(environment.apiUrl + this.product + id);
   }
+
+  	/**Get all products */
+	public getAllProducts(): Observable<Object> {
+		return this.httpClient.get(environment.apiUrl + this.product);
+	}
 }

@@ -15,8 +15,10 @@ export class AppUserGuard implements CanActivate {
 		next: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		if (this.appAuthService.validSessionAvailable) {
+			console.log('there is a login session')
 			return true;
 		} else {
+			console.error('there is no session');
 			this.router.navigateByUrl('/login');
 		}
 	}

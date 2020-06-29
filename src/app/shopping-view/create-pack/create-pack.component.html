@@ -1,38 +1,50 @@
 <div class="container">
+<div>
+    <h1>Create your packs</h1>
+</div>
     <!--Item accordian-->
     <div class="row">
-        <div class="col-6">
+        <div class="col-sm-6">
             <accordion [isAnimated]="true">
-                <accordion-group *ngFor="let item of categoryList; let i = index" heading="{{item.name}}">
-                    <div class="row" *ngFor="let prod of productList | productCategoryFilter: item; let a = index">
-                        <div class="col-8">
+                <accordion-group class="m-1 custom" *ngFor="let item of categoryList; let i = index" heading="{{item.name}}">
+                    <div class="row p-1" *ngFor="let prod of productList | productCategoryFilter: item; let a = index">
+                        <div class="col-10">
                             {{prod.name}}
                         </div>
-                        <div>
-                            <button type="button" class="btn btn-primary" (click)="addProductToMyPack(prod)">+</button>
+                        <div class="col-2">
+                            <button type="button" class="btn" (click)="addProductToMyPack(prod)">
+                                <i class="fas fa-plus-circle"></i>
+                            </button>
                         </div>
                     </div>
                 </accordion-group>
             </accordion>
         </div>
+
         <!--Selected item list-->
-        <div class="col-6">
-            <div class="row" *ngFor="let packItem of myPackItems; let i = index">
-                <div class="col-6">
+        <div class="col-sm-6">
+            <div class="row m-2" *ngFor="let packItem of myPackItems; let i = index">
+                <div class="col-6 align-content-cente">
                     {{packItem.productName}}
                 </div>
-                <div class="col-4">
-                    <input type="number" value="1" class="form-control" placeholder="Quantity" min="0" max="100" [(ngModel)]="packItem.quantity">
+                <div class="col-4 mt-2">
+                    <input type="number" value="1" class="form-control" placeholder="Quantity" min="0" max="100"
+                        [(ngModel)]="packItem.quantity">
                 </div>
-                <div class="col-2">
-                    <button type="button" class="btn btn-primary" (click)="removeProductFromMyPack(packItem)">-</button>
+                <div class="col-2 mt-2">
+                    <button type="button" class="btn" (click)="removeProductFromMyPack(packItem)">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
                 </div>
             </div>
+
             <!--Pack Info-->
             <div class="col" [hidden]="myPackItems.length === 0">
-                <input type="text" class="form-control" id="packName" placeholder="Put a name for the pack" [(ngModel)]="packTitle">
-                <textarea class="form-control" id="packDescription" rows="3" placeholder="Describe the pack" [(ngModel)]="packDescription"></textarea>
-                <button type="button" class="btn btn-primary" (click)="saveMyPack()">Save</button>
+                <input type="text" class="form-control m-2" id="packName" placeholder="Put a name for the pack"
+                    [(ngModel)]="packTitle">
+                <textarea class="form-control m-2" id="packDescription" rows="3" placeholder="Describe the pack"
+                    [(ngModel)]="packDescription"></textarea>
+                <button type="button" class="btn btn-success m-2" (click)="saveMyPack()">Save</button>
             </div>
         </div>
     </div>

@@ -53,7 +53,7 @@ export class PackComponent implements OnInit {
 	}
 
 	showCreatePack() {
-		this.router.navigateByUrl('pack/create');
+		this.router.navigateByUrl('create');
 	}
 
 }

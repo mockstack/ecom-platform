@@ -6,6 +6,9 @@ import { ProductNameService } from 'src/app/service/product-name.service';
 import { Pack } from 'src/app/model/pack';
 import { PackItem } from 'src/app/model/pack-item';
 import { PackService } from 'src/app/ws/pack.service';
+import { CategoryService } from 'src/app/ws/category.service';
+import { ProductCategory } from 'src/app/model/product-category';
+import { Product } from 'src/app/model/product';
 
 @Component({
 	selector: 'app-create-pack',
@@ -14,26 +17,34 @@ import { PackService } from 'src/app/ws/pack.service';
 })
 export class CreatePackComponent implements OnInit {
 
-	public categoryList;
-	public productList;
+	public categoryList: ProductCategory[];
+	public productList: Product[];
 	public myPack: Pack[] = [];
 	public myPackItems: PackItem[] = [];
 	public packTitle: string = '';
 	public packDescription: string = '';
 
-	constructor(private productService: ProductService, public appAuthService: AppAuthService,
-		private router: Router, private productNameService: ProductNameService, private packService: PackService) {
-		this.categoryList = this.productNameService.categoryList;
-		this.productList = this.productNameService.productList;
+	constructor(private productService: ProductService, private categoryService: CategoryService, public appAuthService: AppAuthService,
+		private router: Router, private packService: PackService) {
+		//this.categoryList = [];
+		this.productList = [];
 	}
 
 	ngOnInit(): void {
-		console.log(this.productNameService.productList)
-		console.log(this.productNameService.categoryList)
+		this.categoryService.getProductCategories().subscribe((data: ProductCategory[]) => {
+			this.categoryList = data;
+			this.productService.getAllProducts().subscribe((data: Product[]) => {
+				this.productList = data;
+			}, error => {
+				// cannot load products
+			});
+		}, error => {
+			// cannot load categories
+		});
 	}
 
 	addProductToMyPack(product: any) {
-		if (this.myPackItems.findIndex(item => item === product) == -1) {
+		if (this.myPackItems.findIndex(item => item.productId === product._id) == -1) {
 			let packItem = new PackItem(product._id, product.name, 1);
 			this.myPackItems.push(packItem);
 		}

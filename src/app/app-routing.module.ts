@@ -25,8 +25,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, data: {bcNav: 'Login'}},
   {path: 'register', component: RegisterComponent, data: {bcNav: 'Register'}},
   {path: 'pack', component: PackComponent, data: {bcNav: 'Packs'}},
-  {path: 'pack/detail', component: PackContentComponent, data: {bcNav: 'Edit Pack'}},
-  {path: 'pack/create', component: CreatePackComponent, canActivate: [AppUserGuard], data: {bcNav: 'Create Pack'}},
+  {path: 'detail', component: PackContentComponent, data: {bcNav: 'Edit Pack'}},
+  {path: 'create', component: CreatePackComponent, data: {bcNav: 'Create Pack'}},
   {path: '**', component: NotFoundComponent}
 ];
 
