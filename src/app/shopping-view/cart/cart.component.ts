@@ -5,14 +5,6 @@ import { CartItem } from 'src/app/model/cart-item';
 import { Product } from 'src/app/model/product';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
-const product = new Product();
-product.name = "THis is the name of the prodcuts"
-product._id = '2321321';
-product.unit_price_lkr = 12.50;
-
-const itemList = [new CartItem(product, 3)];
-
-
 @Component({
 	selector: 'app-cart',
 	templateUrl: './cart.component.html',
@@ -20,14 +12,14 @@ const itemList = [new CartItem(product, 3)];
 })
 export class CartComponent implements OnInit {
 	showGuestButton: Boolean = true;
-	cartItemList: CartItem[];// = itemList;
+	cartItemList: CartItem[];
 	total: number = 0.00;
 	modalRef: BsModalRef;
 
 	constructor(public router: Router, private cart: CartDataService, private modalService: BsModalService) { }
 
 	ngOnInit(): void {
-		this.cartItemList = this.cart.cart.items;
+		this.cartItemList = this.cart.cart.items as CartItem[];
 		this.calculateTotal(this.cartItemList);
 
 		this.cart.selectionStatus.subscribe((data: CartItem[]) => {

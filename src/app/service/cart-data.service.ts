@@ -15,6 +15,7 @@ export class CartDataService {
 	private _cart: Cart;
 	private notifier = new BehaviorSubject(this._cartItems);
 	public selectionStatus = this.notifier.asObservable();
+	public _productIdList = [];
 
 	constructor(private cartService: CartService, private userService: AppAuthService,
 		private toasts: ToastrService) {
@@ -103,6 +104,13 @@ export class CartDataService {
 		if (this._cart === undefined) throw Error('Cart is not initialized');
 
 		this._cart.userId = userId;
+	}
+
+	/**
+	 * Get selected product id list.
+	 */
+	public get productIdList() {
+		return this._cartItems.map(item => item.product._id);
 	}
 
 	/**

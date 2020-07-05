@@ -21,4 +21,8 @@ export class CartService {
 	public updateCart(data: CartSave): Observable<Object> {
 		return this.httpClient.put(environment.apiUrl + 'cart/' +data._id , data);
 	}
+
+	public checkOut(data: any) {
+		return this.httpClient.post(environment.apiUrl + 'order', data);
+	}
 }
