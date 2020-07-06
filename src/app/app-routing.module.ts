@@ -12,6 +12,7 @@ import { PackComponent } from './shopping-view/pack/pack.component';
 import { PackContentComponent } from './shopping-view/common/pack-content/pack-content.component';
 import { CreatePackComponent } from './shopping-view/create-pack/create-pack.component';
 import { AppUserGuard } from './guard/app-user.guard';
+import { CheckoutStatusComponent } from './shopping-view/common/checkout-status/checkout-status.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'products/:cat/:catid', component: ProductComponent, data: {bcNav: 'Products'} },
   {path: 'product/:id', component: ProductDetailComponent, data: {bcNav: 'Detail'}},
   {path: 'checkout', component: CheckoutComponent, data: {bcNav: 'Checkout'}},
+  {path: 'costatus', component: CheckoutStatusComponent, data: {bcNav: 'Status'}},
   {path: 'cart', component: CartComponent, data: {bcNav: 'Cart'}},
   {path: 'login', component: LoginComponent, data: {bcNav: 'Login'}},
   {path: 'register', component: RegisterComponent, data: {bcNav: 'Register'}},

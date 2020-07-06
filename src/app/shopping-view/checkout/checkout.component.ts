@@ -6,6 +6,9 @@ import { District } from 'src/app/model/district';
 import { City } from 'src/app/model/city';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CartService } from 'src/app/ws/cart.service';
+import { Router } from '@angular/router';
+import { AppAuthService } from 'src/app/service/app-auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-checkout',
@@ -23,7 +26,8 @@ export class CheckoutComponent implements OnInit {
 	selectedCity: City;
 
 	constructor(private cart: CartDataService, private delArea: DeliveryAreaService, private formBuilder: FormBuilder,
-		private cartService: CartService) {
+		private cartService: CartService, private router: Router, private authService: AppAuthService,
+		private toastr: ToastrService) {
 		this.cityList = [];
 		this.districtList = [];
 	}
@@ -94,10 +98,9 @@ export class CheckoutComponent implements OnInit {
 		}
 
 		const FORM = this.checkoutForm.value;
-		let data = {
+		let data: any = {
 			first_name: FORM.firstName,
 			last_name: FORM.lastName,
-			user_id: 'id',
 			email: FORM.email,
 			district: this.selectedDistrict._id,
 			city: this.selectedCity._id,
@@ -107,16 +110,20 @@ export class CheckoutComponent implements OnInit {
 			cart: this.cart.productIdList
 		}
 
+		if (this.authService.validSessionAvailable) {
+			data.user_id = this.authService.loggedUser._id;
+		}
+
 		this.cartService.checkOut(data).subscribe((data: any) => {
 			if (data.type === 'cc' || data.type === 'dc') {
 				//must redirected to the payment gateway.
 			} else {
 				// cod(cash on delivery will be redirected to the success page)
-				
+				this.router.navigate(['/costatus'], {queryParams: {ref: data.ref}});
 			}
 		}, error => {
-
-		})
+			this.toastr.error(error.error, 'Transaction Failed');
+		});
 
 	}
 

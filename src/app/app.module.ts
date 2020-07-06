@@ -46,6 +46,7 @@ import { HomeGridItemComponent } from './shopping-view/common/home-grid-item/hom
 import { NewItemsViewComponent } from './shopping-view/common/new-items-view/new-items-view.component';
 import { AddItemViewComponent } from './shopping-view/common/add-item-view/add-item-view.component';
 import { DistrictCityFilterPipe } from './pipe/district-city-filter.pipe';
+import { CheckoutStatusComponent } from './shopping-view/common/checkout-status/checkout-status.component';
 
 let config = new AuthServiceConfig([
   {
@@ -95,7 +96,8 @@ export function provideConfig() {
     HomeGridItemComponent,
     NewItemsViewComponent,
     AddItemViewComponent,
-    DistrictCityFilterPipe
+    DistrictCityFilterPipe,
+    CheckoutStatusComponent
   ],
   imports: [
     BrowserModule,
