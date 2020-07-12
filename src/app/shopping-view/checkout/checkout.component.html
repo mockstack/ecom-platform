@@ -15,6 +15,10 @@
                     <span class="text-muted">{{item.product.unit_price_lkr}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
+                    <span>Delivery Charge (LKR)</span>
+                    <strong>{{cart.deliveryCharge}}</strong>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
                     <span>Total (LKR)</span>
                     <strong>{{total}}</strong>
                 </li>
@@ -76,8 +80,9 @@
                             [ngClass]="{ 'is-invalid': submitted && formField.city.errors }" required
                             (change)="onCityChange($event.target.value)">
                             <option value="">Choose...</option>
-                            <option *ngFor="let city of cityList | districtCityFilter: selectedDistrict" [value]="city | json">
-                                {{city.name_en}}</option>
+                            <option *ngFor="let city of deliveryCityList"
+                                [value]="city | json">
+                                {{city.city.name_en}}</option>
                         </select>
                         <div class="invalid-feedback" *ngIf="formField.city.errors">
                             <div *ngIf="formField.city.errors.required">Please provide a valid city.</div>
@@ -97,7 +102,8 @@
 
                 <div class="mb-3">
                     <label for="optionalAddress">Address 2 <span class="text-muted">(Optional)</span></label>
-                    <input type="text" class="form-control" id="optionalAddress" formControlName="optionalAddress" placeholder="Apartment or suite">
+                    <input type="text" class="form-control" id="optionalAddress" formControlName="optionalAddress"
+                        placeholder="Apartment or suite">
                 </div>
 
                 <!--Payment Information-->
@@ -118,6 +124,24 @@
                         <input id="cod" name="payment" type="radio" value="cod" formControlName="payment"
                             class="custom-control-input">
                         <label class="custom-control-label" for="cod">Cash on Delivery</label>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                <h4 class="mb-3">Terms and Conditions</h4>
+                <div class="d-block my-3">
+                    <div class="custom-checkbox ml-4">
+                        <input id="tcAccept" name="tcAccept" formControlName="tcAccept" type="checkbox"
+                            class="custom-control-input"
+                            [ngClass]="{ 'is-invalid': submitted && formField.tcAccept.errors }">
+                        <label class="custom-control-label" for="tcAccept">I have read and agree to the
+                            <a target="_blank" href="./../../../../assets/html/terms-of-service.html"> Terms and
+                                Conditions</a>
+                        </label>
+                        <div class="invalid-feedback" *ngIf="formField.tcAccept.errors">
+                            <div *ngIf="formField.tcAccept.errors.required">You should accept the terms and conditions
+                                to continue.</div>
+                        </div>
                     </div>
                 </div>
 

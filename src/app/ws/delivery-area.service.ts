@@ -16,56 +16,19 @@ export class DeliveryAreaService {
 
 	constructor(private httpClient: HttpClient) { }
 
-	/**Get all provinces */
-	public getProvinces(): Observable<object> {
-		return this.httpClient.get(this.PROVINCE);
-	}
-
-	/**Get districts for a province */
-	public getDistrictsByProvinceId(provinceId): Observable<object> {
-		return this.httpClient.get(this.DISTRICT + provinceId);
-	}
-
-	/**Get districts for a province */
-	public getDistrictsByDistrictId(districtId): Observable<object> {
-		return this.httpClient.get(this.DISTRICT + districtId);
-	}
-
-	/**Get cities for a district */
-	public getCitiesByDistrictId(districtId): Observable<object> {
-		return this.httpClient.get(this.CITY + districtId);
-	}
-
-	/**Update province */
-	public updateProvince(provinceId, deliveryAvailable: Boolean): Observable<object> {
-		const status = { available: deliveryAvailable };
-		return this.httpClient.put(this.PROVINCE + provinceId, status);
-	}
-
-	/**Update district */
-	public updateDistrict(districtId, provId: any): Observable<object> {
-		const status = { available: provId };
-		return this.httpClient.put(this.DISTRICT + districtId, status);
-	}
-
-	/**Update city */
-	public updateCity(cityId, deliveryAvailable: Boolean): Observable<object> {
-		const status = { available: deliveryAvailable };
-		return this.httpClient.put(this.CITY + cityId, status);
-	}
-
-	/**Get delivery cities */
 	public getDeliveryCities(): Observable<object> {
 		return this.httpClient.get(this.DEL_AREA);
 	}
 
-	/**Add delivery city list */
-	public addDeliveryCities(idList: String[]): Observable<object> {
-		return this.httpClient.post(this.DEL_AREA, { "cities": idList });
+	public getDeliveryDistrictList(): Observable<object> {
+		return this.httpClient.get(this.DEL_AREA + 'district')
 	}
 
-	/**Update delivery city list */
-	public updateDeliveryCities(idList: String[], listId: String): Observable<object> {
-		return this.httpClient.put(this.DEL_AREA + listId, { "cities": idList });
+	public getDeliveryCityByDistrictId(districtId: String): Observable<object> {
+		return this.httpClient.get(this.DEL_AREA + districtId)
+	}
+
+	public getDeliveryAreas(): Observable<object> {
+		return this.httpClient.get(this.DEL_AREA)
 	}
 }

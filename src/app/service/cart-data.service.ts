@@ -15,7 +15,8 @@ export class CartDataService {
 	private _cart: Cart;
 	private notifier = new BehaviorSubject(this._cartItems);
 	public selectionStatus = this.notifier.asObservable();
-	public _productIdList = [];
+	private _productIdList = [];
+	private _deliveryCharge: number = 0;
 
 	constructor(private cartService: CartService, private userService: AppAuthService,
 		private toasts: ToastrService) {
@@ -33,6 +34,7 @@ export class CartDataService {
 		this._cart.checkedOut = false;
 		this._cart.items = this._cartItems;
 		this._cart.created_date = new Date();
+		this._deliveryCharge = 0;
 	}
 
 
@@ -141,6 +143,14 @@ export class CartDataService {
 		let out: CartSave = new CartSave(cart._id, cart.userId, itemList, cart.checkedOut, cart.created_date, cart.modified_date);
 
 		return out;
+	}
+
+	public get deliveryCharge() {
+		return this._deliveryCharge;
+	}
+
+	public set deliveryCharge(charge: number) {
+		this._deliveryCharge = charge;
 	}
 }
 

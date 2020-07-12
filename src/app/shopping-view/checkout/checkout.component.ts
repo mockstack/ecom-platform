@@ -9,6 +9,7 @@ import { CartService } from 'src/app/ws/cart.service';
 import { Router } from '@angular/router';
 import { AppAuthService } from 'src/app/service/app-auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { DeliveryArea } from 'src/app/model/delivery-area';
 
 @Component({
 	selector: 'app-checkout',
@@ -18,18 +19,20 @@ import { ToastrService } from 'ngx-toastr';
 export class CheckoutComponent implements OnInit {
 	cartItems: CartItem[];
 	total: number = 0.00;
-	cityList: City[];//dilivery available cities
+	deliveryCityList: DeliveryArea[];//dilivery available cities
 	districtList: District[];// dilivery available districts
 	checkoutForm: FormGroup;
 	submitted = false;
 	selectedDistrict: District;
-	selectedCity: City;
+	selectedCity: DeliveryArea;
+	deliveryAreaList: DeliveryArea[];
 
-	constructor(private cart: CartDataService, private delArea: DeliveryAreaService, private formBuilder: FormBuilder,
+	constructor(public cart: CartDataService, private deliveryAreaService: DeliveryAreaService, private formBuilder: FormBuilder,
 		private cartService: CartService, private router: Router, private authService: AppAuthService,
 		private toastr: ToastrService) {
-		this.cityList = [];
+		this.deliveryCityList = [];
 		this.districtList = [];
+		this.deliveryAreaList = [];
 	}
 
 	ngOnInit(): void {
@@ -41,16 +44,21 @@ export class CheckoutComponent implements OnInit {
 			city: ['', Validators.required],
 			address: ['', Validators.required],
 			optionalAddress: ['', !Validators.required],
-			payment: ['cc', Validators.required]
+			payment: ['cc', Validators.required],
+			tcAccept: ['', Validators.requiredTrue]
 		});
 
 		this.cartItems = this.cart.cart.items as CartItem[];
 		this.calculateTotal(this.cartItems);
 
-		this.delArea.getDeliveryCities().subscribe((data: any) => {
-			this.cityList = data.city;
-			this.districtList = this.getDistrictList(this.cityList);
+		//get delivery area then we can set the charges
+		this.deliveryAreaService.getDeliveryAreas().subscribe((data: DeliveryArea[]) => {
+			this.deliveryAreaList = data;
 		});
+
+		this.deliveryAreaService.getDeliveryDistrictList().subscribe((data: District[]) => {
+			this.districtList = data;
+		})
 	}
 
 	get formField() {
@@ -65,11 +73,23 @@ export class CheckoutComponent implements OnInit {
 	}
 
 	onDistrictChange(district: any) {
+		this.deliveryCityList = [];
 		this.selectedDistrict = JSON.parse(district);
+		this.deliveryAreaService.getDeliveryCityByDistrictId(this.selectedDistrict._id).subscribe((data: DeliveryArea[]) => {
+			this.deliveryCityList = data;
+		}, error => {
+			console.log(error)
+		});
 	}
 
 	onCityChange(city: any) {
+		if (this.selectedCity !== undefined) {
+			this.total -= this.selectedCity.delivery_charge.valueOf();
+		}
+		
 		this.selectedCity = JSON.parse(city);
+		this.cart.deliveryCharge = this.selectedCity.delivery_charge.valueOf();
+		this.total += this.cart.deliveryCharge;
 	}
 
 	/**
@@ -107,7 +127,7 @@ export class CheckoutComponent implements OnInit {
 			street_address: FORM.address,
 			optional_address: FORM.optionalAddress,
 			payment_method: FORM.payment,
-			cart: this.cart.productIdList
+			cart: this.cart.cart._id
 		}
 
 		if (this.authService.validSessionAvailable) {
@@ -117,9 +137,11 @@ export class CheckoutComponent implements OnInit {
 		this.cartService.checkOut(data).subscribe((data: any) => {
 			if (data.type === 'cc' || data.type === 'dc') {
 				//must redirected to the payment gateway.
+				//transaction data must be stored in a separate collection
+				//for auditing purposes.
 			} else {
 				// cod(cash on delivery will be redirected to the success page)
-				this.router.navigate(['/costatus'], {queryParams: {ref: data.ref}});
+				this.router.navigate(['/costatus'], { queryParams: { ref: data.ref } });
 			}
 		}, error => {
 			this.toastr.error(error.error, 'Transaction Failed');
