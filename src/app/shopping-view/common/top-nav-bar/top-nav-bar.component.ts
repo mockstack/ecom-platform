@@ -131,6 +131,7 @@ export class TopNavBarComponent implements OnInit {
 
 	searchButtonClick(selectedProduct: any) {
 		if (this.productList.map((val, ind) => val.name).indexOf(this.selectedProduct) === -1) {
+			this.selectedProduct = '';
 			this.searchItemAvailable = false;
 			this.searchTermService.addSearchTerm(selectedProduct).subscribe(data => { });
 			setTimeout(() => {
