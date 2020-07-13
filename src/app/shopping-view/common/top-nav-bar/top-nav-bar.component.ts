@@ -14,6 +14,7 @@ import Key from 'src/app/utils/key';
 import { error } from 'protractor';
 import { CartDataService } from 'src/app/service/cart-data.service';
 import { CartItem } from 'src/app/model/cart-item';
+import { SearchTermService } from 'src/app/ws/search-term.service';
 
 @Component({
 	selector: 'app-top-nav-bar',
@@ -29,12 +30,14 @@ export class TopNavBarComponent implements OnInit {
 	public cartItemCount: number = 0;
 	public cartItems: CartItem[];
 	//public loggedUser: AppUser;
+	public searchItemAvailable: Boolean = true;
 
 	constructor(private router: Router, private productService: ProductService,
 		private activatedRoute: ActivatedRoute, private cookieService: CookieService,
 		private userService: UserService, private authService: AuthService,
 		private ref: ChangeDetectorRef, public appAuthService: AppAuthService,
-		private productNameService: ProductNameService, private cartDataService: CartDataService) {
+		private productNameService: ProductNameService, private cartDataService: CartDataService,
+		private searchTermService: SearchTermService) {
 		router.events.subscribe(evt => {
 			// console.log(evt);
 
@@ -114,7 +117,7 @@ export class TopNavBarComponent implements OnInit {
 			//console.log(values['catid']);
 		})
 
-		this.cartDataService.selectionStatus.subscribe( (data: CartItem[]) => {
+		this.cartDataService.selectionStatus.subscribe((data: CartItem[]) => {
 			this.cartItemCount = data.length;
 			this.cartItems = data;
 		}, error => {
@@ -124,7 +127,15 @@ export class TopNavBarComponent implements OnInit {
 
 	onSelectProduct(event: TypeaheadMatch): void {
 		this.selectedOption = event.item._id;
-		console.log(this.selectedOption)
+		this.router.navigateByUrl('product/' + event.item._id);
+	}
+
+	searchButtonClick(selectedProduct: String) {
+		this.searchItemAvailable = false;
+		this.searchTermService.addSearchTerm(selectedProduct).subscribe(data => {});
+		setTimeout(() => {
+			this.searchItemAvailable = true;
+		}, 2000);
 	}
 
 	showPacks() {

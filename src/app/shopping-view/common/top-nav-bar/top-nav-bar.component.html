@@ -19,10 +19,10 @@
 						<input type="text" class="form-control mr-auto ml-auto w-50 search-input"
 							placeholder="Search products" [(ngModel)]="selectedProduct" [typeahead]="productList"
 							typeaheadOptionField="name" typeaheadGroupField="category.name"
-							(typeaheadOnSelect)="onSelectProduct($event)">
+							(typeaheadOnSelect)="onSelectProduct($event)" (keydown.enter)="searchButtonClick($event.target.value)">
 
 						<div class="input-group-append">
-							<button class="btn btn-secondary search-button" type="button">
+							<button class="btn btn-secondary search-button" type="button" (click)="searchButtonClick(selectedProduct)">
 								<i class="fa fa-search"></i>
 							</button>
 						</div>
@@ -90,6 +90,9 @@
 				</ul>
 			</div>
 		</nav>
+		<div class="row bg-warning w-100 m-0 p-0" *ngIf="!searchItemAvailable">
+			<p class="text-center font-weight-light w-100 p-0 m-0">Sorry, search item is not available at the moment.</p>
+		</div>
 	</li>
 
 	<!--Menu items-->
