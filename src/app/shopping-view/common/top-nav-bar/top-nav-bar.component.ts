@@ -11,7 +11,6 @@ import { AuthService } from 'angularx-social-login';
 import { AppAuthService } from 'src/app/service/app-auth.service';
 import { ProductNameService } from 'src/app/service/product-name.service';
 import Key from 'src/app/utils/key';
-import { error } from 'protractor';
 import { CartDataService } from 'src/app/service/cart-data.service';
 import { CartItem } from 'src/app/model/cart-item';
 import { SearchTermService } from 'src/app/ws/search-term.service';
@@ -130,12 +129,14 @@ export class TopNavBarComponent implements OnInit {
 		this.router.navigateByUrl('product/' + event.item._id);
 	}
 
-	searchButtonClick(selectedProduct: String) {
-		this.searchItemAvailable = false;
-		this.searchTermService.addSearchTerm(selectedProduct).subscribe(data => {});
-		setTimeout(() => {
-			this.searchItemAvailable = true;
-		}, 2000);
+	searchButtonClick(selectedProduct: any) {
+		if (this.productList.map((val, ind) => val.name).indexOf(this.selectedProduct) === -1) {
+			this.searchItemAvailable = false;
+			this.searchTermService.addSearchTerm(selectedProduct).subscribe(data => { });
+			setTimeout(() => {
+				this.searchItemAvailable = true;
+			}, 2000);
+		}
 	}
 
 	showPacks() {
