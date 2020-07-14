@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
 
 			if (this.selectedCategoryId != undefined) {
 				this.productService.getProductsByCategoryId(this.selectedCategoryId).subscribe((data: Object[]) => {
+					this.productList = [];
 					data.forEach((val, index, array) => {
 						//console.log(val);
 						//console.log(index);
