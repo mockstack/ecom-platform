@@ -13,27 +13,29 @@ import { PackContentComponent } from './shopping-view/common/pack-content/pack-c
 import { CreatePackComponent } from './shopping-view/create-pack/create-pack.component';
 import { AppUserGuard } from './guard/app-user.guard';
 import { CheckoutStatusComponent } from './shopping-view/common/checkout-status/checkout-status.component';
+import { UserProfileComponent } from './shopping-view/user-profile/user-profile.component';
 
 
 const routes: Routes = [
-  //{path: '', redirectTo: 'product-view', pathMatch: 'full'},
-  {path: '', component: HomeComponent, data: {bcNav: 'Home'}},
-  {path: 'product', pathMatch: 'full', redirectTo: ''},
-  {path: 'products/:cat/:catid', component: ProductComponent, data: {bcNav: 'Products'} },
-  {path: 'product/:id', component: ProductDetailComponent, data: {bcNav: 'Detail'}},
-  {path: 'checkout', component: CheckoutComponent, data: {bcNav: 'Checkout'}},
-  {path: 'costatus', component: CheckoutStatusComponent, data: {bcNav: 'Status'}},
-  {path: 'cart', component: CartComponent, data: {bcNav: 'Cart'}},
-  {path: 'login', component: LoginComponent, data: {bcNav: 'Login'}},
-  {path: 'register', component: RegisterComponent, data: {bcNav: 'Register'}},
-  {path: 'pack', component: PackComponent, data: {bcNav: 'Packs'}},
-  {path: 'detail', component: PackContentComponent, data: {bcNav: 'Edit Pack'}},
-  {path: 'create', component: CreatePackComponent, data: {bcNav: 'Create Pack'}},
-  {path: '**', component: NotFoundComponent}
+	//{path: '', redirectTo: 'product-view', pathMatch: 'full'},
+	{ path: '', component: HomeComponent, data: { bcNav: 'Home' } },
+	{ path: 'product', pathMatch: 'full', redirectTo: '' },
+	{ path: 'products/:cat/:catid', component: ProductComponent, data: { bcNav: 'Products' } },
+	{ path: 'product/:id', component: ProductDetailComponent, data: { bcNav: 'Detail' } },
+	{ path: 'checkout', component: CheckoutComponent, data: { bcNav: 'Checkout' } },
+	{ path: 'costatus', component: CheckoutStatusComponent, data: { bcNav: 'Status' } },
+	{ path: 'cart', component: CartComponent, data: { bcNav: 'Cart' } },
+	{ path: 'login', component: LoginComponent, data: { bcNav: 'Login' } },
+	{ path: 'register', component: RegisterComponent, data: { bcNav: 'Register' } },
+	{ path: 'pack', component: PackComponent, data: { bcNav: 'Packs' } },
+	{ path: 'detail', component: PackContentComponent, data: { bcNav: 'Edit Pack' } },
+	{ path: 'create', component: CreatePackComponent, data: { bcNav: 'Create Pack' } },
+	{ path: 'profile', component: UserProfileComponent, data: { bcNav: 'User Profile' } },
+	{ path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
 export class AppRoutingModule { }

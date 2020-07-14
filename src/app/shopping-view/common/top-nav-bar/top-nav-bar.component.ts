@@ -161,11 +161,11 @@ export class TopNavBarComponent implements OnInit {
 	}
 
 	showMyPacks() {
-		// to be implemented
+		this.router.navigateByUrl('pack')
 	}
 
 	showProfile() {
-		// to be implemented
+		this.router.navigateByUrl('profile')
 	}
 
 	signOut(): void {

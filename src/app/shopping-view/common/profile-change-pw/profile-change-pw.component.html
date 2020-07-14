@@ -1,0 +1,52 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="paswordChangeForm" (ngSubmit)="submitForm(paswordChangeForm.value)">
+            <h5 class="card-title">Change Password</h5>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Enter old password</p>
+                </div>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="oldPassword" required formControlName="oldPassword"
+                        [ngClass]="{ 'is-invalid': submitted && formField.oldPassword.errors }">
+                    <div class="invalid-feedback" *ngIf="formField.oldPassword.errors">
+                        <div *ngIf="formField.oldPassword.errors.required">Old password is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>New password</p>
+                </div>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="newPassword" required formControlName="newPassword"
+                        [ngClass]="{ 'is-invalid': submitted && formField.newPassword.errors }">
+                    <div class="invalid-feedback" *ngIf="formField.newPassword.errors">
+                        <div *ngIf="formField.newPassword.errors.required">New password is required</div>
+                        <div *ngIf="formField.newPassword.errors.minlength">Must have at least 6 characters</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <p>Confirm new password</p>
+                </div>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="confirmPassword" required
+                        formControlName="confirmPassword"
+                        [ngClass]="{ 'is-invalid': submitted && formField.confirmPassword.errors }">
+                    <div class="invalid-feedback" *ngIf="formField.confirmPassword.errors">
+                        <div *ngIf="formField.confirmPassword.errors.required">Confirm password is required</div>
+                        <div *ngIf="formField.confirmPassword.errors.mustMatch">New password must match with the confirm
+                            password</div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary float-right">Update</button>
+        </form>
+    </div>
+</div>

@@ -47,6 +47,9 @@ import { NewItemsViewComponent } from './shopping-view/common/new-items-view/new
 import { AddItemViewComponent } from './shopping-view/common/add-item-view/add-item-view.component';
 import { DistrictCityFilterPipe } from './pipe/district-city-filter.pipe';
 import { CheckoutStatusComponent } from './shopping-view/common/checkout-status/checkout-status.component';
+import { UserProfileComponent } from './shopping-view/user-profile/user-profile.component';
+import { ProfileBasicComponent } from './shopping-view/common/profile-basic/profile-basic.component';
+import { ProfileChangePwComponent } from './shopping-view/common/profile-change-pw/profile-change-pw.component';
 
 let config = new AuthServiceConfig([
   {
@@ -97,7 +100,10 @@ export function provideConfig() {
     NewItemsViewComponent,
     AddItemViewComponent,
     DistrictCityFilterPipe,
-    CheckoutStatusComponent
+    CheckoutStatusComponent,
+    UserProfileComponent,
+    ProfileBasicComponent,
+    ProfileChangePwComponent
   ],
   imports: [
     BrowserModule,
