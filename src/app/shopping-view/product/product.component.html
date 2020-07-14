@@ -14,5 +14,17 @@
         <!--Product List-->
         <app-product-grid-item *ngFor="let item of productList; let i = index" [product]="item">
         </app-product-grid-item>
+
+        <!--Not products message-->
+        <div class="h-50 m-5 p-5" *ngIf="productList.length === 0">
+            <div class="col-sm-12 h-100 ">
+                <div class="card  align-middle">
+                    <div class=" text-center p-5">
+                        <h1 class="card-title">Products not available</h1>
+                        <h4 class="card-text">Cannot find products for the selected category</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
