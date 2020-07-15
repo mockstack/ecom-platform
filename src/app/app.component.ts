@@ -19,6 +19,7 @@ export class AppComponent {
 
 	ngOnInit(): void { 
 		if (this.cookieService.get(Key.COOKIE_USER) !== '') {
+			console.log('validating user session')
 			const appUser: AppUser = new AppUser().deserialize(JSON.parse(this.cookieService.get(Key.COOKIE_USER)));
 			const prevSession: UserSession = new UserSession().deserialize(JSON.parse(this.cookieService.get(Key.COOKIE_USER_SESSION)));
 
@@ -27,7 +28,7 @@ export class AppComponent {
 				this.appAuthService.initiateSession(appUser, validatedSession, true);
 			}, error => {
 				this.cookieService.deleteAll();
-				this.appAuthService.reset();
+				this.appAuthService.terminateSession();
 			});
 		}
 	}
