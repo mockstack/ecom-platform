@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="!isAppUser">
     <div class="card-body">
         <form [formGroup]="paswordChangeForm" (ngSubmit)="submitForm(paswordChangeForm.value)">
             <h5 class="card-title">Change Password</h5>

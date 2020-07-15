@@ -53,7 +53,7 @@ export class TopNavBarComponent implements OnInit {
 
 	ngOnInit(): void {
 		//get the session from the cookie
-		if (this.cookieService.get(Key.COOKIE_USER) !== '') {
+		/*if (this.cookieService.get(Key.COOKIE_USER) !== '') {
 			const appUser: AppUser = new AppUser().deserialize(JSON.parse(this.cookieService.get(Key.COOKIE_USER)));
 			const prevSession: UserSession = new UserSession().deserialize(JSON.parse(this.cookieService.get(Key.COOKIE_USER_SESSION)));
 
@@ -64,7 +64,7 @@ export class TopNavBarComponent implements OnInit {
 				this.cookieService.deleteAll();
 				this.appAuthService.reset();
 			});
-		}
+		}*/
 
 		//REMOVED SINCE SESSION VALIDATION IS DONE THROUGH THE COOKIE
 		/*if (this.cookieService.get(Key.COOKIE_USER_ID) !== '') {

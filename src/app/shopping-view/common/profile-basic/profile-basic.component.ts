@@ -3,6 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { District } from 'src/app/model/district';
 import { DeliveryAreaService } from 'src/app/ws/delivery-area.service';
 import { DeliveryArea } from 'src/app/model/delivery-area';
+import { UserProfileService } from 'src/app/ws/user-profile.service';
+import { AppAuthService } from 'src/app/service/app-auth.service';
+import { AppUserProfile } from 'src/app/model/app-user-profile';
+import { City } from 'src/app/model/city';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-profile-basic',
@@ -16,11 +21,14 @@ export class ProfileBasicComponent implements OnInit {
 	public districtList: District[];
 	public deliveryCityList: DeliveryArea[];
 	public selectedDistrict: District;
+	private selectedCity: City;
+	public userProfile: AppUserProfile;
 
-	constructor(private formBuilder: FormBuilder, private deliveryAreaService: DeliveryAreaService) {
+	constructor(private formBuilder: FormBuilder, private deliveryAreaService: DeliveryAreaService,
+		private profileService: UserProfileService, private authService: AppAuthService, private toastr: ToastrService) {
 		this.districtList = [];
 		this.deliveryCityList = [];
-	 }
+	}
 
 	ngOnInit(): void {
 		this.profileForm = this.formBuilder.group({
@@ -31,26 +39,56 @@ export class ProfileBasicComponent implements OnInit {
 			city: ['', Validators.required],
 			address: ['', Validators.required],
 			optionalAddress: ['', !Validators.required]
-		});		
-		
-		this.deliveryAreaService.getDeliveryDistrictList().subscribe((data: District[]) => {
-			this.districtList = data;
-		})
+		});
 
+		this.authService.sessionStatus.subscribe((validity: Boolean) => {
+			if (validity) {
+				this.profileService.getProfileByUserId(this.authService.loggedUser._id).subscribe((data: AppUserProfile) => {
+					this.userProfile = data;
+					this.profileForm.patchValue({
+						firstName: this.userProfile.first_name,
+						lastName: this.userProfile.last_name,
+						email: this.userProfile.email,
+						address: this.userProfile.address,
+						optionalAddress: this.userProfile.optional_address,
+						district: this.userProfile.district._id,
+						city: this.userProfile.city._id
+					});
+					this.selectedDistrict = this.userProfile.district;
+					this.selectedCity = this.userProfile.city;
+
+					// get district list for the profile
+					this.deliveryAreaService.getDeliveryDistrictList().subscribe((data: District[]) => {
+						this.districtList = data;
+					});
+
+					// get city list for the profile
+					this.deliveryAreaService.getDeliveryCityByDistrictId(this.selectedDistrict._id).subscribe((data: DeliveryArea[]) => {
+						this.deliveryCityList = data;
+					});
+
+				}, error => {
+					console.log(error);
+				});
+			}
+
+		});
 
 	}
 
-	onDistrictChange(district: any) {
+	onDistrictChange(districtId: any) {
 		this.deliveryCityList = [];
-		this.selectedDistrict = JSON.parse(district);
+		this.selectedDistrict = this.districtList.filter(item => item._id === districtId)[0];
 		this.deliveryAreaService.getDeliveryCityByDistrictId(this.selectedDistrict._id).subscribe((data: DeliveryArea[]) => {
 			this.deliveryCityList = data;
 		}, error => {
 			console.log(error)
 		});
 	}
-	
-	onCityChange(city: any) {}
+
+	onCityChange(cityId: any) {
+		this.selectedCity = this.deliveryCityList.filter(item => item._id === cityId)[0].city;
+	}
 
 	get formField() {
 		return this.profileForm.controls;
@@ -63,7 +101,13 @@ export class ProfileBasicComponent implements OnInit {
 			return;
 		}
 
-		console.log(value)
+		value.user = this.userProfile.user._id;
+
+		this.profileService.updateUsreProfile(value).subscribe(data => {
+			this.toastr.success("Profile was updated successfully", "Success")
+		}, error => {
+			this.toastr.error("Profile update fail", "Fail")
+		})
 	}
 
 }

@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="col order-md-1">
             <h4 class="mb-3">Billing Information</h4>
-            <form [formGroup]="profileForm" (ngSubmit)="submitForm(profileForm.value)">
+            <form *ngIf="userProfile !== undefined" [formGroup]="profileForm" (ngSubmit)="submitForm(profileForm.value)">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
@@ -41,7 +41,7 @@
                             [ngClass]="{ 'is-invalid': submitted && formField.district.errors }" required
                             (change)="onDistrictChange($event.target.value)">
                             <option value="">Choose...</option>
-                            <option *ngFor="let district of districtList" [value]="district | json">{{district.name_en}}
+                            <option *ngFor="let district of districtList" [value]="district._id">{{district.name_en}}
                             </option>
                         </select>
                         <div class="invalid-feedback" *ngIf="formField.district.errors">
@@ -54,8 +54,7 @@
                             [ngClass]="{ 'is-invalid': submitted && formField.city.errors }" required
                             (change)="onCityChange($event.target.value)">
                             <option value="">Choose...</option>
-                            <option *ngFor="let city of deliveryCityList" [value]="city | json">
-                                {{city.city.name_en}}</option>
+                            <option *ngFor="let city of deliveryCityList" [value]="city.city._id">{{city.city.name_en}}</option>
                         </select>
                         <div class="invalid-feedback" *ngIf="formField.city.errors">
                             <div *ngIf="formField.city.errors.required">Please provide a valid city.</div>
@@ -83,6 +82,11 @@
                     <button type="submit" class="btn btn-primary float-right">Update</button>
                 </div>
             </form>
+
+            <!--Profile load error-->
+            <div *ngIf="userProfile === undefined">
+                <h5 class="text-danger">Cannot load the user profile, Please contact devionline.lk for assistance.</h5>
+            </div>
         </div>
     </div>
 </div>
