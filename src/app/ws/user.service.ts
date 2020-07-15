@@ -33,6 +33,11 @@ export class UserService {
     return this.httpClient.put(environment.apiUrl + 'user', data);
   }
 
+  /**Change password */
+  public updatePassword(data: any): Observable<object> {
+    return this.httpClient.put(environment.apiUrl + 'user' + '/changepw', data);
+  }
+
   /**Get user by user id */
   public getUserByUserId(userId: string): Observable<object> {
     return this.httpClient.get(environment.apiUrl + 'user/' + userId);

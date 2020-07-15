@@ -44,6 +44,9 @@ export class ProfileBasicComponent implements OnInit {
 		this.authService.sessionStatus.subscribe((validity: Boolean) => {
 			if (validity) {
 				this.profileService.getProfileByUserId(this.authService.loggedUser._id).subscribe((data: AppUserProfile) => {
+					if (data === null) {
+						return;
+					}
 					this.userProfile = data;
 					this.profileForm.patchValue({
 						firstName: this.userProfile.first_name,
@@ -57,22 +60,23 @@ export class ProfileBasicComponent implements OnInit {
 					this.selectedDistrict = this.userProfile.district;
 					this.selectedCity = this.userProfile.city;
 
-					// get district list for the profile
-					this.deliveryAreaService.getDeliveryDistrictList().subscribe((data: District[]) => {
-						this.districtList = data;
-					});
-
 					// get city list for the profile
 					this.deliveryAreaService.getDeliveryCityByDistrictId(this.selectedDistrict._id).subscribe((data: DeliveryArea[]) => {
 						this.deliveryCityList = data;
 					});
-
 				}, error => {
 					console.log(error);
 				});
 			}
 
 		});
+
+		// get district list for the profile
+		this.deliveryAreaService.getDeliveryDistrictList().subscribe((data: District[]) => {
+			this.districtList = data;
+		});
+
+
 
 	}
 
