@@ -55,8 +55,8 @@ export class UserService {
   }
 
   /**Validate the user current session */
-  public validateSession(userId: string): Observable<object> {
-    return this.httpClient.get(environment.apiUrl + 'session/' + userId);
+  async validateSession(userId: string): Promise<object> {
+    return await this.httpClient.get(environment.apiUrl + 'session/' + userId).toPromise();
   }
 
 }

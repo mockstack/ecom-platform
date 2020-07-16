@@ -15,21 +15,25 @@ export class AppComponent {
 	title = 'ecom-platform';
 
 	constructor(private userService: UserService, private cookieService: CookieService,
-		public appAuthService: AppAuthService) {}
+		public appAuthService: AppAuthService) { }
 
-	ngOnInit(): void { 
+	async ngOnInit() {
+		await this.validateUserSession();
+	}
+
+	async validateUserSession() {
 		if (this.cookieService.get(Key.COOKIE_USER) !== '') {
-			console.log('validating user session')
 			const appUser: AppUser = new AppUser().deserialize(JSON.parse(this.cookieService.get(Key.COOKIE_USER)));
 			const prevSession: UserSession = new UserSession().deserialize(JSON.parse(this.cookieService.get(Key.COOKIE_USER_SESSION)));
 
-			this.userService.validateSession(appUser._id).subscribe(session => {
+			await this.userService.validateSession(appUser._id).then((session) => {
 				const validatedSession = new UserSession().deserialize(session);
 				this.appAuthService.initiateSession(appUser, validatedSession, true);
-			}, error => {
+			}).catch(reason => {
 				this.cookieService.deleteAll();
 				this.appAuthService.terminateSession();
 			});
 		}
+
 	}
 }
