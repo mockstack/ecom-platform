@@ -22,7 +22,13 @@ export class CartService {
 		return this.httpClient.put(environment.apiUrl + 'cart/' + data._id, data);
 	}
 
-	public checkOut(data: any) {
+	/**Checkout cart */
+	public checkOut(data: any): Observable<Object> {
 		return this.httpClient.post(environment.apiUrl + 'order', data);
+	}
+
+	/**Get cart by cart id */
+	public getCartByCartId(id: any): Observable<object> {
+		return this.httpClient.get(environment.apiUrl + 'cart/' + id);
 	}
 }

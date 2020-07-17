@@ -5,6 +5,9 @@ import { AppUser } from './model/app-user';
 import { CookieService } from 'ngx-cookie-service';
 import Key from 'src/app/utils/key';
 import { AppAuthService } from './service/app-auth.service';
+import { CartService } from './ws/cart.service';
+import { Cart } from './model/cart';
+import { CartDataService } from './service/cart-data.service';
 
 @Component({
 	selector: 'app-root',
@@ -15,10 +18,17 @@ export class AppComponent {
 	title = 'ecom-platform';
 
 	constructor(private userService: UserService, private cookieService: CookieService,
-		public appAuthService: AppAuthService) { }
+		public appAuthService: AppAuthService, private cartService: CartService, private cartDataService: CartDataService) { }
 
 	async ngOnInit() {
 		await this.validateUserSession();
+
+		if (this.cookieService.get(Key.CART_ID) !== '') {
+			this.cartService.getCartByCartId(this.cookieService.get(Key.CART_ID)).subscribe((data: Cart) => {
+				if (data === null) return;
+				this.cartDataService.cart = data;
+			});
+		}
 	}
 
 	async validateUserSession() {
@@ -34,6 +44,7 @@ export class AppComponent {
 				this.appAuthService.terminateSession();
 			});
 		}
-
 	}
+
+
 }

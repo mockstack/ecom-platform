@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 import { AppAuthService } from './app-auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { IBuyItem } from '../model/ibuy-item';
+import { CookieService } from 'ngx-cookie-service';
+import Key from '../utils/key';
 
 @Injectable({
 	providedIn: 'root'
@@ -19,8 +21,9 @@ export class CartDataService {
 	private _deliveryCharge: number = 0;
 
 	constructor(private cartService: CartService, private userService: AppAuthService,
-		private toasts: ToastrService) {
+		private toasts: ToastrService, private cookieService: CookieService) {
 		this.initCart();
+		console.log('cart is initializing....')
 	}
 
 	/**
@@ -60,6 +63,7 @@ export class CartDataService {
 		if (this._cart._id === undefined) {
 			this.cartService.addCart(this.convertToSaveModel(this._cart)).subscribe((id: string) => {
 				this._cart._id = id;
+				this.cookieService.set(Key.CART_ID, id, undefined, '/');
 			});
 		} else {
 			this.cartService.updateCart(this.convertToSaveModel(this._cart)).subscribe(data => {
@@ -97,6 +101,14 @@ export class CartDataService {
 		if (this._cart === undefined) throw Error('Cart is not initialized');
 
 		return this._cart;
+	}
+
+	/**
+	 * Set the cart
+	 */
+	public set cart(cart: Cart) {
+		this._cart = cart;
+		this.notifier.next(this.cart.items);
 	}
 
 	/**
@@ -176,11 +188,11 @@ export class CartSave {
 }
 
 export class CartSaveItem {
-	productId: String;
+	product: String;
 	quantity: Number;
 
 	constructor(productId: String, quantity: Number) {
-		this.productId = productId;
+		this.product = productId;
 		this.quantity = quantity;
 	}
 }

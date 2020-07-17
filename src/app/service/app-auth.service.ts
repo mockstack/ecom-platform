@@ -55,9 +55,9 @@ export class AppAuthService {
 		this.userSession = session;
 		this.validSessionAvailable = validSession;
 		// set cookies
-		this.cookieService.set(Key.COOKIE_USER_ID, user._id, 1);
-		this.cookieService.set(Key.COOKIE_USER, JSON.stringify(user), 1);
-		this.cookieService.set(Key.COOKIE_USER_SESSION, JSON.stringify(session), 1);
+		this.cookieService.set(Key.COOKIE_USER_ID, user._id, 1, '/');
+		this.cookieService.set(Key.COOKIE_USER, JSON.stringify(user), 1, '/');
+		this.cookieService.set(Key.COOKIE_USER_SESSION, JSON.stringify(session), 1, '/');
 	}
 
 	/**Signout the user */

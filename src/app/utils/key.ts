@@ -13,4 +13,6 @@ export default class Key {
     // pack
     public static SS_PACK_PRIVATE: string = 'private-packs';
     public static SS_PACK_DEFAULT: string = 'default-packs'
+    // cart
+    public static CART_ID: string = 'cId';
 }

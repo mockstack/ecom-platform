@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartDataService } from 'src/app/service/cart-data.service';
 import { CartItem } from 'src/app/model/cart-item';
-import { Product } from 'src/app/model/product';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
