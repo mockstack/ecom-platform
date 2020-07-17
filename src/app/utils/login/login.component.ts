@@ -150,4 +150,7 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
+	continueAsGuest() {
+		this.router.navigateByUrl('checkout');
+	}
 }

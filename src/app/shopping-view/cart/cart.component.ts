@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CartDataService } from 'src/app/service/cart-data.service';
 import { CartItem } from 'src/app/model/cart-item';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AppAuthService } from 'src/app/service/app-auth.service';
 
 @Component({
 	selector: 'app-cart',
@@ -15,7 +16,8 @@ export class CartComponent implements OnInit {
 	total: number = 0.00;
 	modalRef: BsModalRef;
 
-	constructor(public router: Router, private cart: CartDataService, private modalService: BsModalService) { }
+	constructor(public router: Router, private cart: CartDataService, private modalService: BsModalService,
+		private appAuthService: AppAuthService) { }
 
 	ngOnInit(): void {
 		this.cartItemList = this.cart.cart.items as CartItem[];
@@ -46,7 +48,11 @@ export class CartComponent implements OnInit {
 	}
 
 	openModal(template: TemplateRef<any>) {
-		this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+		if (!this.appAuthService.validSessionAvailable) {
+			this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+		} else {
+			this.router.navigateByUrl('checkout');
+		}
 	}
 
 	ngOnDestroy() {
