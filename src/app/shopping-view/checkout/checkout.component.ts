@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { AppAuthService } from 'src/app/service/app-auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { DeliveryArea } from 'src/app/model/delivery-area';
+import { UserProfileService } from 'src/app/ws/user-profile.service';
+import { AppUserProfile } from 'src/app/model/app-user-profile';
 
 @Component({
 	selector: 'app-checkout',
@@ -26,10 +28,11 @@ export class CheckoutComponent implements OnInit {
 	selectedDistrict: District;
 	selectedCity: DeliveryArea;
 	deliveryAreaList: DeliveryArea[];
-
-	constructor(public cart: CartDataService, private deliveryAreaService: DeliveryAreaService, private formBuilder: FormBuilder,
-		private cartService: CartService, private router: Router, private authService: AppAuthService,
-		private toastr: ToastrService) {
+	public userProfile: AppUserProfile;
+	
+	constructor(public cart: CartDataService, private deliveryAreaService: DeliveryAreaService,
+		private formBuilder: FormBuilder, private cartService: CartService, private router: Router,
+		private authService: AppAuthService, private toastr: ToastrService, private profileService: UserProfileService) {
 		this.deliveryCityList = [];
 		this.districtList = [];
 		this.deliveryAreaList = [];
@@ -59,6 +62,38 @@ export class CheckoutComponent implements OnInit {
 		this.deliveryAreaService.getDeliveryDistrictList().subscribe((data: District[]) => {
 			this.districtList = data;
 		})
+
+		this.authService.sessionStatus.subscribe((validity: Boolean) => {
+			if (validity) {
+				this.profileService.getProfileByUserId(this.authService.loggedUser._id).subscribe((data: AppUserProfile) => {
+					console.log(data);
+		
+					if (data === null) {
+						return;
+					}
+					this.userProfile = data;
+					this.checkoutForm.patchValue({
+						firstName: this.userProfile.first_name,
+						lastName: this.userProfile.last_name,
+						email: this.userProfile.email,
+						address: this.userProfile.address,
+						optionalAddress: this.userProfile.optional_address,
+						district: this.userProfile.district._id,
+						city: this.userProfile.city._id
+					});
+					this.selectedDistrict = this.userProfile.district;
+					//this.selectedCity = this.userProfile.city;
+		
+					// get city list for the profile
+					this.deliveryAreaService.getDeliveryCityByDistrictId(this.selectedDistrict._id).subscribe((data: DeliveryArea[]) => {
+						this.deliveryCityList = data;
+					});
+				}, error => {
+					console.log(error);
+				});
+			}
+		});
+		
 	}
 
 	get formField() {

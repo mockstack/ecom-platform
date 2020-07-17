@@ -67,7 +67,7 @@
                             [ngClass]="{ 'is-invalid': submitted && formField.district.errors }" required
                             (change)="onDistrictChange($event.target.value)">
                             <option value="">Choose...</option>
-                            <option *ngFor="let district of districtList" [value]="district | json">{{district.name_en}}
+                            <option *ngFor="let district of districtList" [value]="district._id">{{district.name_en}}
                             </option>
                         </select>
                         <div class="invalid-feedback" *ngIf="formField.district.errors">
@@ -81,7 +81,7 @@
                             (change)="onCityChange($event.target.value)">
                             <option value="">Choose...</option>
                             <option *ngFor="let city of deliveryCityList"
-                                [value]="city | json">
+                                [value]="city.city._id">
                                 {{city.city.name_en}}</option>
                         </select>
                         <div class="invalid-feedback" *ngIf="formField.city.errors">
