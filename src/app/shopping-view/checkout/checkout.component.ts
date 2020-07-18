@@ -3,7 +3,6 @@ import { CartDataService } from 'src/app/service/cart-data.service';
 import { CartItem } from 'src/app/model/cart-item';
 import { DeliveryAreaService } from 'src/app/ws/delivery-area.service';
 import { District } from 'src/app/model/district';
-import { City } from 'src/app/model/city';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CartService } from 'src/app/ws/cart.service';
 import { Router } from '@angular/router';
@@ -29,10 +28,11 @@ export class CheckoutComponent implements OnInit {
 	selectedCity: DeliveryArea;
 	deliveryAreaList: DeliveryArea[];
 	public userProfile: AppUserProfile;
-	
+
 	constructor(public cart: CartDataService, private deliveryAreaService: DeliveryAreaService,
 		private formBuilder: FormBuilder, private cartService: CartService, private router: Router,
-		private authService: AppAuthService, private toastr: ToastrService, private profileService: UserProfileService) {
+		private authService: AppAuthService, private toastr: ToastrService, private profileService: UserProfileService,
+		private cartDataService: CartDataService) {
 		this.deliveryCityList = [];
 		this.districtList = [];
 		this.deliveryAreaList = [];
@@ -63,11 +63,10 @@ export class CheckoutComponent implements OnInit {
 			this.districtList = data;
 		})
 
+		// when user reload or directly navigating to this page
 		this.authService.sessionStatus.subscribe((validity: Boolean) => {
 			if (validity) {
 				this.profileService.getProfileByUserId(this.authService.loggedUser._id).subscribe((data: AppUserProfile) => {
-					console.log(data);
-		
 					if (data === null) {
 						return;
 					}
@@ -83,17 +82,30 @@ export class CheckoutComponent implements OnInit {
 					});
 					this.selectedDistrict = this.userProfile.district;
 					//this.selectedCity = this.userProfile.city;
-		
+
 					// get city list for the profile
 					this.deliveryAreaService.getDeliveryCityByDistrictId(this.selectedDistrict._id).subscribe((data: DeliveryArea[]) => {
 						this.deliveryCityList = data;
+
+						//set delivery cost for the selected city
+						//this.deliveryAreaList.filter(item => item.city._id === cityId)[0];
+						this.selectedCity = this.deliveryCityList.filter(item => item.city._id === this.userProfile.city._id)[0];
+						this.addDeliveryCharges();
 					});
 				}, error => {
 					console.log(error);
 				});
 			}
 		});
-		
+
+		//loading the data from the service
+		this.cartDataService.selectionStatus.subscribe((data: CartItem[]) => {
+			this.cartItems = data;
+			this.calculateTotal(this.cartItems);
+		}, error => {
+
+		});
+
 	}
 
 	get formField() {
@@ -117,32 +129,16 @@ export class CheckoutComponent implements OnInit {
 		});
 	}
 
-	onCityChange(city: any) {
-		if (this.selectedCity !== undefined) {
-			this.total -= this.selectedCity.delivery_charge.valueOf();
-		}
-		
-		this.selectedCity = JSON.parse(city);
-		this.cart.deliveryCharge = this.selectedCity.delivery_charge.valueOf();
-		this.total += this.cart.deliveryCharge;
+	onCityChange(cityId: any) {
+		//reduct the previously added delivery charge
+		this.total -= this.selectedCity.delivery_charge.valueOf();
+		this.selectedCity = this.deliveryAreaList.filter(item => item.city._id === cityId)[0];
+		this.addDeliveryCharges();
 	}
 
-	/**
-	 * Get unique list of districts
-	 * @param cityList delivery city list
-	 */
-	private getDistrictList(cityList: City[]): District[] {
-		let districtIds = [];
-		let districtList: District[] = [];
-		cityList.map(function (val, index) {
-			if (districtIds.indexOf(val.district_id._id) === -1) {
-				districtList.push(val.district_id);
-			}
-			districtIds.push(val.district_id._id);
-			return;
-		});
-
-		return districtList;
+	addDeliveryCharges() {
+		this.cart.deliveryCharge = this.selectedCity.delivery_charge.valueOf();
+		this.total += this.cart.deliveryCharge;
 	}
 
 	submitForm(values: any) {
