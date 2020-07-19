@@ -34,8 +34,6 @@ export class PackComponent implements OnInit {
 		this.appAuthService.sessionStatus.subscribe(value => {
 			if (value) {
 				this.loggedUser = this.appAuthService.loggedUser;
-				console.log(this.loggedUser);
-
 				this.packService.getPrivatePacksByUserId(this.loggedUser._id).subscribe((data: Object[]) => {
 					this.myPackList = data;
 					//save my packs in the session storage

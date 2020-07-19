@@ -76,6 +76,42 @@ export class CartDataService {
 	}
 
 	/**
+	 * Adding list of items in to the cart. If the item is already existing then it will be updated.
+	 * @param cartItems An array of CartItems
+	 */
+	public addItems(cartItems: CartItem[]) {
+		if (this._cart === undefined) throw Error('Cart is not initialized');
+
+		for (let cartItem of cartItems) {
+			if (this._cartItems.findIndex(item => (item.product._id === cartItem.product._id)) === -1) {
+				//item is not available then push it
+				this._cartItems.push(cartItem);
+			} else {
+				//item is available then remove it and add it with new values
+				this._cartItems = this._cartItems.filter(item => item.product._id !== cartItem.product._id);
+				this._cartItems.push(cartItem);
+				// since filter returns a new array we have to assign it again.
+				this._cart.items = this._cartItems;
+			}
+		}
+
+		// add item to database
+		if (this._cart._id === undefined) {
+			this.cartService.addCart(this.convertToSaveModel(this._cart)).subscribe((id: string) => {
+				this._cart._id = id;
+				this.cookieService.set(Key.CART_ID, id, undefined, '/');
+			});
+		} else {
+			this.cartService.updateCart(this.convertToSaveModel(this._cart)).subscribe(data => {
+				this.toasts.success('Added Item', 'Success');
+			}, error => {
+				this.toasts.error(error, 'Error');
+			});
+		}
+		this.notifier.next(this._cartItems);
+	}
+
+	/**
 	 * Remove an item from the cart.
 	 * @param cartItem item to be removed
 	 */

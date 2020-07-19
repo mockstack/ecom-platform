@@ -24,10 +24,12 @@ export class PackGridComponent implements OnInit {
 	}
 
 	showCheckout(pack: Pack) {
+		let list: CartItem[] = [];
 		for(let item of pack.packItems) {
-			console.log(item)
-			this.cartDataService.addItem(new CartItem(item.product, item.quantity));
+			list.push(new CartItem(item.product, item.quantity));
 		}
+
+		this.cartDataService.addItems(list);
 		
 	}
 

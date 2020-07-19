@@ -31,4 +31,10 @@ export class CartService {
 	public getCartByCartId(id: any): Observable<object> {
 		return this.httpClient.get(environment.apiUrl + 'cart/' + id);
 	}
+
+	/**Mark cart as checked out */
+	public cartCheckout(id: any): Observable<object> {
+		const data = { checkedOut: true };
+		return this.httpClient.put(environment.apiUrl + 'cart/checkout/' + id, data);
+	}
 }

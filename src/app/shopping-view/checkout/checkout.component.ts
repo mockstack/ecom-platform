@@ -95,11 +95,16 @@ export class CheckoutComponent implements OnInit {
 				}, error => {
 					console.log(error);
 				});
+			} else {
+				this.router.navigateByUrl('/');
 			}
 		});
 
 		//loading the data from the service
 		this.cartDataService.selectionStatus.subscribe((data: CartItem[]) => {
+			if (data.length === 0) {
+				this.router.navigateByUrl('/');
+			}
 			this.cartItems = data;
 			this.calculateTotal(this.cartItems);
 		}, error => {
@@ -165,19 +170,25 @@ export class CheckoutComponent implements OnInit {
 			data.user_id = this.authService.loggedUser._id;
 		}
 
-		this.cartService.checkOut(data).subscribe((data: any) => {
-			if (data.type === 'cc' || data.type === 'dc') {
-				//must redirected to the payment gateway.
-				//transaction data must be stored in a separate collection
-				//for auditing purposes.
-			} else {
-				// cod(cash on delivery will be redirected to the success page)
-				this.router.navigate(['/costatus'], { queryParams: { ref: data.ref } });
-			}
-		}, error => {
-			this.toastr.error(error.error, 'Transaction Failed');
-		});
+		//mark the cart as checked out.
+		this.cartService.cartCheckout(this.cart.cart._id).subscribe(cData => {
+			this.cartService.checkOut(data).subscribe((data: any) => {
+				if (data.type === 'cc' || data.type === 'dc') {
+					//must redirected to the payment gateway.
+					//transaction data must be stored in a separate collection
+					//for auditing purposes.
+				} else {
+					// cod(cash on delivery will be redirected to the success page)
+					this.router.navigate(['/costatus'], { queryParams: { ref: data.ref } });
+				}
 
+				this.cartDataService.completeCheckout();
+			}, error => {
+				this.toastr.error(error.error, 'Transaction Failed');
+			});
+		}, error => {
+			this.toastr.error(error.error, 'Cart update failed');
+		});
 	}
 
 }
