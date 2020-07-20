@@ -12,7 +12,7 @@
                         <h6 class="my-0">{{item.product.name}}</h6>
                         <small class="text-muted">{{item.product.unit_price_lkr}} LKR / {{item.quantity}}</small>
                     </div>
-                    <span class="text-muted">{{item.product.unit_price_lkr}}</span>
+                    <span class="text-muted">{{item.product.unit_price_lkr * item.quantity}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Delivery Charge (LKR)</span>
