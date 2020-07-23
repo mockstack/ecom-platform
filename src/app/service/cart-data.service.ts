@@ -15,19 +15,18 @@ import Key from '../utils/key';
 export class CartDataService {
 	private _cartItems: IBuyItem[] = [];
 	private _cart: Cart;
+	private _deliveryCharge: number = 0;
+
 	private notifier = new BehaviorSubject(this._cartItems);
 	public selectionStatus = this.notifier.asObservable();
-	private _productIdList = [];
-	private _deliveryCharge: number = 0;
 
 	constructor(private cartService: CartService, private userService: AppAuthService,
 		private toasts: ToastrService, private cookieService: CookieService) {
 		this.initCart();
-		console.log('cart is initializing....')
 	}
 
 	/**
-	 * Initializa the car with zero items.
+	 * Initialize the car with zero items.
 	 */
 	public initCart() {
 		// initialize main attributes
@@ -40,6 +39,31 @@ export class CartDataService {
 		this._deliveryCharge = 0;
 	}
 
+	public get cart() {
+		if (this._cart === undefined) throw Error('Cart is not initialized');
+		return this._cart;
+	}
+
+	public set cart(cart: Cart) {
+		this._cart = cart;
+		for (const item of this._cart.items) {
+			this.subscribeToQuantityChanges(item);
+		}
+		this.notifier.next(this.cart.items);
+	}
+
+	public set userId(userId: string) {
+		if (this._cart === undefined) throw Error('Cart is not initialized');
+		this._cart.userId = userId;
+	}
+
+	public get deliveryCharge() {
+		return this._deliveryCharge;
+	}
+
+	public set deliveryCharge(charge: number) {
+		this._deliveryCharge = charge;
+	}
 
 	/**
 	 * Adding a new item to the cart. If the item is already existing then it will be updated.
@@ -58,6 +82,7 @@ export class CartDataService {
 			// since filter returns a new array we have to assign it again.
 			this._cart.items = this._cartItems;
 		}
+		this.subscribeToQuantityChanges(cartItem);
 
 		// add item to database
 		if (this._cart._id === undefined) {
@@ -93,6 +118,7 @@ export class CartDataService {
 				// since filter returns a new array we have to assign it again.
 				this._cart.items = this._cartItems;
 			}
+			this.subscribeToQuantityChanges(cartItem);
 		}
 
 		// add item to database
@@ -128,39 +154,7 @@ export class CartDataService {
 		}, error => {
 			this.toasts.error(error.message, 'Error');
 		});
-	}
 
-	/**
-	 * Get the cart
-	 */
-	public get cart() {
-		if (this._cart === undefined) throw Error('Cart is not initialized');
-
-		return this._cart;
-	}
-
-	/**
-	 * Set the cart
-	 */
-	public set cart(cart: Cart) {
-		this._cart = cart;
-		this.notifier.next(this.cart.items);
-	}
-
-	/**
-	 * Set the user id for the cart.
-	 */
-	public set userId(userId: string) {
-		if (this._cart === undefined) throw Error('Cart is not initialized');
-
-		this._cart.userId = userId;
-	}
-
-	/**
-	 * Get selected product id list.
-	 */
-	public get productIdList() {
-		return this._cartItems.map(item => item.product._id);
 	}
 
 	/**
@@ -193,13 +187,10 @@ export class CartDataService {
 		return out;
 	}
 
-	public get deliveryCharge() {
-		return this._deliveryCharge;
+	private subscribeToQuantityChanges(cartItem: CartItem) {
+		//TODO this method will be implemented to identify the quantity changes.
 	}
 
-	public set deliveryCharge(charge: number) {
-		this._deliveryCharge = charge;
-	}
 }
 
 /**

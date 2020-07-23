@@ -1,14 +1,10 @@
-import { ProductService } from '../ws/product.service';
 import { Product } from './product';
 import { IBuyItem } from './ibuy-item';
 
-export class CartItem implements IBuyItem {
-    product: Product;
-    quantity: Number;
+export class CartItem extends IBuyItem {
 
     constructor(product?: Product, quantity?: Number) {
-        this.product = product;
-        this.quantity = quantity;
+        super(product, quantity);
     }
 
     deserialize(input: any): this {

@@ -1,13 +1,9 @@
 import { Product } from './product';
 import { IBuyItem } from './ibuy-item';
 
-export class PackItem implements IBuyItem {
-    product: Product;
-    quantity: Number;
-
+export class PackItem extends IBuyItem {
     constructor(product?: Product, quantity?: Number) {
-        this.product = product;
-        this.quantity = quantity;
+        super(product, quantity);
     }
 
     deserialize(input: any): this {
