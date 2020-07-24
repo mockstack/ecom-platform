@@ -44,11 +44,16 @@ export class CartDataService {
 		return this._cart;
 	}
 
+	/**Initializa the cart when the page is being reloaded. */
 	public set cart(cart: Cart) {
 		this._cart = cart;
+		let cartItemList: CartItem[] = [];
 		for (const item of this._cart.items) {
-			this.subscribeToQuantityChanges(item);
+			let _cItem: CartItem = new CartItem(item.product, item.quantity);
+			this.subscribeToQuantityChanges(_cItem);
+			cartItemList.push(_cItem);
 		}
+		this._cart.items = cartItemList;
 		this.notifier.next(this.cart.items);
 	}
 
@@ -187,8 +192,14 @@ export class CartDataService {
 		return out;
 	}
 
+	/**The method which is being called when the quantity is changed */
 	private subscribeToQuantityChanges(cartItem: CartItem) {
+		console.log(cartItem)
 		//TODO this method will be implemented to identify the quantity changes.
+		cartItem.subscribe().subscribe(data => {
+			console.log(data)
+			//this.cartService.updateCartItemQuantity(this.cart._id, cartItem._id, data).subscribe(data => { });
+		});
 	}
 
 }
