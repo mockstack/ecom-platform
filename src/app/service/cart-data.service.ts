@@ -50,6 +50,7 @@ export class CartDataService {
 		let cartItemList: CartItem[] = [];
 		for (const item of this._cart.items) {
 			let _cItem: CartItem = new CartItem(item.product, item.quantity);
+			_cItem._id = item._id;
 			this.subscribeToQuantityChanges(_cItem);
 			cartItemList.push(_cItem);
 		}
@@ -194,11 +195,8 @@ export class CartDataService {
 
 	/**The method which is being called when the quantity is changed */
 	private subscribeToQuantityChanges(cartItem: CartItem) {
-		console.log(cartItem)
-		//TODO this method will be implemented to identify the quantity changes.
 		cartItem.subscribe().subscribe(data => {
-			console.log(data)
-			//this.cartService.updateCartItemQuantity(this.cart._id, cartItem._id, data).subscribe(data => { });
+			this.cartService.updateCartItemQuantity(this.cart._id, cartItem.product._id, data).subscribe(data => { });
 		});
 	}
 

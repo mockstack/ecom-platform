@@ -39,8 +39,8 @@ export class CartService {
 	}
 
 	/**Update cart item quantity */
-	public updateCartItemQuantity(cartId: any, itemId: any, quantity: Number): Observable<any> {
+	public updateCartItemQuantity(cartId: any, productId: any, quantity: Number): Observable<any> {
 		const data = { "quantity": quantity }
-		return this.httpClient.put(environment.apiUrl + 'cart/' + cartId + '/item/' + itemId, data);
+		return this.httpClient.put(environment.apiUrl + 'cart/' + cartId + '/product/' + productId, data);
 	}
 }
