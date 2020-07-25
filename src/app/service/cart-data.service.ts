@@ -88,17 +88,18 @@ export class CartDataService {
 			// since filter returns a new array we have to assign it again.
 			this._cart.items = this._cartItems;
 		}
-		this.subscribeToQuantityChanges(cartItem);
 
 		// add item to database
 		if (this._cart._id === undefined) {
 			this.cartService.addCart(this.convertToSaveModel(this._cart)).subscribe((id: string) => {
 				this._cart._id = id;
 				this.cookieService.set(Key.CART_ID, id, undefined, '/');
+				this.subscribeToQuantityChanges(cartItem);
 			});
 		} else {
 			this.cartService.updateCart(this.convertToSaveModel(this._cart)).subscribe(data => {
 				this.toasts.success('Added Item', 'Success');
+				this.subscribeToQuantityChanges(cartItem);
 			}, error => {
 				this.toasts.error(error, 'Error');
 			});
@@ -124,7 +125,6 @@ export class CartDataService {
 				// since filter returns a new array we have to assign it again.
 				this._cart.items = this._cartItems;
 			}
-			this.subscribeToQuantityChanges(cartItem);
 		}
 
 		// add item to database
@@ -132,10 +132,16 @@ export class CartDataService {
 			this.cartService.addCart(this.convertToSaveModel(this._cart)).subscribe((id: string) => {
 				this._cart._id = id;
 				this.cookieService.set(Key.CART_ID, id, undefined, '/');
+				for (let cartItem of cartItems) {
+					this.subscribeToQuantityChanges(cartItem);
+				}
 			});
 		} else {
 			this.cartService.updateCart(this.convertToSaveModel(this._cart)).subscribe(data => {
 				this.toasts.success('Added Item', 'Success');
+				for (let cartItem of cartItems) {
+					this.subscribeToQuantityChanges(cartItem);
+				}
 			}, error => {
 				this.toasts.error(error, 'Error');
 			});
