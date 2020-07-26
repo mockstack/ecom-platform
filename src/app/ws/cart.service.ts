@@ -27,6 +27,11 @@ export class CartService {
 		return this.httpClient.post(environment.apiUrl + 'order', data);
 	}
 
+	/**GET minimnum transaction value */
+	public getMinTransactionValue(): Observable<Object> {
+		return this.httpClient.get(environment.apiUrl + 'order/minvalue')
+	}
+
 	/**Get cart by cart id */
 	public getCartByCartId(id: any): Observable<object> {
 		return this.httpClient.get(environment.apiUrl + 'cart/' + id);

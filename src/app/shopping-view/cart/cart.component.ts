@@ -4,6 +4,8 @@ import { CartDataService } from 'src/app/service/cart-data.service';
 import { CartItem } from 'src/app/model/cart-item';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AppAuthService } from 'src/app/service/app-auth.service';
+import { CartService } from 'src/app/ws/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-cart',
@@ -14,10 +16,11 @@ export class CartComponent implements OnInit {
 	showGuestButton: Boolean = true;
 	cartItemList: CartItem[];
 	total: number = 0.00;
+	minTransactionValue: Number = 2000.0;
 	modalRef: BsModalRef;
 
 	constructor(public router: Router, private cart: CartDataService, private modalService: BsModalService,
-		private appAuthService: AppAuthService) { }
+		private appAuthService: AppAuthService, private cartSerice: CartService, private toastr: ToastrService) { }
 
 	ngOnInit(): void {
 		this.cartItemList = this.cart.cart.items as CartItem[];
@@ -29,6 +32,10 @@ export class CartComponent implements OnInit {
 		}, error => {
 
 		});
+
+		this.cartSerice.getMinTransactionValue().subscribe((data: any) => {
+			this.minTransactionValue = data.min;
+		})
 	}
 
 	deleteCartItem(item: CartItem) {
@@ -48,6 +55,12 @@ export class CartComponent implements OnInit {
 	}
 
 	openModal(template: TemplateRef<any>) {
+		if (this.minTransactionValue > this.total) {
+			this.toastr.error('Minimum transaction value is ' + this.minTransactionValue,
+				'Min Transaction Value');
+			return;
+		}
+
 		if (!this.appAuthService.validSessionAvailable) {
 			this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
 		} else {
