@@ -96,7 +96,7 @@ export class CheckoutComponent implements OnInit {
 					console.log(error);
 				});
 			} else {
-				this.router.navigateByUrl('/');
+				//this.router.navigateByUrl('/');
 			}
 		});
 
@@ -124,10 +124,10 @@ export class CheckoutComponent implements OnInit {
 		});
 	}
 
-	onDistrictChange(district: any) {
+	onDistrictChange(districtId: any) {
 		this.deliveryCityList = [];
-		this.selectedDistrict = JSON.parse(district);
-		this.deliveryAreaService.getDeliveryCityByDistrictId(this.selectedDistrict._id).subscribe((data: DeliveryArea[]) => {
+		this.selectedDistrict = this.districtList.filter(item => item._id === districtId)[0];
+		this.deliveryAreaService.getDeliveryCityByDistrictId(districtId).subscribe((data: DeliveryArea[]) => {
 			this.deliveryCityList = data;
 		}, error => {
 			console.log(error)
@@ -136,7 +136,9 @@ export class CheckoutComponent implements OnInit {
 
 	onCityChange(cityId: any) {
 		//reduct the previously added delivery charge
-		this.total -= this.selectedCity.delivery_charge.valueOf();
+		if (this.selectedCity !== undefined) {
+			this.total -= this.selectedCity.delivery_charge.valueOf();
+		}
 		this.selectedCity = this.deliveryAreaList.filter(item => item.city._id === cityId)[0];
 		this.addDeliveryCharges();
 	}
