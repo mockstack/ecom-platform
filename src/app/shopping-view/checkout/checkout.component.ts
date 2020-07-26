@@ -175,6 +175,7 @@ export class CheckoutComponent implements OnInit {
 		//mark the cart as checked out.
 		this.cartService.cartCheckout(this.cart.cart._id).subscribe(cData => {
 			this.cartService.checkOut(data).subscribe((data: any) => {
+				this.cartDataService.completeCheckout();
 				if (data.type === 'cc' || data.type === 'dc') {
 					//must redirected to the payment gateway.
 					//transaction data must be stored in a separate collection
@@ -183,8 +184,6 @@ export class CheckoutComponent implements OnInit {
 					// cod(cash on delivery will be redirected to the success page)
 					this.router.navigate(['/costatus'], { queryParams: { ref: data.ref } });
 				}
-
-				this.cartDataService.completeCheckout();
 			}, error => {
 				this.toastr.error(error.error, 'Transaction Failed');
 			});

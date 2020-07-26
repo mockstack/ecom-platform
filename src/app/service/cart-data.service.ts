@@ -174,14 +174,16 @@ export class CartDataService {
 	 */
 	public completeCheckout() {
 		// user id will be added only for logged users. Guest users will not have a user ID.
-		if (this.userService.loggedUser._id !== undefined) {
+		if (this.userService.loggedUser !== undefined) {
 			this._cart.userId = this.userService.loggedUser._id;
 		}
 		this._cart.checkedOut = true;
 		this.cartService.updateCart(this.convertToSaveModel(this._cart));
 		// reset all data
 		this._cart = undefined;
-		this._cartItems = undefined;
+		this._cartItems = [];
+
+		this.notifier.next(this._cartItems);
 	}
 
 	/**
