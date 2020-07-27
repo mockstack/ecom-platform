@@ -1,19 +1,20 @@
-<div class="card m-2" style="width: 12rem;">
+<div class="card m-1" style="width: 13rem;">
 
-    <div #loading class="card-img-top text-center">
-        <!--<app-loading *biRepeat="1"></app-loading>-->
-        <img src="{{serverUrl}}{{product.thumbImage}}" style="height: 10rem; width: 10rem;" class="rounded"
-            alt="{{product.name}}">
+    <div #loading>
+        <img src="{{serverUrl}}{{product.thumbImage}}" class="card-img-top" alt="{{product.name}}">
     </div>
 
-    <div class="card-body p-1" style="height: 6rem;">
-        <p class="card-title text-center"><b>{{product.name}}</b></p>
-        <p class="card-text text-center">{{product.short_desc}}</p>
+    <div style="height: 4.5rem;">
+        <p class="text-center" style="height: 3rem;">{{product.name}}</p>
+        <div style="height: 1.5rem;">
+            <p class="text-center text-success">Rs.{{product.unit_price_lkr}} / {{product.measurementUnit}}</p>
+        </div>
+        <!--<p class="card-text text-center">{{product.short_desc}}</p>-->
     </div>
     <hr>
-    <div class="text-center">
+    <div class="text-center" style="height: 2rem;">
         <button type="button" class="btn btn-sm" (click)="addToCart(product)"><i class="fas fa-cart-plus"></i></button>
-        <button type="button" class="btn btn-sm"><i class="far fa-heart text-danger"></i></button>
+        <!--<button type="button" class="btn btn-sm"><i class="far fa-heart text-danger"></i></button>-->
         <button type="button" class="btn btn-link btn-sm" [routerLink]="['/product', product._id]">more</button>
     </div>
 </div>
