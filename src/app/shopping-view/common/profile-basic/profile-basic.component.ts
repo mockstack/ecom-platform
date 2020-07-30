@@ -38,7 +38,8 @@ export class ProfileBasicComponent implements OnInit {
 			district: ['', Validators.required],
 			city: ['', Validators.required],
 			address: ['', Validators.required],
-			optionalAddress: ['', !Validators.required]
+			optionalAddress: ['', !Validators.required],
+			contact_number: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
 		});
 
 		this.authService.sessionStatus.subscribe((validity: Boolean) => {
@@ -55,7 +56,8 @@ export class ProfileBasicComponent implements OnInit {
 						address: this.userProfile.address,
 						optionalAddress: this.userProfile.optional_address,
 						district: this.userProfile.district._id,
-						city: this.userProfile.city._id
+						city: this.userProfile.city._id,
+						contact_number: this.userProfile.contact_number
 					});
 					this.selectedDistrict = this.userProfile.district;
 					this.selectedCity = this.userProfile.city;

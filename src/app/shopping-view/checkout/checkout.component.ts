@@ -48,7 +48,8 @@ export class CheckoutComponent implements OnInit {
 			address: ['', Validators.required],
 			optionalAddress: ['', !Validators.required],
 			payment: ['cc', Validators.required],
-			tcAccept: ['', Validators.requiredTrue]
+			tcAccept: ['', Validators.requiredTrue],
+			contact_number: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
 		});
 
 		this.cartItems = this.cart.cart.items as CartItem[];
@@ -78,7 +79,8 @@ export class CheckoutComponent implements OnInit {
 						address: this.userProfile.address,
 						optionalAddress: this.userProfile.optional_address,
 						district: this.userProfile.district._id,
-						city: this.userProfile.city._id
+						city: this.userProfile.city._id,
+						contact_number: this.userProfile.contact_number
 					});
 					this.selectedDistrict = this.userProfile.district;
 					//this.selectedCity = this.userProfile.city;
@@ -161,11 +163,12 @@ export class CheckoutComponent implements OnInit {
 			last_name: FORM.lastName,
 			email: FORM.email,
 			district: this.selectedDistrict._id,
-			city: this.selectedCity._id,
+			city: this.selectedCity.city._id,
 			street_address: FORM.address,
 			optional_address: FORM.optionalAddress,
 			payment_method: FORM.payment,
-			cart: this.cart.cart._id
+			cart: this.cart.cart._id,
+			contact_number: FORM.contact_number
 		}
 
 		if (this.authService.validSessionAvailable) {

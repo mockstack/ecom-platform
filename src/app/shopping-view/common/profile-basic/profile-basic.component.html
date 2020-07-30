@@ -34,6 +34,16 @@
                     </div>
                 </div>
 
+                <div class="mb-3">
+                    <label for="contact_number">Contact Number</label>
+                    <input type="contact_number" class="form-control" id="contact_number" formControlName="contact_number"
+                        placeholder="10 digit number" [ngClass]="{ 'is-invalid': submitted && formField.contact_number.errors }"
+                        required>
+                    <div class="invalid-feedback" *ngIf="formField.contact_number.errors">
+                        <div *ngIf="formField.contact_number.errors.required">Please enter a valid contact number</div>
+                    </div>
+                </div>
+                
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="district">District</label>

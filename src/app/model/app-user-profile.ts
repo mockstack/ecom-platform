@@ -8,6 +8,7 @@ export class AppUserProfile implements Deserializable {
     first_name: String;
     last_name: String;
     email: String;
+    contact_number: String;
     user: AppUser;
     city: City;
     district: District;
