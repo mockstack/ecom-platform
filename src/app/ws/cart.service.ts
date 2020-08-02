@@ -48,4 +48,9 @@ export class CartService {
 		const data = { "quantity": quantity }
 		return this.httpClient.put(environment.apiUrl + 'cart/' + cartId + '/product/' + productId, data);
 	}
+
+	/**Sends invoice to the customer */
+	public sendInvoiceByEmail(ref: String): Observable<any> {
+		return this.httpClient.get(environment.apiUrl + 'order/email/' + ref)
+	}
 }

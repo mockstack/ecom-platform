@@ -177,6 +177,7 @@ export class CheckoutComponent implements OnInit {
 
 		//mark the cart as checked out.
 		this.cartService.cartCheckout(this.cart.cart._id).subscribe(cData => {
+			//insert document into the order table.
 			this.cartService.checkOut(data).subscribe((data: any) => {
 				this.cartDataService.completeCheckout();
 				if (data.type === 'cc' || data.type === 'dc') {
