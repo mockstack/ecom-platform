@@ -1,4 +1,4 @@
-import { Deserializable } from './Deserializable';
+import { Deserializable } from './deserializable';
 import { MapItem } from './map-item';
 import { District } from './district';
 
