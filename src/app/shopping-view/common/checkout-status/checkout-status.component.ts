@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/ws/cart.service';
-import { error } from 'console';
 
 @Component({
 	selector: 'app-checkout-status',
