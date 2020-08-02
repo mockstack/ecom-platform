@@ -1,4 +1,4 @@
-import { Deserializable } from './Deserializable';
+import { Deserializable } from './deserializable';
 
 export class MapItem implements Deserializable {
 	_id: String;
