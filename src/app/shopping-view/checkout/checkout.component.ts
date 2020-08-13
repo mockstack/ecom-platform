@@ -11,6 +11,9 @@ import { ToastrService } from 'ngx-toastr';
 import { DeliveryArea } from 'src/app/model/delivery-area';
 import { UserProfileService } from 'src/app/ws/user-profile.service';
 import { AppUserProfile } from 'src/app/model/app-user-profile';
+import { environment } from 'src/environments/environment';
+//payment gateway
+declare const loadPaycorpPayment: any;
 
 @Component({
 	selector: 'app-checkout',
@@ -184,6 +187,15 @@ export class CheckoutComponent implements OnInit {
 					//must redirected to the payment gateway.
 					//transaction data must be stored in a separate collection
 					//for auditing purposes.
+					// TEMPORARILY REMOVED
+					/*loadPaycorpPayment({
+						clientId: environment.pgClientId,
+						paymentAmount: 1010,
+						currency: 'LKR',
+						returnUrl: environment.pgReturnUrl,
+						clientRef: data.ref,
+						comment: 'This is a demo payment'
+					});*/
 				} else {
 					// cod(cash on delivery will be redirected to the success page)
 					this.router.navigate(['/costatus'], { queryParams: { ref: data.ref } });

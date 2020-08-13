@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { CartService } from 'src/app/ws/cart.service';
 
 @Component({
@@ -14,17 +14,30 @@ export class CheckoutStatusComponent implements OnInit {
 	constructor(private route: ActivatedRoute, private router: Router, private cartService: CartService) { }
 
 	ngOnInit(): void {
-		this.reference = this.route.snapshot.queryParams.ref;
-		if (this.reference === undefined || this.reference === null || this.reference.trim() === '') {
-			this.router.navigateByUrl('404');
-		}
+		let clientRef: String;
+		let requestId: String;
 
-		this.cartService.sendInvoiceByEmail(this.reference).subscribe(data => {
+		this.route.queryParamMap.subscribe((params: any) => {
+			//response from the payment gateway
+			clientRef = params.params.clientRef;
+			requestId = params.params.reqid;
+		});
+
+
+		//this.reference = this.route.snapshot.queryParams.ref;
+
+		//const snapshot: RouterStateSnapshot = this.router.routerState.snapshot;
+		//console.log(snapshot);  // <-- hope it helps
+
+		//if (this.reference === undefined || this.reference === null || this.reference.trim() === '') {
+			//this.router.navigateByUrl('404');
+		//}
+
+		/*this.cartService.sendInvoiceByEmail(this.reference).subscribe(data => {
 			console.log('email sent successfully')
 		}, error => {
 			console.log('email sending failed')
-		});
-
+		});*/
 	}
 
 }

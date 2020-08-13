@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000/',
-  key: 'george-w-bush-2-@USA'
+  key: 'george-w-bush-2-@USA',
+  pgReturnUrl: 'http://localhost:4200/costatus',
+  pgClientId: 14002582
 };
 
 /*

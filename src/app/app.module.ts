@@ -28,7 +28,6 @@ import { AdStatCustomerComponent } from './shopping-view/common/ad-stat-customer
 import { BreadcrumbComponent } from './shopping-view/common/breadcrumb/breadcrumb.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 //import { CryptoService } from './service/crypto.service';
 import { ToastrModule } from 'ngx-toastr';
@@ -136,7 +135,6 @@ export function provideConfig() {
     CookieService,
     AppAuthService,
     ProductNameService,
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true },
     CookiePolicyService
   ],
