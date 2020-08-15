@@ -12,6 +12,8 @@ import { DeliveryArea } from 'src/app/model/delivery-area';
 import { UserProfileService } from 'src/app/ws/user-profile.service';
 import { AppUserProfile } from 'src/app/model/app-user-profile';
 import { environment } from 'src/environments/environment';
+import { PgService } from 'src/app/ws/pg.service';
+import Key from 'src/app/utils/key';
 //payment gateway
 declare const loadPaycorpPayment: any;
 
@@ -35,7 +37,7 @@ export class CheckoutComponent implements OnInit {
 	constructor(public cart: CartDataService, private deliveryAreaService: DeliveryAreaService,
 		private formBuilder: FormBuilder, private cartService: CartService, private router: Router,
 		private authService: AppAuthService, private toastr: ToastrService, private profileService: UserProfileService,
-		private cartDataService: CartDataService) {
+		private cartDataService: CartDataService, private pgService: PgService) {
 		this.deliveryCityList = [];
 		this.districtList = [];
 		this.deliveryAreaList = [];
@@ -161,7 +163,7 @@ export class CheckoutComponent implements OnInit {
 		}
 
 		const FORM = this.checkoutForm.value;
-		let data: any = {
+		let formData: any = {
 			first_name: FORM.firstName,
 			last_name: FORM.lastName,
 			email: FORM.email,
@@ -175,37 +177,52 @@ export class CheckoutComponent implements OnInit {
 		}
 
 		if (this.authService.validSessionAvailable) {
-			data.user_id = this.authService.loggedUser._id;
+			formData.user_id = this.authService.loggedUser._id;
 		}
 
 		//mark the cart as checked out.
-		this.cartService.cartCheckout(this.cart.cart._id).subscribe(cData => {
+		this.cartService.cartCheckout(this.cart.cart._id).subscribe((cData: any) => {
+			formData.ref = cData.ref;
+			// save the current checkout form information in the local storage
+			// this data will be accessed from the status component and will delete
+			// after completing the transaction. IF the data did not deleted, new data
+			// will overwrite the existing data.
+			localStorage.setItem(Key.LS_CART, JSON.stringify(formData));
+			if (formData.type === 'cc' || formData.type === 'dc') {
+				const paymentObject = this.buildPayment(this.total, 'LKR', cData.ref);
+				//save the payment object in the database.
+				this.pgService.savePaymentObject(paymentObject).subscribe(data => {
+					// open the payment window
+					loadPaycorpPayment(paymentObject);
+				}, error => {
+					this.toastr.error(error, 'Save Payment Infor');
+				});
+			} else {
+				this.router.navigate(['/costatus'], { queryParams: { ref: cData.ref } });
+			}
+
+			// Old logic
 			//insert document into the order table.
-			this.cartService.checkOut(data).subscribe((data: any) => {
+			/*this.cartService.checkOut(data).subscribe((data: any) => {
 				this.cartDataService.completeCheckout();
-				if (data.type === 'cc' || data.type === 'dc') {
-					//must redirected to the payment gateway.
-					//transaction data must be stored in a separate collection
-					//for auditing purposes.
-					// TEMPORARILY REMOVED
-					/*loadPaycorpPayment({
-						clientId: environment.pgClientId,
-						paymentAmount: 1010,
-						currency: 'LKR',
-						returnUrl: environment.pgReturnUrl,
-						clientRef: data.ref,
-						comment: 'This is a demo payment'
-					});*/
-				} else {
-					// cod(cash on delivery will be redirected to the success page)
-					this.router.navigate(['/costatus'], { queryParams: { ref: data.ref } });
-				}
+				if (data.type === 'cc' || data.type === 'dc') {} else {}
 			}, error => {
 				this.toastr.error(error.error, 'Transaction Failed');
-			});
+			});*/
 		}, error => {
 			this.toastr.error(error.error, 'Cart update failed');
 		});
+	}
+
+	buildPayment(amount: Number, currency: String, ref: String): any {
+		return {
+			clientId: environment.pgClientId,
+			paymentAmount: amount,
+			currency: currency,
+			returnUrl: environment.pgReturnUrl,
+			clientRef: ref,
+			comment: 'Payment for the cart id = ' + this.cart.cart._id
+		};
 	}
 
 }

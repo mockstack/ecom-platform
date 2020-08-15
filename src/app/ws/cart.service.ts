@@ -53,4 +53,9 @@ export class CartService {
 	public sendInvoiceByEmail(ref: String): Observable<any> {
 		return this.httpClient.get(environment.apiUrl + 'order/email/' + ref)
 	}
+
+	/**Validate transaction reference number */
+	public validateReferenceNumber(ref: String): Observable<any> {
+		return this.httpClient.get(environment.apiUrl + 'order/validate/' + ref)
+	}
 }
