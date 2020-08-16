@@ -8,6 +8,7 @@ import { ErrorLogService } from 'src/app/ws/error-log.service';
 import { environment } from 'src/environments/environment';
 import { ErrorLog } from 'src/app/model/error-log';
 import { ReportGenerateService } from 'src/app/ws/report-generate.service';
+import { isIdentifier } from '@angular/compiler';
 
 @Component({
 	selector: 'app-checkout-status',
@@ -21,6 +22,8 @@ export class CheckoutStatusComponent implements OnInit {
 	public requestId: String;
 	public formData: any;
 	public inProgress: Boolean = true;
+	public errorMessage: String = '';
+	public isSuccess: Boolean = true;
 
 	constructor(private route: ActivatedRoute, private router: Router, private cartService: CartService,
 		public cartDataService: CartDataService, private toast: ToastrService, private errorLogService: ErrorLogService,
@@ -45,7 +48,10 @@ export class CheckoutStatusComponent implements OnInit {
 				if (data.valid) {
 					this.completeTransaction(this.formData, this.reference);
 				} else {
-					this.toast.error('Invalid reference number', 'Validation')
+					//this.toast.error('Invalid reference number', 'Validation')
+					this.isSuccess = false;
+					this.inProgress = false;
+					this.errorMessage = "Invalid Reference Number"
 				}
 			});
 			
