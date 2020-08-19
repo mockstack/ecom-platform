@@ -7,7 +7,9 @@ export const environment = {
   apiUrl: 'http://localhost:3000/',
   key: 'george-w-bush-2-@USA',
   pgReturnUrl: 'http://localhost:4200/costatus',
-  pgClientId: 14002582
+  pgClientId: 14002582,
+  //{"id": "", "name":""}, 
+  previewItems: [{ "id": "5eece6aa5bd4a8557067f22c", "name": "Grocery Items" }, { "id": "5eece6aa5bd4a8557067f22c", "name": "Milk Products" }]
 };
 
 /*

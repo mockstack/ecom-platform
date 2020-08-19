@@ -12,10 +12,9 @@
             <img class="w-100" src="../../../assets/img/wants_to_be_a_supplier.webp">
         </div>
         <!--Grocery Items-->
-        <app-product-type-preview class="w-100" [productTypeId]="'5eece6aa5bd4a8557067f22c'" [category]="'Grocery Items'"></app-product-type-preview>
-        <app-product-type-preview class="w-100" [productTypeId]="'5eece6aa5bd4a8557067f22c'" [category]="'Grocery Items'"></app-product-type-preview>
-        <app-product-type-preview class="w-100" [productTypeId]="'5eece6aa5bd4a8557067f22c'" [category]="'Grocery Items'"></app-product-type-preview>
-        <app-product-type-preview class="w-100" [productTypeId]="'5eece6aa5bd4a8557067f22c'" [category]="'Grocery Items'"></app-product-type-preview>
+        <app-product-type-preview *ngFor="let item of preItemList" class="w-100" [productTypeId]="item.id" [category]="item.name">
+        </app-product-type-preview>
+        
     </div>
     <div class="row">
         <app-ad-stat-customer></app-ad-stat-customer>
