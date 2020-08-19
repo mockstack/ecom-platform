@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router'
+import { ProductService } from 'src/app/ws/product.service';
+import { Product } from 'src/app/model/product';
 
 @Component({
 	selector: 'app-product-type-preview',
@@ -7,15 +9,29 @@ import { Router } from '@angular/router'
 	styleUrls: ['./product-type-preview.component.scss']
 })
 export class ProductTypePreviewComponent implements OnInit {
-	@Input() productType: string;
-	newItemList: number[] = [23, 4, 3, 6];
-	constructor(private router: Router) { }
+	@Input() productTypeId: string;
+	@Input() category: string;
+	public productList: Product[] = [];
+	
+	constructor(private router: Router, private productService: ProductService) { }
 
 	ngOnInit(): void {
+		this.productService.getProductForPreviewByCategoryId(this.productTypeId).subscribe((data: Object[]) => {
+			this.productList = [];
+			data.forEach((val, index, array) => {
+				this.productList[index] = new Product().deserialize(val);
+			});
+			console.log(this.productList[0].category)
+		}, error=>{
+			console.log(error.message);
+		});
 	}
 
 	showAllProductsByType() {
-		this.router.navigateByUrl('products');
+		if (this.productList !== []) {
+			let catObj: any = this.productList[0].category;
+			this.router.navigateByUrl('products/' + catObj.name + '/' + catObj._id);
+		}
 	}
 
 	ngOnChanges(changes: SimpleChanges) {

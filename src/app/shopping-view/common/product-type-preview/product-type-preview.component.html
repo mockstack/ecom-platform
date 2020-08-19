@@ -1,12 +1,12 @@
 <div class="container bg-light pt-5">
     <div class="row">
-        <h3>New Arraivals</h3>
+        <h3>{{category}}</h3>
     </div>
     <div class="row">
 
         <!-- Card Narrower -->
-        <div class="col-sm narrower m-1 p-1" *ngFor="let item of newItemList">
-            <app-home-grid-item></app-home-grid-item>
+        <div class="col-sm narrower m-1 p-1" *ngFor="let item of productList">
+            <app-home-grid-item [product]="item"></app-home-grid-item>
         </div>
 
     </div>
