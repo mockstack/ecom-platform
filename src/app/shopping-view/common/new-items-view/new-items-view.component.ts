@@ -1,17 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { PackService } from 'src/app/ws/pack.service';
+import { Pack } from 'src/app/model/pack';
 
 @Component({
-  selector: 'app-new-items-view',
-  templateUrl: './new-items-view.component.html',
-  styleUrls: ['./new-items-view.component.scss']
+	selector: 'app-new-items-view',
+	templateUrl: './new-items-view.component.html',
+	styleUrls: ['./new-items-view.component.scss']
 })
 export class NewItemsViewComponent implements OnInit {
 
-  constructor() { }
+	constructor(private packService: PackService) { }
 
-  newItemList: number[] = [23, 4, 3, 6];
+	public imageList: String[] = ["./assets/img/pack/1.webp",
+		"./assets/img/pack/2.webp", "./assets/img/pack/3.webp", "./assets/img/pack/4.webp"];
+	public packList: Object[] = [];
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+		this.packService.getDefaultPackForPreview().subscribe((data: Object[]) => {
+			this.packList = data;
+		})
+	}
 
 }

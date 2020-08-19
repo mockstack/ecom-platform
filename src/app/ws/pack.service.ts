@@ -57,4 +57,9 @@ export class PackService {
 	public updateDefaultPack(body: any): Observable<object> {
 		return this.httpClient.put(this.pack + this.defaultPack, body);
 	}
+
+	/**Get 4 default pack items for preview purposes */
+	public getDefaultPackForPreview(): Observable<object> {
+		return this.httpClient.get(this.pack + this.defaultPack + 'preview');
+	}
 }
