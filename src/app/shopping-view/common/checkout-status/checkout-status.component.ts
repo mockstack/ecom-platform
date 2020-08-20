@@ -44,7 +44,7 @@ export class CheckoutStatusComponent implements OnInit {
 			//TO BE IMPLEMENTED
 		} else {
 			//Cash on delivery option
-			this.cartService.validateReferenceNumber(this.reference).subscribe((data: any) => {
+			/*this.cartService.validateReferenceNumber(this.reference).subscribe((data: any) => {
 				if (data.valid) {
 					this.completeTransaction(this.formData, this.reference);
 				} else {
@@ -53,7 +53,10 @@ export class CheckoutStatusComponent implements OnInit {
 					this.inProgress = false;
 					this.errorMessage = "Invalid Reference Number"
 				}
-			});
+			});*/
+
+			//Find a suitable logic for this.
+			this.completeTransaction(this.formData, this.reference);
 			
 		}
 	}
