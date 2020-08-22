@@ -1,9 +1,11 @@
-<ul class="nav flex-column sticky-top">
+<!--FOR DESKTOP VERSIONS-->
+<ul class="nav flex-column sticky-top nav-desk">
 	<li class="nav-item navbar-dark bg-dark">
 		<nav class="navbar sticky-top navbar-expand-lg" style="height: 80px;">
 			<!--Corporate Logo/Name-->
 			<a class="navbar-brand w-25" (click)="showHome()">
-				<img src="./assets/img/logo.png" style="font-family: Fjalla One;" width="197" height="50" alt="" loading="lazy">
+				<img src="./assets/img/logo.png" style="font-family: Fjalla One;" width="197" height="50" alt=""
+					loading="lazy">
 			</a>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -19,10 +21,12 @@
 						<input type="text" class="form-control mr-auto ml-auto w-50 search-input"
 							placeholder="Search products" [(ngModel)]="selectedProduct" [typeahead]="productList"
 							typeaheadOptionField="name" typeaheadGroupField="category.name"
-							(typeaheadOnSelect)="onSelectProduct($event)" (keydown.enter)="searchButtonClick($event.target.value)">
+							(typeaheadOnSelect)="onSelectProduct($event)"
+							(keydown.enter)="searchButtonClick($event.target.value)">
 
 						<div class="input-group-append">
-							<button class="btn btn-secondary search-button" type="button" (click)="searchButtonClick(selectedProduct)">
+							<button class="btn btn-secondary search-button" type="button"
+								(click)="searchButtonClick(selectedProduct)">
 								<i class="fa fa-search"></i>
 							</button>
 						</div>
@@ -39,7 +43,8 @@
 							<span class="align-middle mr-2 text-white">Packs</span>
 							<!--<i class="fas fa-shopping-cart fa-2x"></i>-->
 							<!--<span class="pe-is-ec-basket-star" style="font-size: 30px; color: white"></span>-->
-							<img src="./assets/img/pack.svg" style="color: white;" width="20" height="20" alt="" loading="lazy">
+							<img src="./assets/img/pack.svg" style="color: white;" width="20" height="20" alt=""
+								loading="lazy">
 							<!--<span class="badge badge-danger badge-pill align-top">New</span>-->
 						</a>
 					</li>
@@ -49,7 +54,8 @@
 						<a class="nav-link" tabindex="-1" role="button" (click)="showCart()">
 							<span class="align-middle mr-2 text-white">Cart</span>
 							<!--<i class="fas fa-shopping-cart fa-2x"></i>-->
-							<img src="./assets/img/cart.svg" style="color: white;" width="20" height="20" alt="" loading="lazy">
+							<img src="./assets/img/cart.svg" style="color: white;" width="20" height="20" alt=""
+								loading="lazy">
 							<!--<span class="pe-is-ec-cart-1" style="font-size: 20px; color: white"></span>-->
 							<span class="badge badge-danger badge-pill align-top">{{cartItemCount}}</span>
 						</a>
@@ -57,15 +63,16 @@
 
 					<!--Login Menu for guest user-->
 					<div class="dropdown" [hidden]="appAuthService.validSessionAvailable">
-						<a class="nav-link mr-3" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						<a class="nav-link mr-3" role="button" id="deskGuestSignin" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">
 							<span class="mr-2 mb-2 text-white">Sign In</span>
 							<!--<i class="fas fa-user fa-2x text-white" style="size: 30px;"></i>-->
 							<!--<span class="pe-is-ec-profile" style="font-size: 30px; color: white"></span>-->
-							<img src="./assets/img/profile.svg" style="color: white;" width="20" height="20" alt="" loading="lazy">
+							<img src="./assets/img/profile.svg" style="color: white;" width="20" height="20" alt=""
+								loading="lazy">
 						</a>
 
-						<div class="dropdown-menu dropdown-menu-right"  aria-labelledby="dropdownMenuLink">
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="deskGuestSignin">
 							<a class="dropdown-item" (click)="showLogin()">Login</a>
 							<a class="dropdown-item" (click)="showRegister()">Register</a>
 						</div>
@@ -73,14 +80,14 @@
 
 					<!--Login Menu for logged user-->
 					<div class="dropdown" [hidden]="!appAuthService.validSessionAvailable">
-						<a class="nav-link mr-3" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						<a class="nav-link mr-3" role="button" id="deskUserSignin" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">
 							<!--<span class="mr-2 mb-2">Sign In</span>-->
 							<!--<i class="fas fa-user fa-2x text-white" style="size: 30px;"></i>-->
 							<span class="pe-is-ec-profile" style="font-size: 30px; color: white"></span>
 						</a>
 
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="deskUserSignin">
 							<a class="dropdown-item" (click)="showProfile()">Profile</a>
 							<a class="dropdown-item" (click)="showMyPacks()">My Packs</a>
 							<a class="dropdown-item" (click)="signOut()">Sign Out</a>
@@ -91,7 +98,8 @@
 			</div>
 		</nav>
 		<div class="row bg-warning w-100 m-0 p-0" *ngIf="!searchItemAvailable">
-			<p class="text-center font-weight-light w-100 p-0 m-0">Sorry, search item is not available at the moment.</p>
+			<p class="text-center font-weight-light w-100 p-0 m-0">Sorry, search item is not available at the moment.
+			</p>
 		</div>
 	</li>
 
@@ -106,3 +114,92 @@
 	</li>
 
 </ul>
+
+
+
+<!--FOR MOBILE VERSIONS-->
+<nav class="sticky-top navbar-expand-md nav-mob navbar-dark bg-dark" style="height: auto; min-height: 80px;">
+	<div class="row w-100 ml-3 mr-3 mt-1 mb-1">
+		<div class="col">
+			<!--Devi logo-->
+			<div class="row justify-content-center mb-3">
+				<a class="navbar-brand" (click)="showHome()">
+					<img src="./assets/img/logo.png" style="font-family: Fjalla One;" width="197" height="50" alt=""
+						loading="lazy">
+				</a>
+			</div>
+
+			<!--Search Items-->
+			<div class="row justify-content-center">
+				<div class="input-group">
+					<input type="text" class="form-control mr-auto ml-auto search-input" placeholder="Search products"
+						[(ngModel)]="selectedProduct" [typeahead]="productList" typeaheadOptionField="name"
+						typeaheadGroupField="category.name" (typeaheadOnSelect)="onSelectProduct($event)"
+						(keydown.enter)="searchButtonClick($event.target.value)">
+					<div class="input-group-append">
+						<button class="btn btn-secondary search-button" type="button"
+							(click)="searchButtonClick(selectedProduct)">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!--Menus-->
+			<div class="row justify-content-end" id="navbarNav1">
+				<!--Packs-->
+				<div class="col w-30 nav-item">
+					<a class="nav-link" tabindex="-1" role="button" (click)="showPacks()">
+						<span class="align-middle text-white mr-1">Packs</span>
+						<img src="./assets/img/pack.svg" style="color: white;" width="20" height="20" alt=""
+							loading="lazy">
+					</a>
+				</div>
+
+				<!--Cart-->
+				<div class="col w-30 nav-item">
+					<a class="nav-link" tabindex="-1" role="button" (click)="showCart()">
+						<span class="align-middle text-white mr-1">Cart</span>
+						<img src="./assets/img/cart.svg" style="color: white;" width="20" height="20" alt=""
+							loading="lazy">
+						<span class="badge badge-danger badge-pill align-top">{{cartItemCount}}</span>
+					</a>
+				</div>
+
+				<!--Login Menu for guest user-->
+				<div class="col w-30 dropdown" [hidden]="appAuthService.validSessionAvailable">
+					<a class="nav-link" role="button" id="mobileGuestSignin" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+						<span class="text-white mr-1">Sign In</span>
+						<img src="./assets/img/profile.svg" style="color: white;" width="20" height="20" alt=""
+							loading="lazy">
+					</a>
+
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="mobileGuestSignin">
+						<a class="dropdown-item" (click)="showLogin()">Login</a>
+						<a class="dropdown-item" (click)="showRegister()">Register</a>
+					</div>
+				</div>
+
+				<!--Login Menu for logged user-->
+				<div class="col dropdown" [hidden]="!appAuthService.validSessionAvailable">
+					<a class="nav-link" role="button" id="mobileUserSignin" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+						<span class="pe-is-ec-profile" style="font-size: 30px; color: white"></span>
+					</a>
+
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="mobileUserSignin">
+						<a class="dropdown-item" (click)="showProfile()">Profile</a>
+						<a class="dropdown-item" (click)="showMyPacks()">My Packs</a>
+						<a class="dropdown-item" (click)="signOut()">Sign Out</a>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row justify-content-start">
+				<app-product-type-list></app-product-type-list>
+			</div>
+		</div>
+	</div>
+</nav>
