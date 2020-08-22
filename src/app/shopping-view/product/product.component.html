@@ -8,16 +8,16 @@
     <div class="row float-right w-100 pb-5">
         <!--Loading Shrimmer-->
         <div #loading class="w-100 h-50">
-            <app-loading *biRepeat="3"></app-loading>
+            <app-loading *biRepeat="3" ></app-loading>
         </div>
-
+        
         <!--Product List-->
         <app-product-grid-item *ngFor="let item of productList; let i = index" [product]="item">
         </app-product-grid-item>
     </div>
 
     <!--No products message-->
-    <div class="class" fxLayout fxFill fxLayoutAlign="space-around center">
+    <div class="class" fxLayout fxFill fxLayoutAlign="space-around center" *ngIf="productList.length === 0">
         <div class=" text-center p-5">
             <h1 class="card-title">Products not available</h1>
             <h4 class="card-text">Cannot find products for the selected category</h4>

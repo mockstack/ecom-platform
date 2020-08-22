@@ -79,7 +79,7 @@
 </div>
 
 <!--Empty Cart Message-->
-<div class="class" fxLayout fxFill fxLayoutAlign="space-around center">
+<div class="class" fxLayout fxFill fxLayoutAlign="space-around center" *ngIf="cartItemList.length === 0">
     <div class=" text-center p-5">
         <h1 class="card-title">No Items in the Cart</h1>
         <h4 class="card-text">You have not added any item to the cart yet</h4>
