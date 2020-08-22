@@ -1,9 +1,11 @@
-<div class="card">
+<div class="card" type="button" [routerLink]="['/product', product._id]">
     <div class="card-body">
-        <h6 class="card-title text-center text-truncate">{{product.name}}</h6>
-        <img src="{{serverUrl}}{{product.thumbImage}}" class="card-img-top" alt="...">
+        <h6 class="card-title text-center text-truncate pb-1">{{product.name}}</h6>
+        <div class="text-center" fxLayout fxFill fxLayoutAlign="space-around center">
+            <img src="{{serverUrl}}{{product.thumbImage}}" class="card-img-top w-75" alt="product image">
+        </div>
         <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
         <hr>
-        <h6 class="red text-center">Rs.{{product.unit_price_lkr}}</h6>
+        <h6 class="red text-center font-weight-bolder">Rs.{{product.unit_price_lkr}}</h6>
     </div>
 </div>
