@@ -9,12 +9,16 @@
         <app-new-items-view></app-new-items-view>
 
         <div class="">
-            <img class="w-100" src="../../../assets/img/wants_to_be_a_supplier.webp">
+            <picture>
+                <source srcset="../../../assets/img/wants_to_be_a_supplier.webp" type="image/webp">
+                <img class="w-100" src="../../../assets/img/wants_to_be_a_supplier.webp">
+            </picture>
         </div>
         <!--Grocery Items-->
-        <app-product-type-preview *ngFor="let item of preItemList" class="w-100" [productTypeId]="item.id" [category]="item.name">
+        <app-product-type-preview *ngFor="let item of preItemList" class="w-100" [productTypeId]="item.id"
+            [category]="item.name">
         </app-product-type-preview>
-        
+
     </div>
     <div class="row">
         <app-ad-stat-customer></app-ad-stat-customer>

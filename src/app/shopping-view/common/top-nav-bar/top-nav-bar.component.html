@@ -1,5 +1,5 @@
 <!--FOR DESKTOP VERSIONS-->
-<ul class="nav flex-column sticky-top nav-desk">
+<ul class="nav flex-column sticky-top desktop-view">
 	<li class="nav-item navbar-dark bg-dark">
 		<nav class="navbar sticky-top navbar-expand-lg" style="height: 80px;">
 			<!--Corporate Logo/Name-->
@@ -118,19 +118,19 @@
 
 
 <!--FOR MOBILE VERSIONS-->
-<nav class="sticky-top navbar-expand-md nav-mob navbar-dark bg-dark" style="height: auto; min-height: 80px;">
-	<div class="row w-100 ml-3 mr-3 mt-1 mb-1">
-		<div class="col">
+<nav class="sticky-top navbar-expand-md mobile-view navbar-dark bg-dark" style="height: auto; min-height: 80px;">
+	<div class="">
+		<div class="">
 			<!--Devi logo-->
-			<div class="row justify-content-center mb-3">
+			<div class="row justify-content-center">
 				<a class="navbar-brand" (click)="showHome()">
-					<img src="./assets/img/logo.png" style="font-family: Fjalla One;" width="197" height="50" alt=""
+					<img src="./assets/img/logo.png" style="font-family: Fjalla One;" width="99" height="25" alt=""
 						loading="lazy">
 				</a>
 			</div>
 
 			<!--Search Items-->
-			<div class="row justify-content-center">
+			<div class="p-3 justify-content-center">
 				<div class="input-group">
 					<input type="text" class="form-control mr-auto ml-auto search-input" placeholder="Search products"
 						[(ngModel)]="selectedProduct" [typeahead]="productList" typeaheadOptionField="name"
@@ -151,15 +151,15 @@
 				<div class="col w-30 nav-item">
 					<a class="nav-link" tabindex="-1" role="button" (click)="showPacks()">
 						<span class="align-middle text-white mr-1">Packs</span>
-						<img src="./assets/img/pack.svg" style="color: white;" width="20" height="20" alt=""
-							loading="lazy">
+						<!--<img src="./assets/img/pack.svg" style="color: white;" width="20" height="20" alt=""
+							loading="lazy">-->
 					</a>
 				</div>
 
 				<!--Cart-->
 				<div class="col w-30 nav-item">
 					<a class="nav-link" tabindex="-1" role="button" (click)="showCart()">
-						<span class="align-middle text-white mr-1">Cart</span>
+						<!--<span class="align-middle text-white mr-1">Cart</span>-->
 						<img src="./assets/img/cart.svg" style="color: white;" width="20" height="20" alt=""
 							loading="lazy">
 						<span class="badge badge-danger badge-pill align-top">{{cartItemCount}}</span>
@@ -171,8 +171,8 @@
 					<a class="nav-link" role="button" id="mobileGuestSignin" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">
 						<span class="text-white mr-1">Sign In</span>
-						<img src="./assets/img/profile.svg" style="color: white;" width="20" height="20" alt=""
-							loading="lazy">
+						<!--<img src="./assets/img/profile.svg" style="color: white;" width="20" height="20" alt=""
+							loading="lazy">-->
 					</a>
 
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="mobileGuestSignin">
@@ -197,7 +197,7 @@
 
 			</div>
 
-			<div class="row justify-content-start">
+			<div class="justify-content-start">
 				<app-product-type-list></app-product-type-list>
 			</div>
 		</div>

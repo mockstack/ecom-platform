@@ -12,3 +12,29 @@
     border-color: orange;
     color: white;
 }
+
+//Small screens
+@media screen and (max-width: 991px) {
+    .mobile-view {
+        display: block;
+    }
+    .desktop-view {
+        display: none;
+    }
+    .w-30 {
+        width: 30%;
+    }
+}
+
+// desktops
+@media screen and (min-width: 992px) {
+    .desktop-view {
+        display: block;
+    }
+    .mobile-view {
+        display: none;
+    }
+    .w-30 {
+        width: 35%;
+    }
+}

@@ -22,29 +22,3 @@
 .search-input {
     border-color: #e38a17ff;
 }
-
-//Small screens
-@media screen and (max-width: 991px) {
-    .nav-mob {
-        display: flex;
-    }
-    .nav-desk {
-        display: none;
-    }
-    .w-30 {
-        width: 30%;
-    }
-}
-
-// desktops
-@media screen and (min-width: 992px) {
-    .nav-desk {
-        display: flex;
-    }
-    .nav-mob {
-        display: none;
-    }
-    .w-30 {
-        width: 35%;
-    }
-}

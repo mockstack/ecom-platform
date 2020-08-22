@@ -52,7 +52,7 @@ export class CheckoutComponent implements OnInit {
 			city: ['', Validators.required],
 			address: ['', Validators.required],
 			optionalAddress: ['', !Validators.required],
-			payment: ['cc', Validators.required],
+			payment: ['cod', Validators.required],
 			tcAccept: ['', Validators.requiredTrue],
 			contact_number: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
 		});

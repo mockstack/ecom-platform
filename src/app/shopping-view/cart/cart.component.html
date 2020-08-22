@@ -2,7 +2,7 @@
     <button type="submit" class="btn btn-primary mb-2" (click)="router.navigate(['/checkout']);">Confirm
         Checkout</button>
 </form>-->
-<div class="container text-center p-3" *ngIf="cartItemList.length > 0">
+<div class="container text-center p-3 desktop-view" *ngIf="cartItemList.length > 0">
     <!--header-->
     <div class="row text-uppercase font-weight-bold p-3">
         <div class="col-1">#</div>
@@ -34,6 +34,51 @@
     </li>
 </div>
 
+<div class="container text-start mobile-view" *ngIf="cartItemList.length > 0">
+    <!--header-->
+    <div class="">
+        <div class="row" *ngFor="let item of cartItemList; let i = index">
+            <!--<div class="row w-100">
+                <div class="col">#</div>
+                <div class="col">{{i}}</div>
+            </div>-->
+            <div class="row w-100">
+                <div class="col">Item</div>
+                <div class="col">{{item.product.name}}</div>
+            </div>
+            <div class="row w-100">
+                <div class="col">Quantity</div>
+                <div class="col">
+                    <input type="number" min="1" class="form-control rounded-right w-100" value="{{item.quantity}}"
+                        (change)="changeItemQuantity(item, $event.target.value)">
+                </div>
+            </div>
+            <div class="row w-100">
+                <div class="col">Unit Price</div>
+                <div class="col">{{item.product.unit_price_lkr}}</div>
+            </div>
+            <div class="row w-100">
+                <div class="col">Price</div>
+                <div class="col">{{item.quantity * item.product.unit_price_lkr}}</div>
+            </div>
+            <div class="row w-100">
+                <div class="col">Delete</div>
+                <div class="col"><i class="far fa-trash-alt" style="color: red;" (click)="deleteCartItem(item)"></i>
+                </div>
+            </div>
+        </div>
+
+        <!--Total Value-->
+        <div class="col totals float-right">
+            <span class="itemName">Total:</span>
+            <span class="price">{{total}}</span>
+            <span class="order"> <a class="text-center" (click)="openModal(template)">ORDER</a></span>
+        </div>
+
+    </div>
+</div>
+
+<!--Empty Cart Message-->
 <div class="h-50 m-5 p-5" *ngIf="cartItemList.length === 0">
     <div class="col-sm-12 h-100 ">
         <div class="card  align-middle">
@@ -50,13 +95,13 @@
 <ng-template #template>
     <!--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
-        <div class="col p-0 m-0">
-            <div class="col p-3 m-0">
-                <app-login [showGuestButton]="'true'"></app-login>
-                <!--<div class="row float-right mt-3">
+    <div class="col p-0 m-0">
+        <div class="col p-3 m-0">
+            <app-login [showGuestButton]="'true'"></app-login>
+            <!--<div class="row float-right mt-3">
                 <button type="button" class="btn btn-primary">Continue As Guest</button>
             </div>-->
-            </div>
         </div>
+    </div>
     <!--</div>-->
 </ng-template>
