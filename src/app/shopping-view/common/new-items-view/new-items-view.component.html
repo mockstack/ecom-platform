@@ -1,12 +1,11 @@
-<div class="container bg-light pt-5">
+<!--Desktop View-->
+<div class="bg-light pt-5 desktop-view">
     <div class="row">
         <h3>Packs</h3>
     </div>
     <div class="row">
-
         <!-- Card Narrower -->
         <div class="col-sm card card-cascade narrower m-1 p-1" *ngFor="let item of packList; let i = index">
-
             <!-- Card image -->
             <div class="view view-cascade overlay">
                 <img class="card-img-top" src="{{imageList[i]}}" alt="Card image cap">
@@ -14,24 +13,25 @@
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
-
             <!-- Card content -->
             <div class="card-body card-body-cascade">
-
-                <!-- Label -->
-                <!--<h5 class="pink-text pb-2 pt-1"><i class="fas fa-utensils"></i> Culinary</h5>-->
-                <!-- Title -->
                 <h4 class="font-weight-bold card-title">{{item.name}}</h4>
                 <p class="card-title">{{item.description}}</p>
             </div>
-
-            <!-- Card footer -->
-            <!--<div class="card-footer text-muted text-center">
-                2 days ago
-            </div>-->
-
         </div>
-
     </div>
     <button type="button" class="btn btn-link float-right" (click)="showAllPacks();">Show more packs...</button>
+</div>
+
+<!--Mobile View-->
+<div class="container">
+    <h3>Packs</h3>
+    <div class="mobile-view card m-1 p-3" *ngFor="let item of packList; let i = index" [routerLink]="['/pack']">
+        <div class="text-center" fxLayout fxFill fxLayoutAlign="space-around center">
+            <img class="card-img-top w-50" src="{{imageList[i]}}" alt="Card image cap">
+        </div>
+        <p class="text-start font-weight-bolder">{{item.name}}</p>
+        <p class="text-start">{{item.description}}</p>
+    </div>
+    <button type="button" class="btn btn-link float-right" (click)="showAllPacks();">More</button>
 </div>
