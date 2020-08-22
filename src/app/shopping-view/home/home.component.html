@@ -3,16 +3,16 @@
     <div class="row">
         <app-ad-carousel></app-ad-carousel>
     </div>
-    <!--Product Type Preview-->
-    <div class="row float-right">
-        <!--pack preview-->
-        <app-new-items-view></app-new-items-view>
 
-        <div class="">
-            <picture>
-                <source srcset="../../../assets/img/wants_to_be_a_supplier.webp" type="image/webp">
-                <img class="w-100" src="../../../assets/img/wants_to_be_a_supplier.webp">
-            </picture>
+    <!--pack preview-->
+    <div class="row">
+        <app-new-items-view></app-new-items-view>
+    </div>
+
+    <!--Product Type Preview-->
+    <div class="row">
+        <div>
+            <img class="w-100" src="../../../assets/img/wants_to_be_a_supplier.jpg" alt="become a supplier">
         </div>
         <!--Grocery Items-->
         <app-product-type-preview *ngFor="let item of preItemList" class="w-100" [productTypeId]="item.id"
@@ -20,7 +20,7 @@
         </app-product-type-preview>
 
     </div>
-    <div class="row">
+    <!--<div class="row">
         <app-ad-stat-customer></app-ad-stat-customer>
-    </div>
+    </div>-->
 </div>

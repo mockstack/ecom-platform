@@ -12,8 +12,8 @@ export class NewItemsViewComponent implements OnInit {
 
 	constructor(private packService: PackService, private router: Router) { }
 
-	public imageList: String[] = ["./assets/img/pack/1.webp",
-		"./assets/img/pack/2.webp", "./assets/img/pack/3.webp", "./assets/img/pack/4.webp"];
+	public imageList: String[] = ["./assets/img/pack/1.jpg",
+		"./assets/img/pack/2.jpg", "./assets/img/pack/3.jpg", "./assets/img/pack/4.jpg"];
 	public packList: Object[] = [];
 
 	ngOnInit(): void {
