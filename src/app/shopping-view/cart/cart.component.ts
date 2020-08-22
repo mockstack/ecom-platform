@@ -19,14 +19,14 @@ export class CartComponent implements OnInit {
 	minTransactionValue: Number = 2000.0;
 	modalRef: BsModalRef;
 
-	constructor(public router: Router, private cart: CartDataService, private modalService: BsModalService,
+	constructor(public router: Router, private cartDataService: CartDataService, private modalService: BsModalService,
 		private appAuthService: AppAuthService, private cartSerice: CartService, private toastr: ToastrService) { }
 
 	ngOnInit(): void {
-		this.cartItemList = this.cart.cart.items as CartItem[];
+		this.cartItemList = this.cartDataService.cart.items as CartItem[];
 		this.calculateTotal(this.cartItemList);
 
-		this.cart.selectionStatus.subscribe((data: CartItem[]) => {
+		this.cartDataService.selectionStatus.subscribe((data: CartItem[]) => {
 			this.cartItemList = data;
 			this.calculateTotal(this.cartItemList);
 		}, error => {
@@ -39,7 +39,7 @@ export class CartComponent implements OnInit {
 	}
 
 	deleteCartItem(item: CartItem) {
-		this.cart.removeItem(item);
+		this.cartDataService.removeItem(item.product._id);
 	}
 
 	calculateTotal(items: CartItem[]) {

@@ -1,0 +1,8 @@
+<div class="container" (click)="buttonClickEvent()">
+    <div *ngIf="!alreadyAdded" class="col bg-success text-white">
+        <p>ADD TO CART</p>
+    </div>
+    <div *ngIf="alreadyAdded" class="col bg-danger text-white">
+        <p>REMOVE</p>
+    </div>
+</div>

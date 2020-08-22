@@ -13,7 +13,8 @@
     </div>
     <hr>
     <div class="text-center" style="height: 2rem;">
-        <button type="button" class="btn btn-sm" (click)="addToCart(product)"><i class="fas fa-cart-plus"></i></button>
+        <!--<button type="button" class="btn btn-sm" (click)="addToCart(product)"><i class="fas fa-cart-plus"></i></button>-->
+        <app-add-to-cart-button [product]="product"></app-add-to-cart-button>
         <!--<button type="button" class="btn btn-sm"><i class="far fa-heart text-danger"></i></button>-->
         <button type="button" class="btn btn-link btn-sm" [routerLink]="['/product', product._id]">more</button>
     </div>

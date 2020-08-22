@@ -44,17 +44,20 @@ export class CartDataService {
 		return this._cart;
 	}
 
-	/**Initializa the cart when the page is being reloaded. */
+	/**
+	 * This code is very sensitive. Many problems can be solved here.
+	 */
 	public set cart(cart: Cart) {
 		this._cart = cart;
-		let cartItemList: CartItem[] = [];
+		//let cartItemList: CartItem[] = [];
+		//recreating and adding items since subscribe is defined in the CartItem class.
 		for (const item of this._cart.items) {
 			let _cItem: CartItem = new CartItem(item.product, item.quantity);
 			_cItem._id = item._id;
 			this.subscribeToQuantityChanges(_cItem);
-			cartItemList.push(_cItem);
+			this._cartItems.push(_cItem);
 		}
-		this._cart.items = cartItemList;
+		this._cart.items = this._cartItems;
 		this.notifier.next(this.cart.items);
 	}
 
@@ -153,10 +156,10 @@ export class CartDataService {
 	 * Remove an item from the cart.
 	 * @param cartItem item to be removed
 	 */
-	public removeItem(cartItem: CartItem) {
+	public removeItem(productId: String) {
 		if (this._cart === undefined) throw Error('Cart is not initialized');
 
-		this._cartItems = this._cartItems.filter(item => item.product._id !== cartItem.product._id);
+		this._cartItems = this._cartItems.filter(item => item.product._id !== productId);
 		this._cart.items = this._cartItems;
 		this.notifier.next(this._cartItems);
 
