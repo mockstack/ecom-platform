@@ -1,26 +1,40 @@
 <div class="contianer-fluid">
     <div class="row">
-        <div class="card p-4 w-100">
+        <div class="p-4 w-100">
             <h1>Easy shopping</h1>
             <!--<p>
                 We offer you some common packs that every home should have. Packs will include essential items based on
                 your family members. These packs are customizable and modifiable so you can make any of these packs your
                 pack. Just login into your account and click on the create button. Once your create you can use it forever.
             </p>-->
-            <p>Login into your account and just click on the create button forneeds of every month OR Just click on the cart button to purchase the pack</p>
+            <p>Login into your account and just click on the create button forneeds of every month OR Just click on the
+                cart button to purchase the pack</p>
         </div>
     </div>
 
-    <div class="row mt-3">
+    <!--Pack list view for desktop view-->
+    <div class="row desktop-view">
         <h4>Our Packs</h4>
-        <div class="d-flex align-content-center flex-wrap">
-            <app-pack-grid #publicpacks [pack]="item" *ngFor="let item of defaultPackList"></app-pack-grid>
+        <div class="d-flex flex-wrap">
+            <app-pack-grid class="w-50" #publicpacks [pack]="item" *ngFor="let item of defaultPackList"></app-pack-grid>
         </div>
     </div>
 
-    <div class="row mt-3">
-        <div class="row">
-            <h4>My Packs</h4>
+    <!--Pack list view for mobile views-->
+    <div class="row mobile-view">
+        <h4>Our Packs</h4>
+        <div class="col">
+            <app-pack-grid class="w-50" #publicpacks [pack]="item" *ngFor="let item of defaultPackList"></app-pack-grid>
+        </div>
+    </div>
+
+    <div class="row mt-3 desktop-view">
+        <h4>My Packs</h4>
+        <!--my pack list-->
+        <div class="d-flex flex-wrap" *ngIf="appAuthService.validSessionAvailable">
+            <app-pack-grid class="w-50" #privatepacks *ngFor="let item2 of myPackList" [pack]="item2"></app-pack-grid>
+            <app-add-item-view class="w-50" [message]="'Create your own pack'" (click)="showCreatePack()">
+            </app-add-item-view>
         </div>
 
         <!--not a logged in user-->
@@ -34,11 +48,26 @@
             </div>
         </div>
 
-        <!--my pack list-->
-        <div *ngIf="appAuthService.validSessionAvailable" class="text-center w-100">
-            <app-pack-grid #privatepacks *ngFor="let item2 of myPackList" [pack]="item2"></app-pack-grid>
-            <app-add-item-view [message]="'Create your own pack'" (click)="showCreatePack()"></app-add-item-view>
-        </div>
     </div>
 
+    <div class="row mt-3 mobile-view">
+        <h4>My Packs</h4>
+        <div class="col mobile-view" *ngIf="appAuthService.validSessionAvailable">
+            <app-pack-grid class="w-50" #privatepacks *ngFor="let item2 of myPackList" [pack]="item2"></app-pack-grid>
+            <app-add-item-view class="w-50" [message]="'Create your own pack'" (click)="showCreatePack()">
+            </app-add-item-view>
+        </div>
+
+        <!--not a logged in user-->
+        <div class="row p-5 w-100" *ngIf="!appAuthService.validSessionAvailable">
+            <div class="col-sm-12 h-100 d-table bg-danger">
+                <div class=" card-block d-table-cell align-middle bg-danger">
+                    <div class="card-body text-center text-white text-capitalize">
+                        <p>Please login to see your packs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
