@@ -41,8 +41,9 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName">Last name</label>
-                        <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="last name"
-                            [ngClass]="{ 'is-invalid': submitted && formField.lastName.errors }" value="" required>
+                        <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                            placeholder="last name" [ngClass]="{ 'is-invalid': submitted && formField.lastName.errors }"
+                            value="" required>
                         <div class="invalid-feedback" *ngIf="formField.lastName.errors">
                             <div *ngIf="formField.lastName.errors.required"> Last name is required.</div>
                         </div>
@@ -62,9 +63,9 @@
 
                 <div class="mb-3">
                     <label for="contact_number">Contact Number</label>
-                    <input type="contact_number" class="form-control" id="contact_number" formControlName="contact_number"
-                        placeholder="071XXXXXXX" [ngClass]="{ 'is-invalid': submitted && formField.contact_number.errors }"
-                        required>
+                    <input type="contact_number" class="form-control" id="contact_number"
+                        formControlName="contact_number" placeholder="071XXXXXXX"
+                        [ngClass]="{ 'is-invalid': submitted && formField.contact_number.errors }" required>
                     <div class="invalid-feedback" *ngIf="formField.contact_number.errors">
                         <div *ngIf="formField.contact_number.errors.required">Please enter a valid contact number</div>
                     </div>
@@ -90,8 +91,7 @@
                             [ngClass]="{ 'is-invalid': submitted && formField.city.errors }" required
                             (change)="onCityChange($event.target.value)">
                             <option value="">Choose...</option>
-                            <option *ngFor="let city of deliveryCityList"
-                                [value]="city.city._id">
+                            <option *ngFor="let city of deliveryCityList" [value]="city.city._id">
                                 {{city.city.name_en}}</option>
                         </select>
                         <div class="invalid-feedback" *ngIf="formField.city.errors">
@@ -103,8 +103,8 @@
                 <div class="mb-3">
                     <label for="address">Street Address</label>
                     <input type="text" class="form-control" id="address" formControlName="address"
-                        placeholder="12/3, Gall Road" [ngClass]="{ 'is-invalid': submitted && formField.address.errors }"
-                        required>
+                        placeholder="12/3, Gall Road"
+                        [ngClass]="{ 'is-invalid': submitted && formField.address.errors }" required>
                     <div class="invalid-feedback" *ngIf="formField.address.errors">
                         <div *ngIf="formField.address.errors.required">Please enter your shipping address.</div>
                     </div>

@@ -173,7 +173,8 @@ export class CheckoutComponent implements OnInit {
 			optional_address: FORM.optionalAddress,
 			payment_method: FORM.payment,
 			cart: this.cart.cart._id,
-			contact_number: FORM.contact_number
+			contact_number: FORM.contact_number,
+			delivery_charge: this.cart.deliveryCharge
 		}
 
 		if (this.authService.validSessionAvailable) {
