@@ -60,11 +60,11 @@ let config = new AuthServiceConfig([
     //SECRET - VBuEgJpwfwaV_BfHvv_RR3qa
     //CLIENT-ID - 921352824143-8im63g97h3h75a5s913j87ivq8b15k2k.apps.googleusercontent.com
   }
-  /*,
+  ,
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("278742869945500")
-  }*/
+    provider: new FacebookLoginProvider("623155175057421")
+  }
 ]);
 
 export function provideConfig() {
