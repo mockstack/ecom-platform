@@ -16,7 +16,7 @@
     <div class="row desktop-view">
         <h4>Our Packs</h4>
         <div class="d-flex flex-wrap">
-            <app-pack-grid class="w-50" #publicpacks [pack]="item" *ngFor="let item of defaultPackList"></app-pack-grid>
+            <app-pack-grid class="w-50" #publicpacks [pack]="item" *ngFor="let item of defaultPackList" (packModified)="mypackModifiedEvent($event)"></app-pack-grid>
         </div>
     </div>
 
@@ -24,15 +24,17 @@
     <div class="row mobile-view">
         <h4>Our Packs</h4>
         <div class="col">
-            <app-pack-grid class="w-50" #publicpacks [pack]="item" *ngFor="let item of defaultPackList"></app-pack-grid>
+            <app-pack-grid class="w-50" #publicpacks [pack]="item" *ngFor="let item of defaultPackList" (packModified)="mypackModifiedEvent($event)"></app-pack-grid>
         </div>
     </div>
 
+    <!--DESKTOP VIEW-->
     <div class="row mt-3 desktop-view">
         <h4>My Packs</h4>
         <!--my pack list-->
         <div class="d-flex flex-wrap" *ngIf="appAuthService.validSessionAvailable">
-            <app-pack-grid class="w-50" #privatepacks *ngFor="let item2 of myPackList" [pack]="item2"></app-pack-grid>
+            <app-pack-grid class="w-50" #privatepacks *ngFor="let item2 of myPackList" [pack]="item2"
+                (packModified)="mypackModifiedEvent($event)"></app-pack-grid>
             <app-add-item-view class="w-50" [message]="'Create your own pack'" (click)="showCreatePack()">
             </app-add-item-view>
         </div>
@@ -50,10 +52,12 @@
 
     </div>
 
+    <!--MOBILE VIEW-->
     <div class="row mt-3 mobile-view">
         <h4>My Packs</h4>
         <div class="col mobile-view" *ngIf="appAuthService.validSessionAvailable">
-            <app-pack-grid class="w-50" #privatepacks *ngFor="let item2 of myPackList" [pack]="item2"></app-pack-grid>
+            <app-pack-grid class="w-50" #privatepacks *ngFor="let item2 of myPackList" [pack]="item2"
+                (packModified)="mypackModifiedEvent($event)"></app-pack-grid>
             <app-add-item-view class="w-50" [message]="'Create your own pack'" (click)="showCreatePack()">
             </app-add-item-view>
         </div>

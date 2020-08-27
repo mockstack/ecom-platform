@@ -8,58 +8,43 @@ import { environment } from 'src/environments/environment';
 })
 export class PackService {
 	private pack: string = environment.apiUrl + "pack/"
-	private myPack: string = "mypacks/";
-	private defaultPack: string = "default/";
+	private myPack: string = this.pack + "mypack/";
+	private defaultPack: string = this.pack + "default/";
 
 	constructor(private httpClient: HttpClient) { }
 
-	/**(Admin Function) Get all packs including private and public */
-	public getAllPacks(): Observable<object> {
-		return this.httpClient.get(this.pack);
-	}
-
 	/**Get all default packs */
-	public getAllDefaultPacks(): Observable<object> {
-		return this.httpClient.get(this.pack + this.defaultPack);
-	}
-
-	/**(Admin Function) Get all private packs without considering the owner */
-	public getAllPrivatePacks(): Observable<object> {
-		return this.httpClient.get(this.pack + this.myPack);
+	public getDefaultPacks(): Observable<object> {
+		return this.httpClient.get(this.defaultPack);
 	}
 
 	/**Get private packs by user id */
-	public getPrivatePacksByUserId(userID: string): Observable<object> {
-		return this.httpClient.get(this.pack + this.myPack + userID);
+	public getPrivatePacks(userID: string): Observable<object> {
+		return this.httpClient.get(this.myPack + userID);
 	}
 
-	/**Get default pack by pack id */
-	public getDefaultPackByPackId(packId: string): Observable<object> {
-		return this.httpClient.get(this.pack + this.defaultPack + '/' + packId);
-	}
-
-	/**Add a private pack */
-	public addDefaultPack(body: any): Observable<object> {
-		return this.httpClient.post(this.pack + this.defaultPack, body);
+	/**Get private pack by pack id */
+	public getPrivatePack(userId: String, packId: String): Observable<object> {
+		return this.httpClient.get(this.myPack + userId +'/'+ packId);
 	}
 
 	/**Add a default pack */
-	public addPrivatePack(body: any): Observable<object> {
-		return this.httpClient.post(this.pack + this.myPack, body);
+	public addPrivatePack(body: any, userId: String): Observable<object> {
+		return this.httpClient.post(this.myPack + userId, body);
 	}
 
 	/**Update a private pack */
-	public updatePrivatePack(body: any): Observable<object> {
-		return this.httpClient.put(this.pack + this.myPack, body);
-	}
-
-	/**Update a default pack */
-	public updateDefaultPack(body: any): Observable<object> {
-		return this.httpClient.put(this.pack + this.defaultPack, body);
+	public updatePrivatePack(body: any, userId: String, packId: String): Observable<object> {
+		return this.httpClient.put(this.myPack + userId + '/' + packId, body);
 	}
 
 	/**Get 4 default pack items for preview purposes */
 	public getDefaultPackForPreview(): Observable<object> {
-		return this.httpClient.get(this.pack + this.defaultPack + 'preview');
+		return this.httpClient.get(this.defaultPack + 'preview');
+	}
+
+	/**Delete a private pack */
+	public deletePrivatePack(userId:String, packId: String): Observable<any> {
+		return this.httpClient.delete(this.myPack + userId + '/' + packId);
 	}
 }

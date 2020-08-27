@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/ws/product.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AppAuthService } from 'src/app/service/app-auth.service';
 import { ProductNameService } from 'src/app/service/product-name.service';
 import { Pack } from 'src/app/model/pack';
@@ -9,6 +9,7 @@ import { PackService } from 'src/app/ws/pack.service';
 import { CategoryService } from 'src/app/ws/category.service';
 import { ProductCategory } from 'src/app/model/product-category';
 import { Product } from 'src/app/model/product';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-create-pack',
@@ -19,18 +20,37 @@ export class CreatePackComponent implements OnInit {
 
 	public categoryList: ProductCategory[];
 	public productList: Product[];
-	public myPack: Pack[] = [];
+	public myPack: Pack;
 	public myPackItems: PackItem[] = [];
 	public packTitle: string = '';
 	public packDescription: string = '';
+	private packId: String;
 
-	constructor(private productService: ProductService, private categoryService: CategoryService, public appAuthService: AppAuthService,
-		private router: Router, private packService: PackService) {
+	constructor(private productService: ProductService, private categoryService: CategoryService,
+		public appAuthService: AppAuthService, private router: Router, private packService: PackService,
+		private route: ActivatedRoute, private toast: ToastrService) {
 		//this.categoryList = [];
 		this.productList = [];
 	}
 
 	ngOnInit(): void {
+		//edit packs
+		this.route.paramMap.subscribe(params => {
+			this.packId = params.get("packId");
+			if (this.packId !== null) {
+				this.packService.getPrivatePack(this.appAuthService.loggedUser._id, this.packId).subscribe((data: Pack) => {
+					this.myPack = data;
+					this.packTitle = data.name;
+					this.packDescription = data.description;
+					for (const item of data.packItems) {
+						this.myPackItems.push(new PackItem(item.product, item.quantity))
+					}
+				}, error => {
+					console.error(error);
+				});
+			}
+		});
+
 		this.categoryService.getProductCategories().subscribe((data: ProductCategory[]) => {
 			this.categoryList = data;
 			this.productService.getAllProducts().subscribe((data: Product[]) => {
@@ -54,14 +74,25 @@ export class CreatePackComponent implements OnInit {
 		this.myPackItems = this.myPackItems.filter(item => item !== product);
 	}
 
-	saveMyPack() {
-		console.log(this.myPackItems);
-		const pack = new Pack(this.packTitle, this.packDescription, this.appAuthService.loggedUser._id, true, this.myPackItems);
-		this.packService.addPrivatePack(pack).subscribe(data => {
-			this.router.navigateByUrl('pack');
-		}, error => {
-			console.log(error)
-		});
+	saveMyPack() {;
+		if (this.packId !== undefined && this.packId !== null) {
+			//update existing pack
+			const pack = new Pack(this.packTitle, this.packDescription, this.appAuthService.loggedUser._id, true, this.myPackItems, this.packId);
+			this.packService.updatePrivatePack(pack, this.appAuthService.loggedUser._id, this.packId).subscribe(data => {
+				this.toast.success('Update success', 'Update')
+			}, error => {
+				this.toast.error('Update failed', 'Update')
+			});
+		} else {
+			//Add new pack
+			const pack = new Pack(this.packTitle, this.packDescription, this.appAuthService.loggedUser._id, true, this.myPackItems);
+			this.packService.addPrivatePack(pack, this.appAuthService.loggedUser._id).subscribe(data => {
+				this.router.navigateByUrl('pack');
+			}, error => {
+				console.log(error)
+			});
+		}
+
 	}
 
 }

@@ -8,7 +8,7 @@ export class CartItem extends IBuyItem {
     private qcObserver = this.notifier.asObservable();
 
     constructor(product?: Product, quantity?: Number) {
-        super(product, quantity);
+        super({ product: product, quantity: quantity, id: undefined });
     }
 
     public get quantity() {

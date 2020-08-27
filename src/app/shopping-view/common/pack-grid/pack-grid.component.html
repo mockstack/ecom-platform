@@ -12,15 +12,24 @@
             </div>
         </div>
         <div class="col-sm-2 float-right bg-white mx-auto">
-            <button type="button" class="btn" (click)="showCheckout(pack)">
+            <button type="button" class="btn" (click)="showCheckout(pack)" title="Add items to the cart">
                 <i class="fas fa-cart-plus"></i>
             </button>
-            <button type="button" class="btn" (click)="showModal(packDetailViewTemplate, pack)">
+            <button type="button" class="btn" (click)="showModal(packDetailViewTemplate, pack)" title="View pack contents">
                 <i class="fas fa-info-circle"></i>
             </button>
-            <!--<button type="button" class="btn" (click)="showPackEdit()">
+            <!--edit button for private packs-->
+            <button type="button" class="btn" *ngIf="isPrivatePack" (click)="editPack()" title="Edit pack">
                 <i class="far fa-edit"></i>
-            </button>-->
+            </button>
+            <!--convert public to private pack-->
+            <button type="button" class="btn" *ngIf="!isPrivatePack && appAuthService.validSessionAvailable" (click)="makePrivatePack()" title="Make this pack mine">
+                <i class="far fa-heart"></i>
+            </button>
+            <!--delete private pack-->
+            <button type="button" class="btn" *ngIf="isPrivatePack" (click)="deletePrivatePack()" title="Delete this pack">
+                <i class="far fa-trash-alt"></i>
+            </button>
         </div>
     </div>
 </div>

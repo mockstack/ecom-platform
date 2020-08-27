@@ -30,6 +30,7 @@ const routes: Routes = [
 	{ path: 'pack', component: PackComponent, data: { bcNav: 'Packs' } },
 	{ path: 'detail', component: PackContentComponent, data: { bcNav: 'Edit Pack' } },
 	{ path: 'create', component: CreatePackComponent, data: { bcNav: 'Create Pack' } },
+	{ path: 'create/:packId', component: CreatePackComponent, data: { bcNav: 'Edit Pack' } },
 	{ path: 'profile', component: UserProfileComponent, data: { bcNav: 'User Profile' } },
 	{ path: '**', component: NotFoundComponent }
 ];
