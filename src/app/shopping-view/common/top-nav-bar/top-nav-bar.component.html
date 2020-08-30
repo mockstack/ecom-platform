@@ -120,9 +120,9 @@
 <!--FOR MOBILE VERSIONS-->
 <nav class="sticky-top navbar-expand-md mobile-view navbar-dark bg-dark" style="height: auto; min-height: 80px;">
 	<div class="">
-		<div class="">
+		<nav class="navbar sticky-top p-0">
 			<!--Devi logo-->
-			<div class="row justify-content-center">
+			<div class="row justify-content-center w-100">
 				<a class="navbar-brand" (click)="showHome()">
 					<img src="./assets/img/logo.png" style="font-family: Fjalla One;" width="99" height="25" alt=""
 						loading="lazy">
@@ -130,7 +130,7 @@
 			</div>
 
 			<!--Search Items-->
-			<div class="p-3 justify-content-center">
+			<div class="p-3 justify-content-center w-100">
 				<div class="input-group">
 					<input type="text" class="form-control mr-auto ml-auto search-input" placeholder="Search products"
 						[(ngModel)]="selectedProduct" [typeahead]="productList" typeaheadOptionField="name"
@@ -146,7 +146,7 @@
 			</div>
 
 			<!--Menus-->
-			<div class="row justify-content-end" id="navbarNav1">
+			<div class="row justify-content-end w-100" id="navbarNav1">
 				<!--Packs-->
 				<div class="col w-30 nav-item">
 					<a class="nav-link" tabindex="-1" role="button" (click)="showPacks()">
@@ -197,9 +197,9 @@
 
 			</div>
 
-			<div class="justify-content-start">
+			<div class="justify-content-start w-100">
 				<app-product-type-list></app-product-type-list>
 			</div>
-		</div>
+		</nav>
 	</div>
 </nav>
