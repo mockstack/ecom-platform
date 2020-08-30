@@ -22,7 +22,8 @@
 							placeholder="Search products" [(ngModel)]="selectedProduct" [typeahead]="productList"
 							typeaheadOptionField="name" typeaheadGroupField="category.name"
 							(typeaheadOnSelect)="onSelectProduct($event)"
-							(keydown.enter)="searchButtonClick($event.target.value)">
+							(keydown.enter)="searchButtonClick($event.target.value)"
+							(click)="selectedProduct = undefined">
 
 						<div class="input-group-append">
 							<button class="btn btn-secondary search-button" type="button"
