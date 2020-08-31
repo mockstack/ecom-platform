@@ -19,7 +19,7 @@
 					<div class="input-group">
 
 						<input type="text" class="form-control mr-auto ml-auto w-50 search-input"
-							placeholder="Search products" [(ngModel)]="selectedProduct" [typeahead]="productList"
+							placeholder="Search products" [(ngModel)]="selectedProduct" [typeahead]="productList.slice(0, 10)"
 							typeaheadOptionField="name" typeaheadGroupField="category.name"
 							(typeaheadOnSelect)="onSelectProduct($event)"
 							(keydown.enter)="searchButtonClick($event.target.value)"

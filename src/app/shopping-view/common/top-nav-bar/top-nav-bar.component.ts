@@ -76,6 +76,7 @@ export class TopNavBarComponent implements OnInit {
 	}
 
 	searchButtonClick(selectedProduct: any) {
+		// if the search item is not available then add it to the db.
 		if (this.productList.map((val, ind) => val.name).indexOf(this.selectedProduct) === -1) {
 			this.selectedProduct = '';
 			this.searchItemAvailable = false;
