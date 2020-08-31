@@ -25,11 +25,11 @@ export class ProductDetailComponent implements OnInit {
 	ngOnInit(): void {
 		this.activatedRoute.params.subscribe(params => {
 			this.productId = params['id'];
-			console.log(this.productId)
 
-			this.productService.getProduct(this.productId).subscribe((product: Product) =>{
+			this.productService.getProduct(this.productId).subscribe((product: Product) => {
+				this.quantity = 1;
 				this.product = product;
-			}, error=> {
+			}, error => {
 				this.router.navigateByUrl('404');
 			})
 		});

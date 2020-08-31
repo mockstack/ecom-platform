@@ -21,7 +21,6 @@ export class ProductTypePreviewComponent implements OnInit {
 			data.forEach((val, index, array) => {
 				this.productList[index] = new Product().deserialize(val);
 			});
-			console.log(this.productList[0].category)
 		}, error=>{
 			console.log(error.message);
 		});
