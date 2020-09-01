@@ -1,11 +1,11 @@
-<div class="container m-5">
+<div class="container">
     <div class="row" *ngIf="product !== undefined">
         <!--Product Image-->
-        <div class="col-4">
+        <div class="col-md-4">
             <img src="{{serverUrl}}{{product.fullImage}}" class="img-fluid" alt="Responsive image">
         </div>
         <!--Details-->
-        <div class="col-7">
+        <div class="col-md-8">
             <div class="row">
                 <p class="font-weight-normal product-name">{{product.name}}</p>
             </div>
@@ -23,9 +23,9 @@
 
             <!--Quantity-->
             <div class="row">
-                <div class="col">
+                <div class="col p-0">
                     <p>Quantity</p>
-                    <div class="input-group mb-3 w-50">
+                    <div class="input-group mb-3 w-25">
                         <div class="input-group-prepend" (click)="increaseQuantity()">
                             <span class="input-group-text">
                                 <i class="fas fa-plus"></i>
@@ -41,11 +41,14 @@
                 </div>
             </div>
 
-            <div class="row mt-5">
-                <button *ngIf="product.stockAvailable" type="button" class="btn btn-success" (click)="addItemToCart(product)">
-                    <i class="fas fa-cart-plus"></i> | Add to cart</button>
-                <button *ngIf="!product.stockAvailable" type="button" disabled class="btn btn-danger">
-                    <i class="fas fa-ban"></i> | Out of Stock</button>
+            <!--Buttons-->
+            <div class="row mt-2">
+                <button *ngIf="product.stockAvailable && !isAlreadyAdded" type="button" class="btn btn-success" (click)="addItemToCart(product)">
+                    <i class="fas fa-cart-plus"></i> | ADD TO CART</button>
+                <button *ngIf="!product.stockAvailable" type="button" disabled class="btn btn-secondary">
+                    <i class="far fa-frown"></i> | OUT OF STOCK</button>
+                <button *ngIf="product.stockAvailable && isAlreadyAdded" type="button" class="btn btn-danger" (click)="removeItemFromCart()">
+                    <i class="far fa-trash-alt"></i> | REMOVE FROM CART</button>
             </div>
         </div>
     </div>

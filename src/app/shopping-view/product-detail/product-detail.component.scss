@@ -5,3 +5,17 @@
 .product-description {
     font-size: 1.2rem;
 }
+
+// desktops
+@media screen and (min-width: 992px) {
+    .w-25 {
+        width: 25%;
+    }
+}
+
+//Small screens
+@media screen and (max-width: 991px) {
+    .w-25 {
+        width: 50% !important;
+    }
+}
