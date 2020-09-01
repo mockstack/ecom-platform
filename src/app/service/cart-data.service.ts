@@ -74,6 +74,15 @@ export class CartDataService {
 		this._deliveryCharge = charge;
 	}
 
+	/**Update item quantity by product id */
+	public updateQuantiryByProductId(productId: string, newQuantity: number) {
+		this._cartItems.filter(item => {
+			if (item.product._id === productId) {
+				item.quantity = newQuantity;
+			}
+		});
+	}
+
 	/**
 	 * Adding a new item to the cart. If the item is already existing then it will be updated.
 	 * @param cartItem item to be added

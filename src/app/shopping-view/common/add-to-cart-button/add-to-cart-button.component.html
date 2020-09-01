@@ -1,8 +1,23 @@
-<div class="container" (click)="buttonClickEvent()">
-    <div *ngIf="!alreadyAdded" class="col bg-success text-white">
-        <p>ADD TO CART</p>
+<div class="container pl-3 pr-3">
+    <!--Add item-->
+    <div *ngIf="!alreadyAdded" class="row bg-success text-white text-center m-2" (click)="addProduct()">
+        <p class="w-100" style="margin-top: auto; margin-bottom: auto;">ADD TO CART</p>
     </div>
-    <div *ngIf="alreadyAdded" class="col bg-danger text-white">
+
+    <!--Remove Item-->
+    <!--<div *ngIf="alreadyAdded" class="col bg-danger text-white">
         <p>REMOVE</p>
+    </div>-->
+    <!--Change Count-->
+    <div *ngIf="alreadyAdded" class="row stepper m-2">
+        <div class="col" (click)="deductItems()">
+            <button class="w-100 h-100"><i class="fas fa-minus"></i></button>
+        </div>
+        <div class="col">
+            <h6 class="w-100 h-100">{{itemCount}}</h6>
+        </div>
+        <div class="col" (click)="addItems()">
+            <button class="w-100 h-100"><i class="fas fa-plus"></i></button>
+        </div>
     </div>
 </div>

@@ -3,18 +3,18 @@ import { Deserializable } from './deserializable';
 
 interface IBuy {
     product: Product;
-    quantity: Number;
-    id: String;
+    quantity: number;
+    id: string;
 }
 
 export class IBuyItem implements Deserializable {
-    private buyItem: IBuy;
+    public buyItem: IBuy;
 
     constructor(buyItem: IBuy) {
         this.buyItem = buyItem;
     }
 
-    public set quantity(value: Number) {
+    public set quantity(value: number) {
         this.buyItem.quantity = value;
     }
 
@@ -30,7 +30,7 @@ export class IBuyItem implements Deserializable {
         return this.buyItem.product;
     }
 
-    public set _id(id: String) {
+    public set _id(id: string) {
         this.buyItem.id = id;
     }
 

@@ -1,18 +1,17 @@
 <div class="card m-1" style="width: 13rem;">
 
-    <div #loading type="button" [routerLink]="['/product', product._id]">
+    <div #loading type="button" [routerLink]="['/product', product._id]" style="border-color: transparent;">
         <img src="{{serverUrl}}{{product.thumbImage}}" class="card-img-top" alt="{{product.name}}">
     </div>
 
-    <div class="pr-3 pl-3" style="height: 4.5rem;">
+    <div class="pr-3 pl-3">
         <p class="text-start truncate" >{{product.name}}</p>
         <div style="height: 1.5rem;">
             <p class="text-center text-dark font-weight-bolder">Rs.{{product.unit_price_lkr}} / {{product.measurementUnit}}</p>
         </div>
         <!--<p class="card-text text-center">{{product.short_desc}}</p>-->
     </div>
-    <hr>
-    <div class="text-center" style="height: 2rem;">
+    <div class="text-center">
         <!--<button type="button" class="btn btn-sm" (click)="addToCart(product)"><i class="fas fa-cart-plus"></i></button>-->
         <app-add-to-cart-button [product]="product"></app-add-to-cart-button>
         <!--<button type="button" class="btn btn-sm"><i class="far fa-heart text-danger"></i></button>-->
