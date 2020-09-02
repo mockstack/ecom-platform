@@ -52,6 +52,7 @@ import { UserProfileComponent } from './shopping-view/user-profile/user-profile.
 import { ProfileBasicComponent } from './shopping-view/common/profile-basic/profile-basic.component';
 import { ProfileChangePwComponent } from './shopping-view/common/profile-change-pw/profile-change-pw.component';
 import { AddToCartButtonComponent } from './shopping-view/common/add-to-cart-button/add-to-cart-button.component';
+import { ProductFilterComponent } from './shopping-view/product-filter/product-filter.component';
 
 let config = new AuthServiceConfig([
   {
@@ -106,7 +107,8 @@ export function provideConfig() {
     UserProfileComponent,
     ProfileBasicComponent,
     ProfileChangePwComponent,
-    AddToCartButtonComponent
+    AddToCartButtonComponent,
+    ProductFilterComponent
   ],
   imports: [
     BrowserModule,
