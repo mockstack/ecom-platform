@@ -110,7 +110,7 @@ export class CheckoutComponent implements OnInit {
 		//loading the data from the service
 		this.cartDataService.selectionStatus.subscribe((data: CartItem[]) => {
 			if (data.length === 0) {
-				this.router.navigateByUrl('/');
+				//this.router.navigateByUrl('/');
 			}
 			this.cartItems = data;
 			this.calculateTotal(this.cartItems);
