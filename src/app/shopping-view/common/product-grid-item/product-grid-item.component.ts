@@ -4,6 +4,7 @@ import { Product } from 'src/app/model/product';
 import { environment } from 'src/environments/environment';
 import { CartDataService } from 'src/app/service/cart-data.service';
 import { CartItem } from 'src/app/model/cart-item';
+import { GoogleAnalyticsService } from 'src/app/service/google-analytics.service';
 
 @Component({
 	selector: 'app-product-grid-item',
@@ -16,9 +17,13 @@ export class ProductGridItemComponent implements OnInit {
 
 	serverUrl = environment.apiUrl;
 
-	constructor(private router: Router, private cart: CartDataService) { }
+	constructor(private router: Router, private cart: CartDataService, private googleAnalyticsService: GoogleAnalyticsService) { }
 
 	ngOnInit(): void {
 	}
 
+	productImageClickEvent(product) {
+		this.googleAnalyticsService.eventEmitter("view_product", "shop", "view_product_detail", "product_name", product.name);
+		this.router.navigate(['/product', product._id]);
+	}
 }

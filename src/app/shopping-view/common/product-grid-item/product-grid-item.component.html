@@ -1,6 +1,6 @@
 <div class="card m-1" style="width: 13rem;">
 
-    <div #loading type="button" [routerLink]="['/product', product._id]" style="border-color: transparent;">
+    <div #loading type="button" (click)="productImageClickEvent(product)" [routerLink]="['/product', product._id]" style="border-color: transparent;">
         <img src="{{serverUrl}}{{product.thumbImage}}" class="card-img-top" alt="{{product.name}}">
     </div>
 

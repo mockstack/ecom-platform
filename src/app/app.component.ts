@@ -8,6 +8,9 @@ import { AppAuthService } from './service/app-auth.service';
 import { CartService } from './ws/cart.service';
 import { Cart } from './model/cart';
 import { CartDataService } from './service/cart-data.service';
+import { Router, NavigationEnd } from '@angular/router';
+
+declare let gtag: Function;
 
 @Component({
 	selector: 'app-root',
@@ -18,7 +21,18 @@ export class AppComponent {
 	title = 'ecom-platform';
 
 	constructor(private userService: UserService, private cookieService: CookieService,
-		public appAuthService: AppAuthService, private cartService: CartService, private cartDataService: CartDataService) { }
+		public appAuthService: AppAuthService, private cartService: CartService,
+		private cartDataService: CartDataService, private router: Router) {
+		this.router.events.subscribe(event => {
+			if (event instanceof NavigationEnd) {
+				gtag('config', 'UA-177320223-1',
+					{
+						'page_path': event.urlAfterRedirects
+					}
+				);
+			}
+		});
+	}
 
 	async ngOnInit() {
 		await this.validateUserSession();
