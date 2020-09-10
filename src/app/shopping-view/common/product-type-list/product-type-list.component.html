@@ -7,7 +7,7 @@
             </button>
 
             <div class="collapse navbar-collapse w-100" id="navbarSupportedContent2">
-                <a type="button" (click)="categoryButtonClickEvent(item)" class="btn bg-transparent text-white btn-sm ml-2"
+                <a type="button" (click)="categoryButtonClickEvent(item)" class="btn bg-transparent text-white btn-sm ml-2 font-weight-bolder"
                     *ngFor='let item of categoryList; let i = index'>
                     {{item.name}}
                 </a>
