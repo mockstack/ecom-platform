@@ -9,7 +9,12 @@ export const environment = {
   pgReturnUrl: 'http://localhost:4200/costatus',
   pgClientId: 14002582,
   //{"id": "", "name":""}, 
-  previewItems: [{ "id": "5eece6aa5bd4a8557067f22c", "name": "Grocery Items" }, { "id": "5eece6aa5bd4a8557067f22c", "name": "Milk Products" }]
+  previewItems: [{ "id": "5eece6aa5bd4a8557067f22c", "name": "Grocery Items" }, { "id": "5eece6aa5bd4a8557067f22c", "name": "Milk Products" }],
+  adsView: [
+		{ "id": "5eece5a05bd4a8557067f228", "name": "Cakes - Branded" },
+		{ "id": "5f54442e1e486a06d97ead3f", "name": "Toys" },
+		{ "id": "5eece6c65bd4a8557067f22d", "name": "Sarees" },
+	]
 };
 
 /*
