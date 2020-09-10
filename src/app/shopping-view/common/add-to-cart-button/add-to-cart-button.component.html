@@ -1,15 +1,10 @@
 <div class="container pl-3 pr-3">
     <!--Add item-->
-    <div *ngIf="!alreadyAdded" class="row bg-success text-white text-center m-2" (click)="addProduct()">
+    <div *ngIf="!alreadyAdded && product.stockAvailable" class="row bg-success text-white text-center m-2" (click)="addProduct()">
         <p class="w-100" style="margin-top: auto; margin-bottom: auto;">ADD TO CART</p>
     </div>
-
-    <!--Remove Item-->
-    <!--<div *ngIf="alreadyAdded" class="col bg-danger text-white">
-        <p>REMOVE</p>
-    </div>-->
     <!--Change Count-->
-    <div *ngIf="alreadyAdded" class="row stepper m-2">
+    <div *ngIf="alreadyAdded && product.stockAvailable" class="row stepper m-2">
         <div class="col" (click)="deductItems()">
             <button class="w-100 h-100"><i class="fas fa-minus"></i></button>
         </div>
@@ -19,5 +14,9 @@
         <div class="col" (click)="addItems()">
             <button class="w-100 h-100"><i class="fas fa-plus"></i></button>
         </div>
+    </div>
+    <!--Out of Stock-->
+    <div *ngIf="!product.stockAvailable" disabled class="row bg-secondary text-white text-center m-2">
+        <p class="w-100" style="margin-top: auto; margin-bottom: auto;">OUT OF STOCK</p>
     </div>
 </div>
