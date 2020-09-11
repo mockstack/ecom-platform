@@ -148,7 +148,7 @@
                             class="custom-control-input"
                             [ngClass]="{ 'is-invalid': submitted && formField.tcAccept.errors }">
                         <label class="custom-control-label" for="tcAccept">I have read and agree to the
-                            <a target="_blank" href="./../../../../assets/html/terms-of-service.html"> Terms and
+                            <a target="_blank" rel="noopener" href="./../../../../assets/html/terms-of-service.html"> Terms and
                                 Conditions</a>
                         </label>
                         <div class="invalid-feedback" *ngIf="formField.tcAccept.errors">
