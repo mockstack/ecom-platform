@@ -1,0 +1,9 @@
+Sitemap: https://devionline.lk/sitemap.xml
+
+User-agent: *
+Allow: /products/*
+Allow: /pack/*
+Allow: /login/*
+Allow: /register/*
+
+Disallow: /assets/*
