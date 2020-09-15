@@ -189,7 +189,7 @@ export class CheckoutComponent implements OnInit {
 			// after completing the transaction. IF the data did not deleted, new data
 			// will overwrite the existing data.
 			localStorage.setItem(Key.LS_CART, JSON.stringify(formData));
-			if (formData.type === 'cc' || formData.type === 'dc') {
+			if (formData.payment_method === 'cc' || formData.payment_method === 'dc') {
 				const paymentObject = this.buildPayment(this.total, 'LKR', cData.ref);
 				//save the payment object in the database.
 				this.pgService.savePaymentObject(paymentObject).subscribe(data => {
