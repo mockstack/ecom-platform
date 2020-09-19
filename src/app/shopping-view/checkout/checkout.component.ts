@@ -14,8 +14,6 @@ import { AppUserProfile } from 'src/app/model/app-user-profile';
 import { environment } from 'src/environments/environment';
 import { PgService } from 'src/app/ws/pg.service';
 import Key from 'src/app/utils/key';
-//payment gateway
-declare const loadPaycorpPayment: any;
 
 @Component({
 	selector: 'app-checkout',
@@ -52,7 +50,7 @@ export class CheckoutComponent implements OnInit {
 			city: ['', Validators.required],
 			address: ['', Validators.required],
 			optionalAddress: ['', !Validators.required],
-			payment: ['cod', Validators.required],
+			payment: ['cc', Validators.required],
 			tcAccept: ['', Validators.requiredTrue],
 			contact_number: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
 		});
@@ -190,40 +188,24 @@ export class CheckoutComponent implements OnInit {
 			// will overwrite the existing data.
 			localStorage.setItem(Key.LS_CART, JSON.stringify(formData));
 			if (formData.payment_method === 'cc' || formData.payment_method === 'dc') {
-				const paymentObject = this.buildPayment(this.total, 'LKR', cData.ref);
-				//save the payment object in the database.
-				this.pgService.savePaymentObject(paymentObject).subscribe(data => {
-					// open the payment window
-					loadPaycorpPayment(paymentObject);
-				}, error => {
-					this.toastr.error(error, 'Save Payment Infor');
-				});
+				let data = {
+					paymentAmount: this.total * 100,
+					currency: 'LKR',
+					clientRef: cData.ref,
+					returnUrl: environment.pgReturnUrl,
+					comment: 'Payment for the cart id = ' + this.cart.cart._id,
+					cartId: this.cart.cart._id
+				}
+
+				// Redirecct to the payment location
+				window.location.replace(environment.pgApi + btoa(JSON.stringify(data)));
+
 			} else {
 				this.router.navigate(['/costatus'], { queryParams: { ref: cData.ref } });
 			}
-
-			// Old logic
-			//insert document into the order table.
-			/*this.cartService.checkOut(data).subscribe((data: any) => {
-				this.cartDataService.completeCheckout();
-				if (data.type === 'cc' || data.type === 'dc') {} else {}
-			}, error => {
-				this.toastr.error(error.error, 'Transaction Failed');
-			});*/
 		}, error => {
 			this.toastr.error(error.error, 'Cart update failed');
 		});
-	}
-
-	buildPayment(amount: Number, currency: String, ref: String): any {
-		return {
-			clientId: environment.pgClientId,
-			paymentAmount: amount,
-			currency: currency,
-			returnUrl: environment.pgReturnUrl,
-			clientRef: ref,
-			comment: 'Payment for the cart id = ' + this.cart.cart._id
-		};
 	}
 
 }

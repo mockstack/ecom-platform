@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { AppUser } from 'src/app/model/app-user';
 import { AppAuthService } from 'src/app/service/app-auth.service';
 import { UserSession } from 'src/app/model/user-session';
+import { RouterService } from 'src/app/service/router.service';
 
 @Component({
 	selector: 'app-login',
@@ -28,13 +29,26 @@ export class LoginComponent implements OnInit {
 
 	constructor(private authService: AuthService, private userService: UserService,
 		private router: Router, private formBuilder: FormBuilder, private cryptoService: CryptoService,
-		private appAuthService: AppAuthService) { }
+		private appAuthService: AppAuthService, private routerService: RouterService) { }
 
 	ngOnChanges(changes: SimpleChanges) {
 		this.showGuestButton = changes.showGuestButton.currentValue;
 	}
 
 	ngOnInit(): void {
+		// If there is a session then this page will be unachieveable.
+		if (this.appAuthService.validSessionAvailable) {
+			this.router.navigateByUrl(this.routerService.getPreviousUrl());
+		}
+
+		// If the user get session info thenmove to the previous one.
+		this.appAuthService.sessionStatus.subscribe(value => {
+			console.log(this.routerService.getCurrentUrl())
+			this.router.navigateByUrl(this.routerService.getCurrentUrl());
+		}, error => {
+			console.error(error);
+		});
+
 		// initializing the login form
 		this.loginForm = this.formBuilder.group({
 			email: ['', [Validators.required, Validators.email]],
@@ -49,7 +63,8 @@ export class LoginComponent implements OnInit {
 				this.userService.initiateSession(appUser._id).subscribe(data => {
 					//setting service attributes
 					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-					this.router.navigateByUrl('/');
+					console.log(this.routerService.getPreviousUrl());
+					this.router.navigateByUrl(this.routerService.getPreviousUrl());
 				}, error => {
 					console.log(error);
 					this.loginError = error.error;
@@ -74,7 +89,7 @@ export class LoginComponent implements OnInit {
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							this.router.navigateByUrl('/');
+							this.router.navigateByUrl(this.routerService.getPreviousUrl());
 						}, error => {
 							console.log(error);
 						});
@@ -82,14 +97,14 @@ export class LoginComponent implements OnInit {
 						console.log(error);
 					})
 				} else {
-					// there is no user so we sould inser it.
+					// there is no user so we should insert it.
 					//console.log(data)
 					this.userService.addUser(appUser).subscribe(userId => {
 						appUser._id = userId + '';
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							this.router.navigateByUrl('/');
+							this.router.navigateByUrl(this.routerService.getPreviousUrl());
 						}, error => {
 							console.log(error);
 						});
@@ -119,7 +134,7 @@ export class LoginComponent implements OnInit {
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							this.router.navigateByUrl('/');
+							this.router.navigateByUrl(this.routerService.getPreviousUrl());
 						}, error => {
 							console.log(error);
 						});
@@ -127,14 +142,14 @@ export class LoginComponent implements OnInit {
 						console.log(error);
 					})
 				} else {
-					// there is no user so we sould inser it.
+					// there is no user so we should insert it.
 					//console.log(data)
 					this.userService.addUser(appUser).subscribe(userId => {
 						appUser._id = userId + '';
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							this.router.navigateByUrl('/');
+							this.router.navigateByUrl(this.routerService.getPreviousUrl());
 						}, error => {
 							console.log(error);
 						});

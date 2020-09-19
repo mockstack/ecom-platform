@@ -3,7 +3,6 @@ export const environment = {
 	apiUrl: 'https://devionline.lk:8443/',
 	key: 'george-w-bush-2-@USA',
 	pgReturnUrl: 'https://devionline.lk/costatus',
-	pgClientId: 14004108,
 	previewItems: [
 		{ "id": "5eece5a05bd4a8557067f228", "name": "Cakes" },
 		{ "id": "5eece6dc5bd4a8557067f22e", "name": "Kids" },
@@ -13,5 +12,6 @@ export const environment = {
 		{ "id": "5eece5a05bd4a8557067f228", "name": "Cakes - Branded" },
 		{ "id": "5f54442e1e486a06d97ead3f", "name": "Toys" },
 		{ "id": "5eece6c65bd4a8557067f22d", "name": "Sarees" },
-	]
+	],
+	pgApi: 'https://devionline.lk:8443/pg/pay/'
 };

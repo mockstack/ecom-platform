@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/ws/cart.service';
 import Key from 'src/app/utils/key';
 import { CartDataService } from 'src/app/service/cart-data.service';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorLogService } from 'src/app/ws/error-log.service';
-import { environment } from 'src/environments/environment';
 import { ErrorLog } from 'src/app/model/error-log';
 import { ReportGenerateService } from 'src/app/ws/report-generate.service';
-import { isIdentifier } from '@angular/compiler';
+import { PgService } from 'src/app/ws/pg.service';
 
 @Component({
 	selector: 'app-checkout-status',
@@ -18,16 +17,16 @@ import { isIdentifier } from '@angular/compiler';
 export class CheckoutStatusComponent implements OnInit {
 
 	public reference: string;
-	public clientRef: String;
-	public requestId: String;
+	public clientRef: string;
+	public requestId: string;
 	public formData: any;
 	public inProgress: Boolean = true;
-	public errorMessage: String = '';
+	public errorMessage: string = '';
 	public isSuccess: Boolean = true;
 
 	constructor(private route: ActivatedRoute, private router: Router, private cartService: CartService,
 		public cartDataService: CartDataService, private toast: ToastrService, private errorLogService: ErrorLogService,
-		private reportService: ReportGenerateService) { }
+		private reportService: ReportGenerateService, private pgService: PgService) { }
 
 	ngOnInit(): void {
 		this.route.queryParamMap.subscribe((params: any) => {
@@ -40,8 +39,14 @@ export class CheckoutStatusComponent implements OnInit {
 		this.formData = JSON.parse(localStorage.getItem(Key.LS_CART));
 
 		if (this.reference === null || this.reference === undefined) {
-			//Credit card payment
-			//TO BE IMPLEMENTED
+			this.pgService.getPaymentStatus(this.requestId, this.clientRef).subscribe(data => {
+				this.reference = this.clientRef;
+				this.completeTransaction(this.formData, this.clientRef);
+			}, error => {
+				this.inProgress = false;
+				this.isSuccess = false;
+				this.errorMessage = error.error
+			});
 		} else {
 			//Cash on delivery option
 			/*this.cartService.validateReferenceNumber(this.reference).subscribe((data: any) => {
@@ -52,12 +57,11 @@ export class CheckoutStatusComponent implements OnInit {
 					this.isSuccess = false;
 					this.inProgress = false;
 					this.errorMessage = "Invalid Reference Number"
-				}
+				}opo
 			});*/
 
 			//Find a suitable logic for this.
 			this.completeTransaction(this.formData, this.reference);
-			
 		}
 	}
 
@@ -71,11 +75,8 @@ export class CheckoutStatusComponent implements OnInit {
 		this.cartService.checkOut(cartData).subscribe((data: any) => {
 			this.inProgress = false;
 
-
 			this.reportService.generateInvoice(ref).subscribe(data => {
-
 				this.cartService.sendInvoiceByEmail(ref).subscribe(data => {
-					console.log('email sent successfully');
 					this.cartDataService.completeCheckout();
 				}, error => {
 					// error will be kept for future usage.
@@ -86,7 +87,6 @@ export class CheckoutStatusComponent implements OnInit {
 					this.errorLogService.saveError(errorData).subscribe();
 				});
 			}, error => {
-				console.log(error);
 				// error will be kept for future usage.
 				let errorData: ErrorLog = new ErrorLog();
 				errorData.message = 'Cannot generate invoice for the transaction';
