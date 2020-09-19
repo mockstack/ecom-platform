@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="192.756px"
+   height="192.756px"
+   viewBox="0 0 192.756 192.756"
+   version="1.1"
+   id="svg20"
+   sodipodi:docname="diners.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+  <metadata
+     id="metadata26">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs24" />
+  <sodipodi:namedview
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1000"
+     id="namedview22"
+     showgrid="false"
+     inkscape:zoom="2.9860805"
+     inkscape:cx="96.377998"
+     inkscape:cy="87.3339"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg20" />
+  <g
+     transform="matrix(0.34346576,0,0,0.29314386,8.4211858,21.320065)"
+     id="g883">
+    <path
+       style="fill:#dedee0"
+       d="M 488.727,66.493 H 256 23.273 C 10.42,66.493 0,76.913 0,89.766 v 332.468 c 0,12.853 10.42,23.273 23.273,23.273 H 256 488.727 c 12.853,0 23.273,-10.42 23.273,-23.273 V 89.766 C 512,76.913 501.58,66.493 488.727,66.493 Z"
+       id="path2" />
+    <g
+       id="g10">
+      <path
+         style="fill:#3d6deb"
+         d="m 175.383,255.826 c 0.042,23.957 14.966,44.378 36.094,52.494 V 203.289 c -21.128,8.169 -36.052,28.59 -36.094,52.537 z"
+         id="path4-9" />
+      <path
+         style="fill:#3d6deb"
+         d="m 351.794,181.684 c -19.914,-18.334 -47.138,-28.85 -74.78,-28.85 H 256 231.325 c -59.238,0 -103.908,44.708 -103.908,103.995 0,56.429 46.435,102.338 103.511,102.338 H 256 276.983 l 0.509,0.002 c 0.002,0 0.003,0 0.005,0 27.012,0 54.165,-10.924 74.493,-29.969 21.018,-19.692 32.594,-45.393 32.594,-72.369 -10e-4,-28.993 -11.646,-55.68 -32.79,-75.147 z M 256,334.698 c -7.708,2.389 -15.892,3.68 -24.374,3.68 -45.515,0 -82.545,-37.032 -82.545,-82.551 0,-45.519 37.03,-82.551 82.545,-82.551 8.482,0 16.666,1.291 24.374,3.68 33.634,10.426 58.135,41.84 58.135,78.871 0,37.031 -24.501,68.444 -58.135,78.871 z"
+         id="path6-3" />
+      <path
+         style="fill:#3d6deb"
+         d="m 256,205.144 c -1.39,-0.672 -2.804,-1.3 -4.253,-1.857 v 105.031 c 1.451,-0.557 2.864,-1.184 4.253,-1.854 18.845,-9.093 31.836,-28.326 31.877,-50.638 C 287.836,233.523 274.845,214.252 256,205.144 Z"
+         id="path8-3" />
+    </g>
+    <path
+       style="fill:#dedee0"
+       d="m 256,176.953 c -7.708,-2.389 -15.892,-3.68 -24.374,-3.68 -45.515,0 -82.545,37.033 -82.545,82.551 0,45.518 37.03,82.551 82.545,82.551 8.482,0 16.666,-1.291 24.374,-3.68 33.634,-10.426 58.135,-41.838 58.135,-78.871 0,-37.033 -24.501,-68.444 -58.135,-78.871 z m -44.522,131.366 c -21.127,-8.114 -36.051,-28.537 -36.094,-52.492 0.042,-23.948 14.967,-44.369 36.094,-52.539 z M 256,306.465 c -1.39,0.67 -2.804,1.297 -4.253,1.854 V 203.287 c 1.451,0.557 2.864,1.187 4.253,1.857 18.845,9.107 31.836,28.379 31.877,50.682 -0.041,22.313 -13.032,41.545 -31.877,50.639 z"
+       id="path12-6" />
+    <path
+       style="fill:#c3c3c7"
+       d="m 230.928,359.166 c -57.076,0 -103.511,-45.909 -103.511,-102.338 0,-59.286 44.67,-103.995 103.908,-103.995 H 256 V 66.493 H 23.273 C 10.42,66.493 0,76.913 0,89.766 v 332.468 c 0,12.853 10.42,23.273 23.273,23.273 H 256 v -86.342 z"
+       id="path14-9" />
+  </g>
+</svg>
