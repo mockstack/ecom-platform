@@ -35,7 +35,18 @@ export class CartComponent implements OnInit {
 
 		this.cartSerice.getMinTransactionValue().subscribe((data: any) => {
 			this.minTransactionValue = data.min;
-		})
+		});
+
+		// listen for session cration.
+		this.appAuthService.sessionStatus.subscribe(value => {
+			if (value) {
+				if (this.modalRef !== undefined) {
+					this.modalRef.hide();
+				}
+			}
+		}, error => {
+			console.error(error);
+		});
 	}
 
 	deleteCartItem(item: CartItem) {

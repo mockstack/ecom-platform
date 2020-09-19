@@ -9,6 +9,7 @@ import { CartService } from './ws/cart.service';
 import { Cart } from './model/cart';
 import { CartDataService } from './service/cart-data.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { RouterService } from './service/router.service';
 
 declare let gtag: Function;
 
@@ -22,7 +23,8 @@ export class AppComponent {
 
 	constructor(private userService: UserService, private cookieService: CookieService,
 		public appAuthService: AppAuthService, private cartService: CartService,
-		private cartDataService: CartDataService, private router: Router) {
+		private cartDataService: CartDataService, private router: Router,
+		private routerService: RouterService) {
 		this.router.events.subscribe(event => {
 			if (event instanceof NavigationEnd) {
 				gtag('config', 'UA-177320223-1',

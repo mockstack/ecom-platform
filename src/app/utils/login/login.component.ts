@@ -43,8 +43,9 @@ export class LoginComponent implements OnInit {
 
 		// If the user get session info thenmove to the previous one.
 		this.appAuthService.sessionStatus.subscribe(value => {
-			console.log(this.routerService.getCurrentUrl())
-			this.router.navigateByUrl(this.routerService.getCurrentUrl());
+			if (value) {
+				this.router.navigateByUrl(this.routerService.getCurrentUrl());
+			}
 		}, error => {
 			console.error(error);
 		});
@@ -63,8 +64,11 @@ export class LoginComponent implements OnInit {
 				this.userService.initiateSession(appUser._id).subscribe(data => {
 					//setting service attributes
 					this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-					console.log(this.routerService.getPreviousUrl());
-					this.router.navigateByUrl(this.routerService.getPreviousUrl());
+					if (!this.showGuestButton) {
+						this.router.navigateByUrl(this.routerService.getPreviousUrl());
+					} else {
+						this.router.navigateByUrl(this.routerService.getCurrentUrl());
+					}
 				}, error => {
 					console.log(error);
 					this.loginError = error.error;
@@ -89,7 +93,11 @@ export class LoginComponent implements OnInit {
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							this.router.navigateByUrl(this.routerService.getPreviousUrl());
+							if (!this.showGuestButton) {
+								this.router.navigateByUrl(this.routerService.getPreviousUrl());
+							} else {
+								this.router.navigateByUrl(this.routerService.getCurrentUrl());
+							}
 						}, error => {
 							console.log(error);
 						});
@@ -104,7 +112,11 @@ export class LoginComponent implements OnInit {
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							this.router.navigateByUrl(this.routerService.getPreviousUrl());
+							if (!this.showGuestButton) {
+								this.router.navigateByUrl(this.routerService.getPreviousUrl());
+							} else {
+								this.router.navigateByUrl(this.routerService.getCurrentUrl());
+							}
 						}, error => {
 							console.log(error);
 						});
@@ -134,7 +146,11 @@ export class LoginComponent implements OnInit {
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							this.router.navigateByUrl(this.routerService.getPreviousUrl());
+							if (!this.showGuestButton) {
+								this.router.navigateByUrl(this.routerService.getPreviousUrl());
+							} else {
+								this.router.navigateByUrl(this.routerService.getCurrentUrl());
+							}
 						}, error => {
 							console.log(error);
 						});
@@ -149,7 +165,11 @@ export class LoginComponent implements OnInit {
 						this.userService.initiateSession(appUser._id).subscribe(data => {
 							//setting service attributes
 							this.appAuthService.initiateSession(appUser, new UserSession().deserialize(data), true);
-							this.router.navigateByUrl(this.routerService.getPreviousUrl());
+							if (!this.showGuestButton) {
+								this.router.navigateByUrl(this.routerService.getPreviousUrl());
+							} else {
+								this.router.navigateByUrl(this.routerService.getCurrentUrl());
+							}
 						}, error => {
 							console.log(error);
 						});
