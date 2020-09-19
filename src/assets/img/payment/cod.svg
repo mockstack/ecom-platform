@@ -7,13 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   sodipodi:docname="master_copy.svg"
-   id="svg20"
-   version="1.1"
-   viewBox="0 0 192.756 192.756"
+   width="192.756px"
    height="192.756px"
-   width="192.756px">
+   viewBox="0 0 192.756 192.756"
+   version="1.1"
+   id="svg20"
+   sodipodi:docname="cod.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
   <metadata
      id="metadata26">
     <rdf:RDF>
@@ -29,64 +29,64 @@
   <defs
      id="defs24" />
   <sodipodi:namedview
-     inkscape:current-layer="svg20"
-     inkscape:window-maximized="1"
-     inkscape:window-y="-11"
-     inkscape:window-x="-11"
-     inkscape:cy="105.85004"
-     inkscape:cx="96.377998"
-     inkscape:zoom="4.2229555"
-     showgrid="false"
-     id="namedview22"
-     inkscape:window-height="1000"
-     inkscape:window-width="1920"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0"
-     guidetolerance="10"
-     gridtolerance="10"
-     objecttolerance="10"
-     borderopacity="1"
-     bordercolor="#666666"
+     inkscape:document-rotation="0"
      pagecolor="#ffffff"
-     inkscape:document-rotation="0" />
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1000"
+     id="namedview22"
+     showgrid="false"
+     inkscape:zoom="23.888644"
+     inkscape:cx="144.98429"
+     inkscape:cy="133.80112"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg20" />
   <g
-     transform="matrix(0.75142159,0,0,0.57910901,23.189499,39.734594)"
-     id="g869">
+     id="g869"
+     transform="matrix(0.75142159,0,0,0.57910901,23.189499,39.734594)">
     <g
-       transform="matrix(0.46790658,0,0,0.5020199,-19.477601,-27.938376)"
-       height="192.756"
+       id="g10"
        width="192.756"
-       id="g10">
+       height="192.756"
+       transform="matrix(0.46790658,0,0,0.5020199,-19.477601,-27.938376)">
       <g
          id="g8">
         <path
-           sodipodi:nodetypes="cssccscsssssscscccsccssccssssscccccsssss"
-           style="fill:#000000"
+           d="m 486.615,322.905 v -58.289 c 0,-8.283 -6.715,-15 -15,-15 h -8.801 l -74.73,-99.464 c -2.834,-3.771 -7.275,-5.99 -11.992,-5.99 H 310.225 V 74.8 c 0,-8.284 -6.717,-15 -15.001,-15 H 15 c -8.284,0 -15,6.716 -15,15 v 288.666 c 0,8.284 6.7197236,15.30035 15,15 l 33.682819,-1.22178 c 1.825,34.289 20.526181,59.99596 55.262181,59.99596 34.736,0 52.09017,-24.48518 53.91517,-58.77418 H 295.223 341.01857 c 6.87729,33.06722 17.49641,53.47979 55.59993,56.73787 34.6495,2.96274 48.04915,-21.63435 52.56717,-56.73787 H 471.615 484.89 c 8.283,0 15,-6.716 15,-15 V 337.8 c 0.003,-7.7 -5.804,-14.037 -13.275,-14.895 z m -382.669,87.186 c -19.368,0 -29.736962,-16.16426 -29.736962,-35.53226 0,-19.368 10.368962,-34.71774 29.736962,-34.71774 19.368,0 29.06346,16.57152 29.06346,35.93952 0,19.368 -9.69546,34.31048 -29.06346,34.31048 z M 310.225,249.617 V 174.163 H 368.6 l 56.689,75.454 z m 85.72,160.474 c -18.01999,-0.81452 -30.74722,-15.34974 -30.74722,-34.71774 0,-19.368 11.38022,-35.53226 30.74722,-35.53226 19.369,0 30.41047,16.57152 30.41047,35.93952 0,19.368 -11.05498,35.18537 -30.41047,34.31048 z"
            id="path2"
-           d="m 486.615,322.905 v -58.289 c 0,-8.283 -6.715,-15 -15,-15 h -8.801 l -74.73,-99.464 c -2.834,-3.771 -7.275,-5.99 -11.992,-5.99 H 310.225 V 74.8 c 0,-8.284 -6.717,-15 -15.001,-15 H 15 c -8.284,0 -15,6.716 -15,15 v 288.666 c 0,8.284 6.716,15 15,15 h 23.917 c 1.825,34.289 30.292,61.625 65.028,61.625 34.736,0 63.203,-27.336 65.028,-61.625 h 126.25 35.693 c 1.826,34.289 30.293,61.625 65.029,61.625 34.736,0 63.203,-27.336 65.027,-61.625 h 10.643 13.275 c 8.283,0 15,-6.716 15,-15 V 337.8 c 0.003,-7.7 -5.804,-14.037 -13.275,-14.895 z m -382.669,87.186 c -19.368,0 -35.125,-15.757 -35.125,-35.125 0,-19.368 15.757,-35.125 35.125,-35.125 19.368,0 35.125,15.757 35.125,35.125 0,19.368 -15.757,35.125 -35.125,35.125 z M 310.225,249.617 V 174.163 H 368.6 l 56.689,75.454 z m 85.72,160.474 c -19.367,0 -35.125,-15.757 -35.125,-35.125 0,-19.368 15.758,-35.125 35.125,-35.125 19.369,0 35.125,15.757 35.125,35.125 0,19.368 -15.756,35.125 -35.125,35.125 z" />
+           style="fill:#000000"
+           sodipodi:nodetypes="cssccscsssssscscccsccssccssssscccccsssss" />
         <path
-           id="path4-8"
-           d="m 179.53,173.664 c 5.198,-1.911 7.724,-4.85 7.724,-8.987 0,-5.794 -5.038,-7.859 -9.754,-7.859 -11.541,0 -19.387,9.914 -22.064,19.524 0.648,0.007 1.289,0.01 1.921,0.01 10,0.001 17.253,-0.879 22.173,-2.688 z" />
+           d="m 179.53,173.664 c 5.198,-1.911 7.724,-4.85 7.724,-8.987 0,-5.794 -5.038,-7.859 -9.754,-7.859 -11.541,0 -19.387,9.914 -22.064,19.524 0.648,0.007 1.289,0.01 1.921,0.01 10,0.001 17.253,-0.879 22.173,-2.688 z"
+           id="path4-8" />
         <path
-           id="path6-4"
-           d="m 253.333,156.819 c -11.542,0 -19.387,9.914 -22.064,19.524 0.648,0.007 1.289,0.01 1.921,0.01 10,0 17.251,-0.879 22.173,-2.688 5.197,-1.911 7.725,-4.85 7.725,-8.987 -0.001,-5.795 -5.04,-7.859 -9.755,-7.859 z" />
+           d="m 253.333,156.819 c -11.542,0 -19.387,9.914 -22.064,19.524 0.648,0.007 1.289,0.01 1.921,0.01 10,0 17.251,-0.879 22.173,-2.688 5.197,-1.911 7.725,-4.85 7.725,-8.987 -0.001,-5.795 -5.04,-7.859 -9.755,-7.859 z"
+           id="path6-4" />
       </g>
     </g>
     <text
-       id="text852"
-       y="60.360207"
-       x="-6.2521605"
+       xml:space="preserve"
        style="font-size:40px;line-height:1.25;font-family:'Fjalla One';-inkscape-font-specification:'Fjalla One'"
-       xml:space="preserve"><tspan
-         style="font-size:35px;fill:#ffffff"
-         y="60.360207"
-         x="-6.2521605"
+       x="-6.2521605"
+       y="60.360207"
+       id="text852"><tspan
+         sodipodi:role="line"
          id="tspan850"
-         sodipodi:role="line">CASH ON</tspan><tspan
-         style="font-size:35px;fill:#ffffff"
-         id="tspan854"
-         y="110.36021"
          x="-6.2521605"
-         sodipodi:role="line">DELIVERY</tspan></text>
+         y="60.360207"
+         style="font-size:35px;fill:#ffffff">CASH ON</tspan><tspan
+         sodipodi:role="line"
+         x="-6.2521605"
+         y="110.36021"
+         id="tspan854"
+         style="font-size:35px;fill:#ffffff">DELIVERY</tspan></text>
   </g>
 </svg>
