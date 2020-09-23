@@ -1,13 +1,14 @@
 <nav class="bg-brown">
     <ul class="nav flex-column bg-brown">
         <li class="nav-item navbar-light bg-brown navbar-expand-lg">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2"
+            <a class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2"
                 aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </a>
 
             <div class="collapse navbar-collapse w-100" id="navbarSupportedContent2">
-                <a type="button" (click)="categoryButtonClickEvent(item)" class="btn bg-transparent text-white btn-sm ml-2 font-weight-bolder"
+                <a (click)="categoryButtonClickEvent(item)"
+                    class="btn bg-transparent text-white btn-sm ml-2 text-uppercase"
                     *ngFor='let item of categoryList; let i = index'>
                     {{item.name}}
                 </a>
