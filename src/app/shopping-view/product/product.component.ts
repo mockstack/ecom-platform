@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
 
 	@ViewChild('loading') loadingView: ElementRef;
 
-	public productList: Product[] = [];
+	public productList: Product[];
 	private paramSubscription;
 	public selectedCategoryName: String;
 	public selectedCategoryId: String;

@@ -24,7 +24,7 @@
         </div>
 
         <!--No products message-->
-        <div class="class" fxLayout fxFill fxLayoutAlign="space-around center" *ngIf="productList.length === 0">
+        <div class="class" fxLayout fxFill fxLayoutAlign="space-around center" *ngIf="productList !== undefined && productList.length === 0">
             <div class=" text-center p-5">
                 <h1 class="card-title">Products not available</h1>
                 <h4 class="card-text">Cannot find products for the selected category</h4>
