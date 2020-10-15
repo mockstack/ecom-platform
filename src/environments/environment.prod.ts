@@ -12,6 +12,7 @@ export const environment = {
 		{ "id": "5eece5a05bd4a8557067f228", "name": "Cakes - Branded" },
 		{ "id": "5f54442e1e486a06d97ead3f", "name": "Toys" },
 		{ "id": "5eece6c65bd4a8557067f22d", "name": "Sarees" },
+		{ "id": "5eece5e75bd4a8557067f22a", "name": "Ayurvedic" }
 	],
 	pgApi: 'https://devionline.lk:8443/pg/pay/'
 };

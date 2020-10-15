@@ -25,4 +25,8 @@ export class AdsViewComponent implements OnInit {
 	showToycars() {
 		this.router.navigate(['/products', environment.adsView[1].name, environment.adsView[1].id]);
 	}
+
+	showAyurveda() {
+		this.router.navigate(['/products', environment.adsView[3].name, environment.adsView[3].id]);
+	}
 }
