@@ -4,6 +4,7 @@ import { Pack } from 'src/app/model/pack';
 import { Router } from '@angular/router';
 
 @Component({
+	standalone: false,
 	selector: 'app-new-items-view',
 	templateUrl: './new-items-view.component.html',
 	styleUrls: ['./new-items-view.component.scss']

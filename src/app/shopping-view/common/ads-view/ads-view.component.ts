@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
+	standalone: false,
 	selector: 'app-ads-view',
 	templateUrl: './ads-view.component.html',
 	styleUrls: ['./ads-view.component.scss']

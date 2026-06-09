@@ -6,6 +6,7 @@ import { Product } from 'src/app/model/product';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+	standalone: false,
 	selector: 'app-add-to-cart-button',
 	templateUrl: './add-to-cart-button.component.html',
 	styleUrls: ['./add-to-cart-button.component.scss']

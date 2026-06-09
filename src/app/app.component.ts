@@ -14,6 +14,7 @@ import { RouterService } from './service/router.service';
 declare let gtag: Function;
 
 @Component({
+	standalone: false,
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']

@@ -26,8 +26,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoadingComponent, RepeatDirective } from './shopping-view/common/loading/loading.component';
 import { AdStatCustomerComponent } from './shopping-view/common/ad-stat-customer/ad-stat-customer.component';
 import { BreadcrumbComponent } from './shopping-view/common/breadcrumb/breadcrumb.component';
-import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from "@abacritt/angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "@abacritt/angularx-social-login";
 
 //import { CryptoService } from './service/crypto.service';
 import { ToastrModule } from 'ngx-toastr';
@@ -55,22 +55,25 @@ import { AddToCartButtonComponent } from './shopping-view/common/add-to-cart-but
 import { ProductFilterComponent } from './shopping-view/product-filter/product-filter.component';
 import { AdsViewComponent } from './shopping-view/common/ads-view/ads-view.component';
 
-let config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("921352824143-8im63g97h3h75a5s913j87ivq8b15k2k.apps.googleusercontent.com")
-    //SECRET - VBuEgJpwfwaV_BfHvv_RR3qa
-    //CLIENT-ID - 921352824143-8im63g97h3h75a5s913j87ivq8b15k2k.apps.googleusercontent.com
-  }
-  ,
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("623155175057421")
-  }
-]);
-
-export function provideConfig() {
-  return config;
+export function provideConfig(): SocialAuthServiceConfig {
+  return {
+    autoLogin: false,
+    providers: [
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider(
+          "921352824143-8im63g97h3h75a5s913j87ivq8b15k2k.apps.googleusercontent.com",
+          { oneTapEnabled: false }
+        )
+        //CLIENT-ID - 921352824143-8im63g97h3h75a5s913j87ivq8b15k2k.apps.googleusercontent.com
+      },
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider("623155175057421")
+      }
+    ],
+    onError: (err) => console.error(err)
+  };
 }
 
 @NgModule({
@@ -119,23 +122,24 @@ export function provideConfig() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    TypeaheadModule.forRoot(),
+    TypeaheadModule,
     BrowserAnimationsModule,
     SocialLoginModule,
+    GoogleSigninButtonModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
-    ModalModule.forRoot(),
-    AccordionModule.forRoot()
+    ModalModule,
+    AccordionModule
   ],
   schemas: [
 
   ],
   providers: [
     {
-      provide: AuthServiceConfig,
+      provide: 'SocialAuthServiceConfig',
       useFactory: provideConfig,
     },
     CookieService,

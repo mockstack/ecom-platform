@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+	standalone: false,
   selector: 'app-pack-content',
   templateUrl: './pack-content.component.html',
   styleUrls: ['./pack-content.component.scss']

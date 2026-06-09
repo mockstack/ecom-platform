@@ -8,6 +8,7 @@ import { CartItem } from 'src/app/model/cart-item';
 import { IBuyItem } from 'src/app/model/ibuy-item';
 
 @Component({
+	standalone: false,
 	selector: 'app-product-detail',
 	templateUrl: './product-detail.component.html',
 	styleUrls: ['./product-detail.component.scss']

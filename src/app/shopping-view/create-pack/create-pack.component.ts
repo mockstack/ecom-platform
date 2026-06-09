@@ -12,6 +12,7 @@ import { Product } from 'src/app/model/product';
 import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
+	standalone: false,
 	selector: 'app-create-pack',
 	templateUrl: './create-pack.component.html',
 	styleUrls: ['./create-pack.component.scss']

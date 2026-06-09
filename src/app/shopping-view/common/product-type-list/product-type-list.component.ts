@@ -6,6 +6,7 @@ import Key from 'src/app/utils/key';
 import { GoogleAnalyticsService } from 'src/app/service/google-analytics.service';
 
 @Component({
+	standalone: false,
 	selector: 'app-product-type-list',
 	templateUrl: './product-type-list.component.html',
 	styleUrls: ['./product-type-list.component.scss']

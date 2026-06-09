@@ -4,6 +4,7 @@ import { ProductService } from 'src/app/ws/product.service';
 import { Product } from 'src/app/model/product';
 
 @Component({
+	standalone: false,
 	selector: 'app-product-type-preview',
 	templateUrl: './product-type-preview.component.html',
 	styleUrls: ['./product-type-preview.component.scss']
@@ -27,7 +28,7 @@ export class ProductTypePreviewComponent implements OnInit {
 	}
 
 	showAllProductsByType() {
-		if (this.productList !== []) {
+		if (this.productList.length > 0) {
 			let catObj: any = this.productList[0].category;
 			this.router.navigateByUrl('products/' + catObj.name + '/' + catObj._id);
 		}

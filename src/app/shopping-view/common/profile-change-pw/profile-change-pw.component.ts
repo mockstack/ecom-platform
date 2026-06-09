@@ -10,6 +10,7 @@ import { CryptoService } from 'src/app/service/crypto.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
+	standalone: false,
 	selector: 'app-profile-change-pw',
 	templateUrl: './profile-change-pw.component.html',
 	styleUrls: ['./profile-change-pw.component.scss']

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BcNavigation } from 'src/app/model/bc-navigation';
 
 @Component({
+	standalone: false,
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']

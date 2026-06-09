@@ -16,6 +16,7 @@ import { PgService } from 'src/app/ws/pg.service';
 import Key from 'src/app/utils/key';
 
 @Component({
+	standalone: false,
 	selector: 'app-checkout',
 	templateUrl: './checkout.component.html',
 	styleUrls: ['./checkout.component.scss']

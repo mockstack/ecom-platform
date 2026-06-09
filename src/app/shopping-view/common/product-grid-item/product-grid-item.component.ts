@@ -7,6 +7,7 @@ import { CartItem } from 'src/app/model/cart-item';
 import { GoogleAnalyticsService } from 'src/app/service/google-analytics.service';
 
 @Component({
+	standalone: false,
 	selector: 'app-product-grid-item',
 	templateUrl: './product-grid-item.component.html',
 	styleUrls: ['./product-grid-item.component.scss']

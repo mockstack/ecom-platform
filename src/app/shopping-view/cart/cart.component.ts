@@ -8,6 +8,7 @@ import { CartService } from 'src/app/ws/cart.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+	standalone: false,
 	selector: 'app-cart',
 	templateUrl: './cart.component.html',
 	styleUrls: ['./cart.component.scss']
@@ -16,7 +17,7 @@ export class CartComponent implements OnInit {
 	showGuestButton: Boolean = true;
 	cartItemList: CartItem[];
 	total: number = 0.00;
-	minTransactionValue: Number = 2000.0;
+	minTransactionValue: number = 2000.0;
 	modalRef: BsModalRef;
 
 	constructor(public router: Router, private cartDataService: CartDataService, private modalService: BsModalService,

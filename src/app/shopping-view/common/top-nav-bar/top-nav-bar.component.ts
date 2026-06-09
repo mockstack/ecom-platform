@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/ws/product.service';
-import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/public_api';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { BcNavigation } from 'src/app/model/bc-navigation';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/app/ws/user.service';
-import { AuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { AppAuthService } from 'src/app/service/app-auth.service';
 import { ProductNameService } from 'src/app/service/product-name.service';
 import Key from 'src/app/utils/key';
@@ -14,6 +14,7 @@ import { CartItem } from 'src/app/model/cart-item';
 import { SearchTermService } from 'src/app/ws/search-term.service';
 
 @Component({
+	standalone: false,
 	selector: 'app-top-nav-bar',
 	templateUrl: './top-nav-bar.component.html',
 	styleUrls: ['./top-nav-bar.component.scss']
@@ -31,7 +32,7 @@ export class TopNavBarComponent implements OnInit {
 
 	constructor(private router: Router, private productService: ProductService,
 		private activatedRoute: ActivatedRoute, private cookieService: CookieService,
-		private userService: UserService, private authService: AuthService,
+		private userService: UserService, private authService: SocialAuthService,
 		private ref: ChangeDetectorRef, public appAuthService: AppAuthService,
 		private productNameService: ProductNameService, private cartDataService: CartDataService,
 		private searchTermService: SearchTermService) {

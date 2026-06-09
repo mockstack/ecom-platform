@@ -10,6 +10,7 @@ import { City } from 'src/app/model/city';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+	standalone: false,
 	selector: 'app-profile-basic',
 	templateUrl: './profile-basic.component.html',
 	styleUrls: ['./profile-basic.component.scss']

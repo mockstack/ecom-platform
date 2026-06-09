@@ -3,6 +3,7 @@ import { City } from '../model/city';
 import { District } from '../model/district';
 
 @Pipe({
+	standalone: false,
 	name: 'districtCityFilter'
 })
 /**

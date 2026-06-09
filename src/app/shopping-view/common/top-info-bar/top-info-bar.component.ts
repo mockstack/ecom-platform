@@ -5,6 +5,7 @@ import { faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
 import { Router } from '@angular/router';
 
 @Component({
+	standalone: false,
   selector: 'app-top-info-bar',
   templateUrl: './top-info-bar.component.html',
   styleUrls: ['./top-info-bar.component.scss']

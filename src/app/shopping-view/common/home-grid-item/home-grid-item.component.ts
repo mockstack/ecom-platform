@@ -3,6 +3,7 @@ import { Product } from 'src/app/model/product';
 import { environment } from 'src/environments/environment';
 
 @Component({
+	standalone: false,
   selector: 'app-home-grid-item',
   templateUrl: './home-grid-item.component.html',
   styleUrls: ['./home-grid-item.component.scss']

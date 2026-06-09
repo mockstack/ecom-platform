@@ -11,6 +11,7 @@ import { AppAuthService } from 'src/app/service/app-auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+	standalone: false,
 	selector: 'app-pack-grid',
 	templateUrl: './pack-grid.component.html',
 	styleUrls: ['./pack-grid.component.scss']

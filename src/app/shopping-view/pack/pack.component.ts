@@ -7,6 +7,7 @@ import Key from 'src/app/utils/key';
 import { Pack } from 'src/app/model/pack';
 
 @Component({
+	standalone: false,
 	selector: 'app-pack',
 	templateUrl: './pack.component.html',
 	styleUrls: ['./pack.component.scss']

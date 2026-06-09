@@ -4,7 +4,7 @@ import { UserSession } from '../model/user-session';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import Key from '../utils/key';
-import { AuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class AppAuthService {
 	// status change tracker
 	sessionStatus = this.notifier.asObservable();
 
-	constructor(private cookieService: CookieService, private socialLoginService: AuthService, private router: Router) { }
+	constructor(private cookieService: CookieService, private socialLoginService: SocialAuthService, private router: Router) { }
 
 	public get validSessionAvailable() {
 		return this._validSessionAvailable;

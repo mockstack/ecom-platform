@@ -10,6 +10,7 @@ import { ReportGenerateService } from 'src/app/ws/report-generate.service';
 import { PgService } from 'src/app/ws/pg.service';
 
 @Component({
+	standalone: false,
 	selector: 'app-checkout-status',
 	templateUrl: './checkout-status.component.html',
 	styleUrls: ['./checkout-status.component.scss']
