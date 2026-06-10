@@ -26,7 +26,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoadingComponent, RepeatDirective } from './shopping-view/common/loading/loading.component';
 import { AdStatCustomerComponent } from './shopping-view/common/ad-stat-customer/ad-stat-customer.component';
 import { BreadcrumbComponent } from './shopping-view/common/breadcrumb/breadcrumb.component';
-import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from "@abacritt/angularx-social-login";
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule, SOCIAL_AUTH_CONFIG } from "@abacritt/angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "@abacritt/angularx-social-login";
 
 //import { CryptoService } from './service/crypto.service';
@@ -139,7 +139,7 @@ export function provideConfig(): SocialAuthServiceConfig {
   ],
   providers: [
     {
-      provide: 'SocialAuthServiceConfig',
+      provide: SOCIAL_AUTH_CONFIG,
       useFactory: provideConfig,
     },
     CookieService,
